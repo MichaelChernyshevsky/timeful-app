@@ -24,7 +24,7 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
   TextEditingController contorllerDescription = TextEditingController();
 
   HistoryElement? element;
-  Color buttonColor = Colors.amber;
+  Color buttonColor = UTILSConstants.purple;
   bool currentDate = true;
   DateTime? date;
 
@@ -61,14 +61,14 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
       );
     } else {
       setState(() {
-        buttonColor = Colors.red;
+        buttonColor = UTILSConstants.grey;
       });
     }
   }
 
   void stateFunc(EconomyBlocState state) {
     if (state is BlocError) {
-      debugPrint('error adding');
+      debugPrint(AppLocalizations.current.errorAdding);
     } else if (state is BlocSuccess) {
       Navigator.of(context).pop(element);
     }
@@ -85,14 +85,14 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
       body: Center(
         child: Column(
           children: [
-            const Text('paste title'),
+            Text(AppLocalizations.current.pasteTitle),
             TextFormField(controller: contorllerTitle),
-            const Text('paste count'),
+            Text(AppLocalizations.current.pasteCount),
             TextFormField(
               controller: contorllerCost,
               keyboardType: TextInputType.number,
             ),
-            const Text('description'),
+            Text(AppLocalizations.current.description),
             TextFormField(
               controller: contorllerDescription,
               keyboardType: TextInputType.number,
@@ -101,7 +101,7 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
             BlocListener<EconomyBloc, EconomyBlocState>(
               listener: (context, state) => stateFunc(state),
               child: CustomButton(
-                color: Colors.amber,
+                color: UTILSConstants.purple,
                 tap: addSpending,
                 text: AppLocalizations.current.add,
               ),
@@ -127,7 +127,7 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
         children: [
           Row(
             children: [
-              const Text('Current date '),
+              Text(AppLocalizations.current.currentDate),
               Checkbox(
                 value: currentDate,
                 onChanged: (value) => changeCheckBox(newValue: value!),
@@ -141,7 +141,7 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
         children: [
           Row(
             children: [
-              const Text('Current date '),
+              Text(AppLocalizations.current.currentDate),
               Checkbox(
                 value: currentDate,
                 onChanged: (value) => changeCheckBox(newValue: value!),

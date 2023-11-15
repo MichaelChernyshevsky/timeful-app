@@ -1,6 +1,5 @@
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatefulWidget {
@@ -37,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       bottomNavigationBar: Container(
-        color: Colors.amber,
+        color: UTILSConstants.purple,
         height: getHeight(80),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

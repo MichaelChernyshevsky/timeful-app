@@ -62,6 +62,14 @@ class AppLocalizations {
   // add
   String get add => Intl.message('Add');
   String get addSpending => Intl.message('Add Spending');
+  String get pasteTitle => Intl.message('Paste title');
+  String get pasteCount => Intl.message('Paste count');
+  String get description => Intl.message('Description');
+  String get currentDate => Intl.message('Current date');
+
+  // notification
+  String get errorLoading => Intl.message('Error loading');
+  String get errorAdding => Intl.message('Error adding');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

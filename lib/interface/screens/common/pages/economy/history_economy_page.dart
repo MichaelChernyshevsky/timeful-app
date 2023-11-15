@@ -63,7 +63,7 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
     }
   }
 
-  void onError() => debugPrint('error adding');
+  void onError() => debugPrint(AppLocalizations.current.errorLoading);
 
   void setElements(List<HistoryElement> elementsBloc) => setState(() {
         elements = elementsBloc;
@@ -123,46 +123,3 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
     );
   }
 }
-
-
- // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 20),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //     children: [
-            //       GestureDetector(
-            //         onTap: () => setNewState(state: HistoryState.all),
-            //         child: CustomButton(
-            //           color: getCurrentButtonColor(state: HistoryState.all),
-            //           text: AppLocalizations.current.sortAll,
-            //         ),
-            //       ),
-            //       GestureDetector(
-            //         onTap: () => setNewState(state: HistoryState.byDate),
-            //         child: CustomButton(
-            //           color: getCurrentButtonColor(state: HistoryState.byDate),
-            //           text: AppLocalizations.current.sortByDate,
-            //         ),
-            //       ),
-            //       GestureDetector(
-            //         onTap: () => setNewState(state: HistoryState.min),
-            //         child: CustomButton(
-            //           color: getCurrentButtonColor(state: HistoryState.min),
-            //           text: AppLocalizations.current.sortMin,
-            //         ),
-            //       ),
-            //       GestureDetector(
-            //         onTap: () => setNewState(state: HistoryState.max),
-            //         child: CustomButton(
-            //           color: getCurrentButtonColor(state: HistoryState.max),
-            //           text: AppLocalizations.current.sortMax,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-
-
-
-
-

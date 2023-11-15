@@ -1,5 +1,6 @@
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddSpedingScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
   HistoryElement? element;
   Color buttonColor = Colors.amber;
   bool currentDate = true;
+  DateTime? date;
 
   @override
   void initState() {
@@ -43,12 +45,10 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
       title: contorllerTitle.text,
       count: int.parse(contorllerCost.text),
       description: contorllerDescription.text,
-      // date:
+      date: date ?? DateTime.now(),
     );
 
-    setState(() {
-      element = createdElement;
-    });
+    element = createdElement;
 
     return createdElement;
   }
@@ -66,15 +66,13 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
     }
   }
 
-  void goBack() {
-    Navigator.of(context).pop(element);
+  void stateFunc(EconomyBlocState state) {
+    if (state is BlocError) {
+      debugPrint('error adding');
+    } else if (state is BlocSuccess) {
+      Navigator.of(context).pop(element);
+    }
   }
-
-  void changeCheckBox({required bool newValue}) => setState(() {
-        currentDate = newValue;
-      });
-
-  void onError() => debugPrint('error adding');
 
   @override
   Widget build(BuildContext context) {
@@ -99,15 +97,9 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
               controller: contorllerDescription,
               keyboardType: TextInputType.number,
             ),
-            date(),
+            dateWidget(),
             BlocListener<EconomyBloc, EconomyBlocState>(
-              listener: (context, state) {
-                if (state is BlocError) {
-                  onError();
-                } else if (state is BlocSuccess) {
-                  goBack();
-                }
-              },
+              listener: (context, state) => stateFunc(state),
               child: CustomButton(
                 color: Colors.amber,
                 tap: addSpending,
@@ -120,7 +112,16 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
     );
   }
 
-  Column date() {
+  Column dateWidget() {
+    void changeCheckBox({required bool newValue}) => setState(() {
+          currentDate = newValue;
+          if (newValue) {
+            date = null;
+          }
+        });
+
+    void setDate({required DateTime pickedDate}) => date = pickedDate;
+
     if (currentDate == true) {
       return Column(
         children: [
@@ -147,7 +148,20 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
               ),
             ],
           ),
-          const Text('set date '),
+          SizedBox(
+            height: 200,
+            child: CupertinoDatePicker(
+              minuteInterval: 30,
+              initialDateTime: DateTime.now().add(
+                Duration(minutes: 30 - DateTime.now().minute % 30),
+              ),
+              mode: CupertinoDatePickerMode.date,
+              use24hFormat: true,
+              onDateTimeChanged: (value) => setDate(
+                pickedDate: value,
+              ),
+            ),
+          ),
         ],
       );
     }

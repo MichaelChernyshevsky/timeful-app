@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
 class SignInScreen extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:app_with_apps/core/exports/exports.dart';
 
+// ignore: must_be_immutable
 class CustomContainer extends StatelessWidget {
   CustomContainer({
     super.key,

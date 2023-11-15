@@ -31,6 +31,7 @@ class Note extends StatelessWidget {
             ),
           ),
           GestureDetector(
+            // ignore: avoid_print
             onTap: () => print(1),
             child: const Icon(Icons.chevron_right_rounded),
           ),

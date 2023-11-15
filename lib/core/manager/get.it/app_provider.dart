@@ -69,9 +69,9 @@ class AppProvider extends ChangeNotifier {
 
   List<Widget> getPages() {
     if (appIs == Functions.economy) {
-      return PagesService.pages_economy;
+      return PagesService.pagesEconomy;
     }
-    return PagesService.pages_todo;
+    return PagesService.pagesTodo;
   }
 
   Text get getAppBarTitle => Text(getTitle());

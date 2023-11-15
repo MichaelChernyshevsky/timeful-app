@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable, lines_longer_than_80_chars
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
 class CustomButton extends StatefulWidget {

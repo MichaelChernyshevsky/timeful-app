@@ -1,3 +1,5 @@
+// ignore_for_file: eol_at_end_of_file, lines_longer_than_80_chars
+
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/core/models/class/sort_parametrs_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
@@ -12,7 +14,6 @@ class HistoryEconomyPage extends StatefulWidget {
 }
 
 class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
-  // ignore: lines_longer_than_80_chars
   final List<SortParametrs> sortParametrs =
       GetIt.I.get<AppProvider>().sortParametrs;
 
@@ -24,12 +25,8 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
 
   @override
   void initState() {
-    setState(() {
-      elements = [];
-    });
     bloc = BlocProvider.of<EconomyBloc>(context);
     bloc!.add(GetSpendingsEvent());
-
     super.initState();
   }
 

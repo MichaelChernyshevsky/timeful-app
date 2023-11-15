@@ -1,4 +1,6 @@
+import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -9,14 +11,23 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  EconomyBloc? bloc;
+
+  @override
+  void initState() {
+    bloc = BlocProvider.of<EconomyBloc>(context);
+    super.initState();
+  }
 
   void changeFunctions() => setState(() {
         GetIt.I.get<AppProvider>().changeFunctions();
       });
 
-  void changePage(int index) => setState(
-        () => _selectedIndex = index,
-      );
+  void changePage(int index) {
+    setState(
+      () => _selectedIndex = index,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

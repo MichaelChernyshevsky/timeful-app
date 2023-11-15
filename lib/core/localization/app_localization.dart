@@ -48,7 +48,9 @@ class AppLocalizations {
   String get curse => Intl.message('Current Curse');
   // titles
   String get news => Intl.message('News');
-  String get history => Intl.message('History');
+  String get historyEconomy => Intl.message('historyEconomy');
+  String get historyToDo => Intl.message('historyToDo');
+
   String get user => Intl.message('User');
   // splash screen
   String get pressToContinue => Intl.message('Press to continue');

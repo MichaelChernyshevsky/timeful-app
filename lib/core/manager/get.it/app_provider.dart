@@ -8,20 +8,12 @@ class AppProvider extends ChangeNotifier {
 
   // history
 
-  Functions appIs = Functions.economy;
-
-  int get sortIndex => sortsIndex[appIs.index];
-
   List<int> sortsIndex = [0, 0];
 
   List<Enum> pagesStates = [
     EconomySortState.all,
     ToDoSortState.all,
   ];
-
-  void setSortIndex({required int index}) => sortsIndex[appIs.index] = index;
-
-  String get getStateString => kindsSorts[appIs.index][sortIndex].toString();
 
   List<SortParametrs> sortParametrs = [
     SortParametrs(
@@ -55,41 +47,5 @@ class AppProvider extends ChangeNotifier {
     ],
   ];
 
-  Enum get getState => getCurrentState();
-
-  Enum getCurrentState() {
-    if (appIs == Functions.economy) {
-      return pagesStates[0];
-    } else {
-      return pagesStates[1];
-    }
-  }
-
-  List<Widget> get pages => getPages();
-
-  List<Widget> getPages() {
-    if (appIs == Functions.economy) {
-      return PagesService.pagesEconomy;
-    }
-    return PagesService.pagesTodo;
-  }
-
-  Text get getAppBarTitle => Text(getTitle());
-
-  String getTitle() {
-    if (appIs == Functions.economy) {
-      return AppLocalizations.current.economy;
-    }
-    return AppLocalizations.current.todo;
-  }
-
-  void changeFunctions() {
-    if (appIs == Functions.todo) {
-      appIs = Functions.economy;
-    } else {
-      appIs = Functions.todo;
-    }
-  }
-
-  //
+  List<Widget> get pages => PagesService.pages;
 }

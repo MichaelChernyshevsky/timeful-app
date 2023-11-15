@@ -1,14 +1,11 @@
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
 class PagesService {
-  static List<Widget> get pagesEconomy => [
+  static List<Widget> get pages => [
         const NewsEconomyPage(),
-        const HistoryEconomyPage(),
-        const UserPage(),
-      ];
-  static List<Widget> get pagesTodo => [
-        const NewsToDoPage(),
+        const NewsEconomyPage(),
         const HistoryToDoPage(),
+        const HistoryEconomyPage(),
         const UserPage(),
       ];
 }

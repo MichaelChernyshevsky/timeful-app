@@ -20,6 +20,8 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
   EconomyBloc? bloc;
   TextEditingController contorllerTitle = TextEditingController();
   TextEditingController contorllerCost = TextEditingController();
+  TextEditingController contorllerDescription = TextEditingController();
+
   HistoryElement? element;
   Color buttonColor = Colors.amber;
 
@@ -39,6 +41,8 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
     final createdElement = HistoryElement(
       title: contorllerTitle.text,
       count: int.parse(contorllerCost.text),
+      description: contorllerDescription.text,
+      // date:
     );
 
     setState(() {
@@ -81,7 +85,15 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
             const Text('paste title'),
             TextFormField(controller: contorllerTitle),
             const Text('paste count'),
-            TextFormField(controller: contorllerCost),
+            TextFormField(
+              controller: contorllerCost,
+              keyboardType: TextInputType.number,
+            ),
+            const Text('description'),
+            TextFormField(
+              controller: contorllerDescription,
+              keyboardType: TextInputType.number,
+            ),
             BlocListener<EconomyBloc, EconomyBlocState>(
               listener: (context, state) {
                 if (state is BlocError) {

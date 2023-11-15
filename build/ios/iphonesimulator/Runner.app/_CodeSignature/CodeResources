@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		O2lCunglcIDI+7uCiC2uPkUZ2fY=
+		ennACWJc+CfHxd3XIohRK7yyT1U=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		XRY2FBxaAvQCIRxrpmRqt2M/wtA=
+		+zS2i/qDa9V9JEFUYjYvfR/dukQ=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		tQf+UYCHpvqI0mD65xf5N3phYs0=
+		e5kiQl9uAhYNcfofr7T2uxacxck=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -194,7 +194,7 @@
 		</data>
 		<key>Frameworks/flutter_localization.framework/flutter_localization</key>
 		<data>
-		rSDDHpgMMHPOgYB8gqHp27ClcXM=
+		SjxPobPak62R99enuI1Xesp0X8s=
 		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
 		<data>
@@ -206,7 +206,7 @@
 		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation</key>
 		<data>
-		EP4PD1LkjLkpoMyEGLQxyqB/PDk=
+		XneSAt/AB47t5CERVY6cB0rvG/M=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -293,7 +293,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			R6+00c/baxVv5Nis0IAaVBD+rjfpu9aFrTzndlKQL6A=
+			wbAhbE94ChsTrBgHwXfeU1Bv7BhlkfwEgsnF6eb9WTM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -307,7 +307,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DfH0neSC4Y0HQD++ccKufWROPixjQ2eTY41OHdZkv7s=
+			S9qMbg76NqM5Qpam/BuJP5q68zsHd0cPFNV+Jkw1pTc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -363,7 +363,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kQUD+rLLGG3F8Wz1MdvHuCr+CptaMOqfbdwP2K3oDxk=
+			NCtDGbpyffOXQEQGRcjRkBfo7RAU7gEzUrSs1so4MpM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -552,7 +552,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8ZF1cc/O2BkKzWYk06aAkWAiOJv6lYqI9az05kTVUtk=
+			oUfiZcM4B9CZjMz5hsos/mcAo0dDJSQau6iJaCAzKbU=
 			</data>
 		</dict>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
@@ -573,7 +573,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yhz+JPsHMsVaoNg/m3NMd3GSSp+BrVhYeXOn3ZLgfDA=
+			8aVYOQSI6CD0vJEFfdwJfU53D7o5QqnZDEG//29ARRk=
 			</data>
 		</dict>
 	</dict>

@@ -24,6 +24,7 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
 
   HistoryElement? element;
   Color buttonColor = Colors.amber;
+  bool currentDate = true;
 
   @override
   void initState() {
@@ -69,6 +70,10 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
     Navigator.of(context).pop(element);
   }
 
+  void changeCheckBox({required bool newValue}) => setState(() {
+        currentDate = newValue;
+      });
+
   void onError() => debugPrint('error adding');
 
   @override
@@ -94,6 +99,7 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
               controller: contorllerDescription,
               keyboardType: TextInputType.number,
             ),
+            date(),
             BlocListener<EconomyBloc, EconomyBlocState>(
               listener: (context, state) {
                 if (state is BlocError) {
@@ -112,5 +118,38 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
         ),
       ),
     );
+  }
+
+  Column date() {
+    if (currentDate == true) {
+      return Column(
+        children: [
+          Row(
+            children: [
+              const Text('Current date '),
+              Checkbox(
+                value: currentDate,
+                onChanged: (value) => changeCheckBox(newValue: value!),
+              ),
+            ],
+          ),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          Row(
+            children: [
+              const Text('Current date '),
+              Checkbox(
+                value: currentDate,
+                onChanged: (value) => changeCheckBox(newValue: value!),
+              ),
+            ],
+          ),
+          const Text('set date '),
+        ],
+      );
+    }
   }
 }

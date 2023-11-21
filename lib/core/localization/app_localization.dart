@@ -50,6 +50,7 @@ class AppLocalizations {
   String get news => Intl.message('News');
   String get historyEconomy => Intl.message('historyEconomy');
   String get historyToDo => Intl.message('historyToDo');
+  String get createTask => Intl.message('Create task');
 
   String get user => Intl.message('User');
   // splash screen
@@ -59,13 +60,22 @@ class AppLocalizations {
   String get sortByDate => Intl.message('By date');
   String get sortMin => Intl.message('Min -> Max');
   String get sortMax => Intl.message('Max -> Min');
-  // add
+  // create
   String get add => Intl.message('Add');
   String get addSpending => Intl.message('Add Spending');
   String get pasteTitle => Intl.message('Paste title');
   String get pasteCount => Intl.message('Paste count');
   String get description => Intl.message('Description');
   String get currentDate => Intl.message('Current date');
+   String get anyway => Intl.message('Anyway');
+  String get morning => Intl.message('Morning');
+  String get day => Intl.message('Day');
+  String get evening => Intl.message('Evening');
+
+
+  String get pasteCountOnDay => Intl.message('Paste count on day');
+
+  String get color => Intl.message('Color');
 
   // notification
   String get errorLoading => Intl.message('Error loading');

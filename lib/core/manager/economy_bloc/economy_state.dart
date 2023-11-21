@@ -8,6 +8,11 @@ class NotesInitial extends EconomyBlocState {
   List<Object?> get props => [];
 }
 
+class EmptyEconomy extends EconomyBlocState {
+  @override
+  List<Object?> get props => [];
+}
+
 class DeleteSucess extends EconomyBlocState {
   DeleteSucess();
   @override

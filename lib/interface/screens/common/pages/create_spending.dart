@@ -1,23 +1,24 @@
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/interface/screens/widgets/body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddSpedingScreen extends StatefulWidget {
-  const AddSpedingScreen({super.key});
+class CreateSpedingScreen extends StatefulWidget {
+  const CreateSpedingScreen({super.key});
 
   static Widget builder(BuildContext context) {
     return BlocProvider<EconomyBloc>(
       create: (context) => EconomyBloc(),
-      child: const AddSpedingScreen(),
+      child: const CreateSpedingScreen(),
     );
   }
 
   @override
-  State<AddSpedingScreen> createState() => _AddSpedingScreenState();
+  State<CreateSpedingScreen> createState() => _CreateSpedingScreenState();
 }
 
-class _AddSpedingScreenState extends State<AddSpedingScreen> {
+class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
   EconomyBloc? bloc;
   TextEditingController contorllerTitle = TextEditingController();
   TextEditingController contorllerCost = TextEditingController();
@@ -76,13 +77,13 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Body(
       appBar: AppBar(
         title: CustomText(
           text: AppLocalizations.current.addSpending,
         ),
       ),
-      body: Center(
+      widget: Center(
         child: Column(
           children: [
             Text(AppLocalizations.current.pasteTitle),
@@ -95,7 +96,6 @@ class _AddSpedingScreenState extends State<AddSpedingScreen> {
             Text(AppLocalizations.current.description),
             TextFormField(
               controller: contorllerDescription,
-              keyboardType: TextInputType.number,
             ),
             dateWidget(),
             BlocListener<EconomyBloc, EconomyBlocState>(

@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       bottomNavigationBar: Container(
-        color: UTILSConstants.purple,
+        color: UTILSConstants.black,
         height: getHeight(80),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,4 +1,6 @@
+import 'package:app_with_apps/core/models/class/part_time__class.dart';
 import 'package:app_with_apps/core/models/class/sort_parametrs_class.dart';
+import 'package:app_with_apps/core/models/enum/part_time__enum.dart';
 import 'package:app_with_apps/core/models/enum/todo_sort_state.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
@@ -13,6 +15,30 @@ class AppProvider extends ChangeNotifier {
   List<Enum> pagesStates = [
     EconomySortState.all,
     ToDoSortState.all,
+  ];
+
+  List<Color> colorsList = [
+    Colors.white,
+    Colors.black,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+  ];
+
+  List<PartTime> partTime = [
+    PartTime(
+      title: AppLocalizations.current.anyway,
+      partTime: PartTimeEnum.anyway,
+    ),
+    PartTime(
+      title: AppLocalizations.current.morning,
+      partTime: PartTimeEnum.morning,
+    ),
+    PartTime(title: AppLocalizations.current.day, partTime: PartTimeEnum.day),
+    PartTime(
+      title: AppLocalizations.current.evening,
+      partTime: PartTimeEnum.evening,
+    ),
   ];
 
   List<SortParametrs> sortParametrs = [

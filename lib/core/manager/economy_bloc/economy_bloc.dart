@@ -3,14 +3,15 @@ import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'event.dart';
-part 'state.dart';
+part 'economy_event.dart';
+part 'economy_state.dart';
 
 class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   EconomyBloc() : super(NotesInitial()) {
     on<DeleteSpendingEvent>(_deleteSpending);
     on<AddSpending>(_addSpending);
     on<GetSpendingsEvent>(_getSpending);
+    on<DisposeEvent>(_dispose);
   }
 
   List<HistoryElement> history = [
@@ -22,6 +23,13 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   ];
 
   // ServiceApiNotes service = ServiceApiNotes();
+
+  Future<void> _dispose(
+    DisposeEvent event,
+    Emitter<EconomyBlocState> state,
+  ) async {
+    emit(EmptyEconomy());
+  }
 
   Future<void> _deleteSpending(
     DeleteSpendingEvent event,

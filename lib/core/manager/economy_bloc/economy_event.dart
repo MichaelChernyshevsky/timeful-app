@@ -10,6 +10,11 @@ class GetSpendingsEvent extends EconomyBlocEvent {
   List<Object?> get props => [];
 }
 
+class DisposeEvent extends EconomyBlocEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class DeleteSpendingEvent extends EconomyBlocEvent {
   int id;
   DeleteSpendingEvent({required this.id});

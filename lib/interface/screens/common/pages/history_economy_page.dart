@@ -101,7 +101,7 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
               child: ListView.builder(
                 itemCount: elements.length,
                 itemBuilder: (context, index) {
-                  return Note(element: elements[index]);
+                  return SpendingWidget(element: elements[index]);
                 },
               ),
             ),

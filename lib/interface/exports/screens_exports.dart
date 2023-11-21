@@ -22,7 +22,7 @@ export 'package:app_with_apps/interface/screens/common/pages/user_page.dart';
 export 'package:app_with_apps/interface/screens/start/splash_screen.dart';
 export 'package:app_with_apps/interface/screens/widgets/bottom_text.dart';
 export 'package:app_with_apps/interface/screens/widgets/custom_bottom.dart';
-export 'package:app_with_apps/interface/screens/widgets/note_widget.dart';
+export 'package:app_with_apps/interface/screens/widgets/spending_widget.dart';
 export 'package:app_with_apps/interface/uikit/container.dart';
 export 'package:app_with_apps/interface/uikit/text.dart';
 export 'package:app_with_apps/interface/uikit/textField.dart';

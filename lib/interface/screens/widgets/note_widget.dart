@@ -10,6 +10,8 @@ class Note extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sign = element.isSpending == true ? '-' : '+';
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Row(
@@ -20,13 +22,15 @@ class Note extends StatelessWidget {
             child: Text('12.09.2023'),
           ),
           CustomContainer(
-            color: UTILSConstants.white,
+            color: element.isSpending == true
+                ? UTILSConstants.grey
+                : UTILSConstants.purple,
             height: 100,
             width: 300,
-            widget: Row(
+            widget: Column(
               children: [
                 Text(element.title),
-                Text(element.count.toString()),
+                Text('$sign  ${element.count}'),
               ],
             ),
           ),

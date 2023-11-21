@@ -15,11 +15,41 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   }
 
   List<HistoryElement> history = [
-    HistoryElement(title: 'title', count: 1),
-    HistoryElement(title: 'title', count: 1),
-    HistoryElement(title: 'title', count: 1),
-    HistoryElement(title: 'title', count: 1),
-    HistoryElement(title: 'title', count: 1),
+    HistoryElement(
+      title: 'title',
+      count: 1,
+      isSpending: true,
+      description: '',
+      date: null,
+    ),
+    HistoryElement(
+      title: 'title',
+      count: 1,
+      isSpending: true,
+      description: '',
+      date: null,
+    ),
+    HistoryElement(
+      title: 'title',
+      count: 1,
+      isSpending: false,
+      description: '',
+      date: null,
+    ),
+    HistoryElement(
+      title: 'title',
+      count: 1,
+      isSpending: false,
+      description: '',
+      date: null,
+    ),
+    HistoryElement(
+      title: 'title',
+      count: 1,
+      isSpending: false,
+      description: '',
+      date: null,
+    ),
   ];
 
   // ServiceApiNotes service = ServiceApiNotes();

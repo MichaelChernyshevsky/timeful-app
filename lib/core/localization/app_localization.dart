@@ -62,16 +62,18 @@ class AppLocalizations {
   String get sortMax => Intl.message('Max -> Min');
   // create
   String get add => Intl.message('Add');
+  String get isSpending => Intl.message('Spending');
+  String get isIncome => Intl.message('Income');
+
   String get addSpending => Intl.message('Add Spending');
   String get pasteTitle => Intl.message('Paste title');
   String get pasteCount => Intl.message('Paste count');
   String get description => Intl.message('Description');
   String get currentDate => Intl.message('Current date');
-   String get anyway => Intl.message('Anyway');
+  String get anyway => Intl.message('Anyway');
   String get morning => Intl.message('Morning');
   String get day => Intl.message('Day');
   String get evening => Intl.message('Evening');
-
 
   String get pasteCountOnDay => Intl.message('Paste count on day');
 

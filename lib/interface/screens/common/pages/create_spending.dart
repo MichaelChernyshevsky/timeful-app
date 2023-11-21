@@ -23,11 +23,11 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
   TextEditingController contorllerTitle = TextEditingController();
   TextEditingController contorllerCost = TextEditingController();
   TextEditingController contorllerDescription = TextEditingController();
-
   HistoryElement? element;
   Color buttonColor = UTILSConstants.purple;
   bool currentDate = true;
   DateTime? date;
+  bool isSpending = true;
 
   @override
   void initState() {
@@ -47,6 +47,7 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
       count: int.parse(contorllerCost.text),
       description: contorllerDescription.text,
       date: date ?? DateTime.now(),
+      isSpending: isSpending,
     );
 
     element = createdElement;
@@ -75,6 +76,14 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
     }
   }
 
+  void onTapSpending() => setState(() {
+        isSpending = true;
+      });
+
+  void onTapIncome() => setState(() {
+        isSpending = false;
+      });
+
   @override
   Widget build(BuildContext context) {
     return Body(
@@ -92,6 +101,24 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
             TextFormField(
               controller: contorllerCost,
               keyboardType: TextInputType.number,
+            ),
+            Padding(
+              padding: getPadding(all: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CustomButton(
+                    color: UTILSConstants.white,
+                    text: AppLocalizations.current.isSpending,
+                    tap: onTapSpending,
+                  ),
+                  CustomButton(
+                    color: UTILSConstants.white,
+                    text: AppLocalizations.current.isIncome,
+                    tap: onTapIncome,
+                  ),
+                ],
+              ),
             ),
             Text(AppLocalizations.current.description),
             TextFormField(

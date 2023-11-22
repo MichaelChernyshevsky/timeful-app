@@ -59,7 +59,7 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
     final element = createElement();
     if (element != null) {
       bloc!.add(
-        AddSpending(element: element),
+        AddSpendingEvent(element: element),
       );
     } else {
       setState(() {

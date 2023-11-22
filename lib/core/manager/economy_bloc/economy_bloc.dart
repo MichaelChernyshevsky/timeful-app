@@ -9,9 +9,10 @@ part 'economy_state.dart';
 class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   EconomyBloc() : super(NotesInitial()) {
     on<DeleteSpendingEvent>(_deleteSpending);
-    on<AddSpending>(_addSpending);
+    on<AddSpendingEvent>(_addSpending);
     on<GetSpendingsEvent>(_getSpending);
     on<DisposeEvent>(_dispose);
+    on<Ed>(_dispose);
   }
 
   List<HistoryElement> history = [
@@ -74,7 +75,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   }
 
   Future<void> _addSpending(
-    AddSpending event,
+    AddSpendingEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
     history.add(event.element);

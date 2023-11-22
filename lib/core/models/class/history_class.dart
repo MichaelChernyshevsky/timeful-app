@@ -7,9 +7,9 @@ class HistoryElement {
     required this.date,
   });
 
-  final String title;
-  final int count;
-  final String? description;
-  final DateTime? date;
-  final bool isSpending;
+  String title;
+  int count;
+  String? description;
+  DateTime? date;
+  bool isSpending;
 }

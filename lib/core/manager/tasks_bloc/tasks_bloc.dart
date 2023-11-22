@@ -15,6 +15,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     on<AddTaskEvent>(_addTask);
     on<GetTasksEvent>(_getTasks);
     on<DisposeEvent>(_dispose);
+    on<EditToDoEvent>(_edit);
   }
 
   List<TaskElement> tasks = [
@@ -59,6 +60,13 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
 
   Future<void> _dispose(
     DisposeEvent event,
+    Emitter<TasksBlocState> state,
+  ) async {
+    emit(EmptyTasks());
+  }
+
+  Future<void> _edit(
+    EditToDoEvent event,
     Emitter<TasksBlocState> state,
   ) async {
     emit(EmptyTasks());

@@ -26,3 +26,10 @@ class AddTaskEvent extends TasksBlocEvent {
   @override
   List<Object?> get props => [task];
 }
+
+class EditToDoEvent extends TasksBlocEvent {
+  TaskElement element;
+  EditToDoEvent({required this.element});
+  @override
+  List<Object?> get props => [element];
+}

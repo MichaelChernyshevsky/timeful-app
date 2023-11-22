@@ -1,1 +1,5 @@
-enum TextEnum { title, common, bottom }
+enum TextEnum {
+  title,
+  common,
+  bottom,
+}

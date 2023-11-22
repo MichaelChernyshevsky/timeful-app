@@ -25,6 +25,12 @@ class _ToDoPageState extends State<ToDoPage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    bloc!.add(DisposeEvent());
+    super.dispose();
+  }
+
   Future goToCreate() async {
     final task = await Navigator.push(
       context,

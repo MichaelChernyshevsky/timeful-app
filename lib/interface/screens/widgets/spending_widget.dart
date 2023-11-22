@@ -12,32 +12,46 @@ class SpendingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final sign = element.isSpending == true ? '-' : '+';
 
+    final color = element.isSpending == true
+        ? UTILSConstants.grey
+        : UTILSConstants.purple;
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const RotatedBox(
+          RotatedBox(
             quarterTurns: -1,
-            child: Text('12.09.2023'),
+            child: Text(
+              '12.09.2023',
+              style: TextStyle(color: color),
+            ),
           ),
           CustomContainer(
-            color: element.isSpending == true
-                ? UTILSConstants.grey
-                : UTILSConstants.purple,
+            colorBorder: color,
             height: 100,
             width: 300,
             widget: Column(
               children: [
-                Text(element.title),
-                Text('$sign  ${element.count}'),
+                Text(
+                  element.title,
+                  style: TextStyle(color: color),
+                ),
+                Text(
+                  '$sign  ${element.count}',
+                  style: TextStyle(color: color),
+                ),
               ],
             ),
           ),
           GestureDetector(
             // ignore: avoid_print
             onTap: () => print(1),
-            child: const Icon(Icons.chevron_right_rounded),
+            child: Icon(
+              Icons.chevron_right_rounded,
+              color: color,
+            ),
           ),
         ],
       ),

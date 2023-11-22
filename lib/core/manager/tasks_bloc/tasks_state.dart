@@ -21,7 +21,7 @@ class DeleteSucess extends TasksBlocState {
 class GetTasksSuccess extends TasksBlocState {
   GetTasksSuccess(this.tasks);
 
-  final List<Task> tasks;
+  final List<TaskElement> tasks;
   @override
   List<Object?> get props => [tasks];
 }

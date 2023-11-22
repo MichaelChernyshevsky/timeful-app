@@ -27,26 +27,35 @@ class _DayPartPickerState extends State<DayPartPicker> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        CustomButton(
+        CustomContainer(
           color: getColor(0),
-          tap: () => setPart(0),
-          element: Text(GetIt.I.get<AppProvider>().partTime[0].title),
+          widget: GestureDetector(
+            onTap: () => widget.value(0),
+            child: const Icon(Icons.sunny_snowing),
+          ),
         ),
-        CustomButton(
+        CustomContainer(
           color: getColor(1),
-          tap: () => setPart(1),
-          element: Text(GetIt.I.get<AppProvider>().partTime[1].title),
+          widget: GestureDetector(
+            onTap: () => widget.value(1),
+            child: const Icon(Icons.sunny),
+          ),
         ),
-        CustomButton(
+        CustomContainer(
           color: getColor(2),
-          tap: () => setPart(2),
-          element: Text(GetIt.I.get<AppProvider>().partTime[2].title),
+          widget: GestureDetector(
+            onTap: () => widget.value(2),
+            child: const Icon(Icons.sunny_snowing),
+          ),
         ),
-        CustomButton(
+        CustomContainer(
           color: getColor(3),
-          tap: () => setPart(3),
-          element: Text(GetIt.I.get<AppProvider>().partTime[3].title),
+          widget: GestureDetector(
+            onTap: () => widget.value(3),
+            child: const Icon(Icons.abc),
+          ),
         ),
       ],
     );

@@ -22,7 +22,7 @@ class DeleteTaskEvent extends TasksBlocEvent {
 
 class AddTaskEvent extends TasksBlocEvent {
   AddTaskEvent({required this.task});
-  Task task;
+  TaskElement task;
   @override
   List<Object?> get props => [task];
 }

@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		7qCQy6/AZ3lUW+AM2kTUeDdHKZY=
+		bswB1+JbphGJqEtD6ArSRIr5HQw=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		MoMoDO844pKoFayhYZ0HOApJr/8=
+		CamiVDw0YKv4SWsQqWzOT+bCKts=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		hZQGD/qJZd/wvxRYdDcK1K1Hs5U=
+		JuuutuIE+/TX7mQVlCThDyZczR0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/money-bag-pixel-art_505135-55.jpg.svg</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		uShboDttmKvgj+2Jzk+PRVb8A1o=
+		B6BwIO4LNMKKOtq4uItWmVSNIIU=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -186,15 +186,15 @@
 		</data>
 		<key>Frameworks/flutter_localization.framework/Info.plist</key>
 		<data>
-		xqM6Q5uikl1WGSTCTPhijlkgF1g=
+		vaP5ztauOULeshp2Rpkn0us3ylo=
 		</data>
 		<key>Frameworks/flutter_localization.framework/_CodeSignature/CodeResources</key>
 		<data>
-		fF7pYkr1WeaNGyL/rLS2+5YHfM4=
+		4dqkyn+kRkTH4jnKNU+hQ2t4W+Y=
 		</data>
 		<key>Frameworks/flutter_localization.framework/flutter_localization</key>
 		<data>
-		U7XZaJe/3t+rohkKjSHCT5fyk2w=
+		5LxrlabgH7ftbgUkJk5L9osu6A0=
 		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
 		<data>
@@ -293,7 +293,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FcM6rj1E6DzBgwKeWczss36Tzstat5regat7Jj1JrU8=
+			LC5QdpoYTLc+lnmAH47XAYTPKWIE2aIkjF40Tdu5kM4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -307,7 +307,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z3sjNxoXNe27o5cWj1/T1cYteAEpqaG8Nq7khTYZkrw=
+			mdxWc/+M0CzZsaEu0unDXoLB0k0Nb3Pt8OAvv+1m+TI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -335,7 +335,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8CSSAYGqPlnawbOCXInaLXRBs/G9zRD2m2MipJ26lAk=
+			FsKw8Ga21l3djmDf+raSRNgyNXCQfvf6WByLs4ZNIik=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/money-bag-pixel-art_505135-55.jpg.svg</key>
@@ -363,7 +363,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ufkfVXkWb7I6C+rSdh8U8RqA7I920DybjGxSrm5n7Pk=
+			pxiEi7x7L0WtafyRT5amUyfB3yzLNWJgDUtAk09q4ZE=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -538,21 +538,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y0yLT29BjdEUdr4uDpqskT5v8oyXwggnDIEVVYTnx84=
+			+O6L6uQEvqAep/bXBB533DrmL1IQoHfQRxkiyngH8m4=
 			</data>
 		</dict>
 		<key>Frameworks/flutter_localization.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XBqBTMz0rjNzCgj4jA7Gu1GUUlqm6b1mL7E/h9j1Ekk=
+			A9hqmIXIAeSjbe3ARzMM+/RY+WknJe4P45F8x93/hQM=
 			</data>
 		</dict>
 		<key>Frameworks/flutter_localization.framework/flutter_localization</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9iQiuN1DCBwb44w0RZBQbDYDVUIH8ibUOCakve4StEY=
+			yWA0ZxM9a/YI3wyHU9eE0YuSszxWN/Apj+DYKypHD8k=
 			</data>
 		</dict>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>

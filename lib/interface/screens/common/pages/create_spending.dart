@@ -108,12 +108,16 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CustomButton(
-                    color: UTILSConstants.white,
+                    color: isSpending == true
+                        ? UTILSConstants.purple
+                        : UTILSConstants.white,
                     text: AppLocalizations.current.isSpending,
                     tap: onTapSpending,
                   ),
                   CustomButton(
-                    color: UTILSConstants.white,
+                    color: isSpending == false
+                        ? UTILSConstants.purple
+                        : UTILSConstants.white,
                     text: AppLocalizations.current.isIncome,
                     tap: onTapIncome,
                   ),

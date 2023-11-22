@@ -27,16 +27,19 @@ class AppProvider extends ChangeNotifier {
 
   List<PartTime> partTime = [
     PartTime(
-      title: AppLocalizations.current.anyway,
+      index: 3,
       partTime: PartTimeEnum.anyway,
     ),
     PartTime(
-      title: AppLocalizations.current.morning,
+      index: 0,
       partTime: PartTimeEnum.morning,
     ),
-    PartTime(title: AppLocalizations.current.day, partTime: PartTimeEnum.day),
     PartTime(
-      title: AppLocalizations.current.evening,
+      index: 1,
+      partTime: PartTimeEnum.day,
+    ),
+    PartTime(
+      index: 3,
       partTime: PartTimeEnum.evening,
     ),
   ];

@@ -1,4 +1,5 @@
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
+import 'package:app_with_apps/core/models/class/part_time__class.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/core/models/enum/part_time__enum.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
@@ -30,6 +31,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   Color color = Colors.white;
   int timeOfDay = 0;
   TasksBloc? bloc;
+  TaskElement? element;
 
   @override
   void initState() {
@@ -37,32 +39,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     super.initState();
   }
 
-  void addTask() {
-    if (contorllerTitle.text.isNotEmpty) {
-      final task = Task(
-        title: contorllerTitle.text,
-        icon: icon,
-        color: color,
-        id: 1,
-        count: count,
-        countOnDay: countOnDay,
-        timeOfDay: GetIt.I.get<AppProvider>().partTime[timeOfDay],
-      );
-
-      bloc!.add(AddTaskEvent(task: task));
-    }
-  }
-
-  void setCount(int newCount) => setState(() {
-        count = newCount;
-      });
-
-  void setCountOnDay(int newCount) => setState(() {
-        countOnDay = newCount;
-      });
-
-  void setColor(Color newColor) => setState(() {
-        color = newColor;
+  void setIndex({required int index}) => setState(() {
+        timeOfDay = index;
       });
 
   @override
@@ -85,8 +63,11 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             count: countOnDay,
             value: setCountOnDay,
           ),
-          Text(AppLocalizations.current.color),
-          //  DayPartPicker(currentIndex: null, value: (int count) {  },),
+          Text(AppLocalizations.current.day),
+          DayPartPicker(
+            currentIndex: timeOfDay,
+            value: (int count) => setIndex(index: count),
+          ),
           Text(AppLocalizations.current.color),
           SizedBox(
             width: size.width,
@@ -104,9 +85,73 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               },
             ),
           ),
-          CustomButton(color: UTILSConstants.purple, tap: addTask),
+          BlocListener<TasksBloc, TasksBlocState>(
+            listener: (context, state) => stateFunc(state),
+            child: CustomButton(color: UTILSConstants.purple, tap: addTask),
+          ),
         ],
       ),
     );
   }
+
+  TaskElement? createElement() {
+    if (contorllerTitle.text.isEmpty) {
+      return null;
+    }
+
+    final createdElement = TaskElement(
+      title: contorllerTitle.text,
+      count: count,
+      id: 123,
+      icon: icon,
+      color: color,
+      countOnDay: countOnDay,
+      timeOfDay: PartTime(
+        index: timeOfDay,
+        partTime: PartTimeEnum.values[timeOfDay],
+      ),
+    );
+
+    element = createdElement;
+
+    return createdElement;
+  }
+
+  void stateFunc(TasksBlocState state) {
+    if (state is BlocError) {
+      debugPrint(AppLocalizations.current.errorAdding);
+    } else if (state is BlocSuccess) {
+      Navigator.of(context).pop(element);
+    }
+  }
+
+  void addTask() {
+    if (contorllerTitle.text.isNotEmpty) {
+      final task = TaskElement(
+        title: contorllerTitle.text,
+        icon: icon,
+        color: color,
+        id: 1,
+        count: count,
+        countOnDay: countOnDay,
+        timeOfDay: GetIt.I.get<AppProvider>().partTime[timeOfDay],
+      );
+
+      element = task;
+
+      bloc!.add(AddTaskEvent(task: task));
+    }
+  }
+
+  void setCount(int newCount) => setState(() {
+        count = newCount;
+      });
+
+  void setCountOnDay(int newCount) => setState(() {
+        countOnDay = newCount;
+      });
+
+  void setColor(Color newColor) => setState(() {
+        color = newColor;
+      });
 }

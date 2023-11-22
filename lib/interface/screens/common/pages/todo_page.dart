@@ -14,7 +14,7 @@ class ToDoPage extends StatefulWidget {
 }
 
 class _ToDoPageState extends State<ToDoPage> {
-  List<Task> tasks = [];
+  List<TaskElement> tasks = [];
   bool loading = true;
   TasksBloc? bloc;
 
@@ -40,7 +40,7 @@ class _ToDoPageState extends State<ToDoPage> {
 
   void onError() => debugPrint(AppLocalizations.current.errorLoading);
 
-  void setElements(List<Task> elementsBloc) => setState(() {
+  void setElements(List<TaskElement> elementsBloc) => setState(() {
         tasks = elementsBloc;
         loading = false;
       });

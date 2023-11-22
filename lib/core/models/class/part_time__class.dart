@@ -2,11 +2,11 @@
 import 'package:app_with_apps/core/models/enum/part_time__enum.dart';
 
 class PartTime {
-  String title;
+  int index;
   PartTimeEnum partTime;
 
   PartTime({
-    required this.title,
+    required this.index,
     required this.partTime,
   });
 }

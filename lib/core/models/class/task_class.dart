@@ -2,7 +2,7 @@
 import 'package:app_with_apps/core/models/class/part_time__class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
-class Task {
+class TaskElement {
   int id;
   String title;
   Icon icon;
@@ -11,7 +11,7 @@ class Task {
   int count;
   PartTime timeOfDay;
 
-  Task({
+  TaskElement({
     required this.id,
     required this.title,
     required this.icon,

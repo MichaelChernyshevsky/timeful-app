@@ -3,6 +3,8 @@ import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 // import 'package:app_with_apps/core/manager/bloc/economy_bloc.dart';
 import 'package:app_with_apps/core/manager/get.it/app_provider.dart';
 import 'package:app_with_apps/core/manager/provider/ordinaryProvider.dart';
+import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
+import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/core/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/interface/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ void main() {
     MultiBlocProvider(
       providers: [
         BlocProvider<EconomyBloc>(create: (context) => EconomyBloc()),
+        BlocProvider<TasksBloc>(create: (context) => TasksBloc()),
       ],
       child: MultiProvider(
         providers: [

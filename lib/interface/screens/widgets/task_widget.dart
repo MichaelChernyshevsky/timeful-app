@@ -7,7 +7,7 @@ class TaskWidget extends StatelessWidget {
     required this.element,
   });
 
-  final Task element;
+  final TaskElement element;
 
   @override
   Widget build(BuildContext context) {

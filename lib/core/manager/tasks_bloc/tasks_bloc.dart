@@ -15,7 +15,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     on<DisposeEvent>(_dispose);
   }
 
-  List<Task> tasks = [];
+  List<TaskElement> tasks = [];
   // ServiceApiNotes service = ServiceApiNotes();
 
   Future<void> _dispose(

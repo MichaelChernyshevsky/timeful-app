@@ -1,5 +1,5 @@
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
-import 'package:app_with_apps/interface/screens/common/pages/create_spending.dart';
+import 'package:app_with_apps/interface/screens/common/screens/create_spending_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';

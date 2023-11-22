@@ -1,12 +1,23 @@
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/interface/screens/common/screens/edit_spending_screen.dart';
 
 class SpendingWidget extends StatelessWidget {
-  const SpendingWidget({
+  SpendingWidget({
     super.key,
     required this.element,
   });
 
   final HistoryElement element;
+  bool validate = false;
+
+  void goToElement(context) => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EditSpendingScreen(
+            element: element,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +39,24 @@ class SpendingWidget extends StatelessWidget {
               style: TextStyle(color: color),
             ),
           ),
-          CustomContainer(
-            colorBorder: color,
-            height: 100,
-            width: 300,
-            widget: Column(
-              children: [
-                Text(
-                  element.title,
-                  style: TextStyle(color: color),
-                ),
-                Text(
-                  '$sign  ${element.count}',
-                  style: TextStyle(color: color),
-                ),
-              ],
-            ),
-          ),
           GestureDetector(
-            // ignore: avoid_print
-            onTap: () => print(1),
-            child: Icon(
-              Icons.chevron_right_rounded,
-              color: color,
+            onTap: () => goToElement(context),
+            child: CustomContainer(
+              colorBorder: color,
+              height: 100,
+              width: 350,
+              widget: Column(
+                children: [
+                  Text(
+                    element.title,
+                    style: TextStyle(color: color),
+                  ),
+                  Text(
+                    '$sign  ${element.count}',
+                    style: TextStyle(color: color),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

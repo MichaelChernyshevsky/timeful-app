@@ -17,7 +17,7 @@ export 'package:app_with_apps/interface/screens/common/main_screen.dart';
 export 'package:app_with_apps/interface/screens/common/pages/history_economy_page.dart';
 export 'package:app_with_apps/interface/screens/common/pages/todo_page.dart';
 export 'package:app_with_apps/interface/screens/common/pages/news_page.dart';
-export 'package:app_with_apps/interface/screens/common/pages/service/pages_service.dart';
+export 'package:app_with_apps/interface/screens/common/service/pages_service.dart';
 export 'package:app_with_apps/interface/screens/common/pages/user_page.dart';
 export 'package:app_with_apps/interface/screens/start/splash_screen.dart';
 export 'package:app_with_apps/interface/screens/widgets/bottom_text.dart';

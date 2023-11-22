@@ -1,5 +1,6 @@
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/interface/screens/common/screens/edit_todo_screen.dart';
 
 class TaskWidget extends StatefulWidget {
   const TaskWidget({
@@ -23,6 +24,15 @@ class _TaskWidgetState extends State<TaskWidget> {
           color = UTILSConstants.transparent;
         }
       });
+
+  void goToElement(context) => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EditToDoScreen(
+            element: widget.element,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

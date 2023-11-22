@@ -3,7 +3,7 @@
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/core/models/class/sort_parametrs_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
-import 'package:app_with_apps/interface/screens/common/pages/create_spending.dart';
+import 'package:app_with_apps/interface/screens/common/screens/create_spending_screen.dart';
 import 'package:app_with_apps/interface/screens/widgets/body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

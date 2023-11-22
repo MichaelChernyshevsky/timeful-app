@@ -1,7 +1,7 @@
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
-import 'package:app_with_apps/interface/screens/common/pages/create_task.dart';
+import 'package:app_with_apps/interface/screens/common/screens/create_task_screen.dart';
 import 'package:app_with_apps/interface/screens/widgets/body.dart';
 import 'package:app_with_apps/interface/screens/widgets/task_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

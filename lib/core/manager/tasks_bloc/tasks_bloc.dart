@@ -1,4 +1,5 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
+import 'package:app_with_apps/core/data/repo.dart';
 import 'package:app_with_apps/core/models/class/part_time__class.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/core/models/enum/part_time__enum.dart';
@@ -18,44 +19,8 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     on<EditToDoEvent>(_edit);
   }
 
-  List<TaskElement> tasks = [
-    TaskElement(
-      color: Colors.amber,
-      id: 1,
-      title: 'wqeqeqw',
-      icon: const Icon(Icons.ac_unit),
-      countOnDay: 1,
-      count: 1,
-      timeOfDay: PartTime(index: 0, partTime: PartTimeEnum.morning),
-    ),
-    TaskElement(
-      color: Colors.red,
-      id: 1,
-      title: 'wqeqeqw',
-      icon: const Icon(Icons.ac_unit),
-      countOnDay: 1,
-      count: 1,
-      timeOfDay: PartTime(index: 1, partTime: PartTimeEnum.day),
-    ),
-    TaskElement(
-      color: Colors.blue,
-      id: 1,
-      title: 'wqeqeqw',
-      icon: const Icon(Icons.ac_unit),
-      countOnDay: 1,
-      count: 1,
-      timeOfDay: PartTime(index: 2, partTime: PartTimeEnum.evening),
-    ),
-    TaskElement(
-      color: Colors.pink,
-      id: 1,
-      title: 'wqeqeqw',
-      icon: const Icon(Icons.ac_unit),
-      countOnDay: 1,
-      count: 1,
-      timeOfDay: PartTime(index: 3, partTime: PartTimeEnum.anyway),
-    ),
-  ];
+  AppRepo repo = AppRepo();
+
   // ServiceApiNotes service = ServiceApiNotes();
 
   Future<void> _dispose(
@@ -88,7 +53,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     AddTaskEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    tasks.add(event.task);
+    repo.addTask(element: event.task);
     emit(BlocSuccess());
     // try {} catch (error) {
     //   emit(BlocError());
@@ -101,7 +66,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
   ) async {
     try {
       // await service.deleteFolder(event.id);
-      emit(GetTasksSuccess(tasks));
+      emit(GetTasksSuccess(repo.getTasks()));
     } catch (error) {
       emit(BlocError());
     }

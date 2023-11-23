@@ -1,4 +1,5 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
+import 'package:app_with_apps/core/data/repo.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,51 +13,22 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     on<AddSpendingEvent>(_addSpending);
     on<GetSpendingsEvent>(_getSpending);
     on<DisposeEvent>(_dispose);
-    on<Ed>(_dispose);
+    on<EditSpendingEvent>(_edit);
   }
 
-  List<HistoryElement> history = [
-    HistoryElement(
-      title: 'title',
-      count: 1,
-      isSpending: true,
-      description: '',
-      date: null,
-    ),
-    HistoryElement(
-      title: 'title',
-      count: 1,
-      isSpending: true,
-      description: '',
-      date: null,
-    ),
-    HistoryElement(
-      title: 'title',
-      count: 1,
-      isSpending: false,
-      description: '',
-      date: null,
-    ),
-    HistoryElement(
-      title: 'title',
-      count: 1,
-      isSpending: false,
-      description: '',
-      date: null,
-    ),
-    HistoryElement(
-      title: 'title',
-      count: 1,
-      isSpending: false,
-      description: '',
-      date: null,
-    ),
-  ];
+  AppRepo repo = AppRepo();
 
   // ServiceApiNotes service = ServiceApiNotes();
 
   Future<void> _dispose(
     DisposeEvent event,
+    Emitter<EconomyBlocState> state,
+  ) async {
+    emit(EmptyEconomy());
+  }
+
+  Future<void> _edit(
+    EditSpendingEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
     emit(EmptyEconomy());
@@ -78,7 +50,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     AddSpendingEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
-    history.add(event.element);
+    repo.addHistory(element: event.element);
     emit(BlocSuccess());
     // try {} catch (error) {
     //   emit(BlocError());
@@ -91,7 +63,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   ) async {
     try {
       // await service.deleteFolder(event.id);
-      emit(GetHistorySuccess(history));
+      emit(GetHistorySuccess(repo.getHistory()));
     } catch (error) {
       emit(BlocError());
     }

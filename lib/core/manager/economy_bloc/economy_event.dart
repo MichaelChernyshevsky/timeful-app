@@ -29,9 +29,9 @@ class AddSpendingEvent extends EconomyBlocEvent {
   List<Object?> get props => [element];
 }
 
-class EditSpending extends EconomyBlocEvent {
+class EditSpendingEvent extends EconomyBlocEvent {
   HistoryElement element;
-  EditSpending({required this.element});
+  EditSpendingEvent({required this.element});
   @override
   List<Object?> get props => [element];
 }

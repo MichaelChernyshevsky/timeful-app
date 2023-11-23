@@ -43,6 +43,7 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
       return null;
     }
     final createdElement = HistoryElement(
+      id: 0,
       title: contorllerTitle.text,
       count: int.parse(contorllerCost.text),
       description: contorllerDescription.text,

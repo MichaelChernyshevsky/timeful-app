@@ -7,6 +7,7 @@ import 'package:app_with_apps/interface/exports/screens_exports.dart';
 class AppRepo {
   List<HistoryElement> history = [
     HistoryElement(
+      id: 1,
       title: 'title',
       count: 1,
       isSpending: true,
@@ -14,6 +15,7 @@ class AppRepo {
       date: null,
     ),
     HistoryElement(
+      id: 3,
       title: 'title',
       count: 1,
       isSpending: true,
@@ -21,6 +23,7 @@ class AppRepo {
       date: null,
     ),
     HistoryElement(
+      id: 4,
       title: 'title',
       count: 1,
       isSpending: false,
@@ -28,6 +31,7 @@ class AppRepo {
       date: null,
     ),
     HistoryElement(
+      id: 6,
       title: 'title',
       count: 1,
       isSpending: false,
@@ -35,6 +39,7 @@ class AppRepo {
       date: null,
     ),
     HistoryElement(
+      id: 8,
       title: 'title',
       count: 1,
       isSpending: false,
@@ -46,6 +51,15 @@ class AppRepo {
   List<HistoryElement> getHistory() => history;
 
   void addHistory({required HistoryElement element}) => history.add(element);
+
+  void editHistory({required HistoryElement element}) {
+    for (final el in history) {
+      if (el.id == element.id) {
+        final index = history.indexOf(el);
+        history[index] = element;
+      }
+    }
+  }
 
   List<TaskElement> tasks = [
     TaskElement(
@@ -89,4 +103,13 @@ class AppRepo {
   List<TaskElement> getTasks() => tasks;
 
   void addTask({required TaskElement element}) => tasks.add(element);
+
+  void editTasks({required TaskElement element}) {
+    for (final el in tasks) {
+      if (el.id == element.id) {
+        final index = tasks.indexOf(el);
+        tasks[index] = element;
+      }
+    }
+  }
 }

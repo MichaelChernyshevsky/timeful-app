@@ -29,7 +29,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           GetIt.I.get<AppProvider>().pages[_selectedIndex],

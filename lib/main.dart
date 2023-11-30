@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 void main() {
   GetIt.I.registerSingleton<AppProvider>(AppProvider());
 
+  
+
   runApp(
     MultiBlocProvider(
       providers: [

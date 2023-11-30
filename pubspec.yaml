@@ -28,6 +28,8 @@ dev_dependencies:
   http: any
   intl: ^0.18.0
 
+
+
 flutter:
   assets:
     - assets/

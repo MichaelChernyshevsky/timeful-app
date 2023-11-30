@@ -44,7 +44,7 @@ class SpendingWidget extends StatelessWidget {
             child: CustomContainer(
               colorBorder: color,
               height: 100,
-              width: 350,
+              width: size.width * 0.8,
               widget: Column(
                 children: [
                   Text(

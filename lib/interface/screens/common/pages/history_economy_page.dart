@@ -74,22 +74,25 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
     return Body(
       widget: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomContainer(
-                color: UTILSConstants.black,
-                widget: const Row(),
-              ),
-              CustomButton(
-                color: UTILSConstants.white,
-                text: AppLocalizations.current.add,
-                tap: goToCreate,
-              ),
-            ],
+          SizedBox(
+            height: size.height * 0.1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomContainer(
+                  color: UTILSConstants.black,
+                  widget: const Row(),
+                ),
+                CustomButton(
+                  color: UTILSConstants.white,
+                  text: AppLocalizations.current.add,
+                  tap: goToCreate,
+                ),
+              ],
+            ),
           ),
           SizedBox(
-            height: getHeight(620),
+            height: size.height * 0.74,
             child: BlocListener<EconomyBloc, EconomyBlocState>(
               listener: (context, state) {
                 if (state is BlocError) {
@@ -99,6 +102,7 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
                 }
               },
               child: ListView.builder(
+                padding: getPadding(all: 0),
                 itemCount: elements.length,
                 reverse: true,
                 itemBuilder: (context, index) {

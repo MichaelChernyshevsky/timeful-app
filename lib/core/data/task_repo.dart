@@ -10,7 +10,9 @@ class TaskRepo {
     box = await Hive.openBox<TaskElement>(AppLocalizations.current.taskRepo);
   }
 
-  List<TaskElement> getMoneys({DateTime? dateFilter}) {
+  List<TaskElement> get() {
+    // List<TaskElement> get({DateTime? dateFilter}) {
+
     // if (dateFilter != null) {
     //   return moneyBox.values
     //       .where((money) => money.wastedDate.month == dateFilter.month)
@@ -20,11 +22,11 @@ class TaskRepo {
     return box.values.toList();
   }
 
-  Future<bool> addMoney(TaskElement money) async {
-    return (await box.add(money)) != -1;
+  Future<bool> add({required TaskElement task}) async {
+    return (await box.add(task)) != -1;
   }
 
-  Future<bool> removeMoney(TaskElement money) => money.delete().then((_) {
+  Future<bool> remove(TaskElement task) => money.delete().then((_) {
         return true;
       }).catchError((_) {
         return false;

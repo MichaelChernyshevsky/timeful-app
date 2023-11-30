@@ -33,3 +33,8 @@ class EditToDoEvent extends TasksBlocEvent {
   @override
   List<Object?> get props => [element];
 }
+
+class WipeToDoEvent extends TasksBlocEvent {
+  @override
+  List<Object?> get props => [];
+}

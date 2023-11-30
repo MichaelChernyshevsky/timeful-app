@@ -7,7 +7,7 @@ class SpendingWidget extends StatelessWidget {
     required this.element,
   });
 
-  final HistoryElement element;
+  final EconomyElement element;
   bool validate = false;
 
   void goToElement(context) => Navigator.push(

@@ -2,7 +2,7 @@ export 'package:app_with_apps/core/constants/app_constants.dart';
 export 'package:app_with_apps/core/exports/exports.dart';
 export 'package:app_with_apps/core/localization/app_localization.dart';
 export 'package:app_with_apps/core/manager/get.it/app_provider.dart';
-export 'package:app_with_apps/core/models/class/history_class.dart';
+export 'package:app_with_apps/core/models/class/economy_class.dart';
 export 'package:app_with_apps/core/models/enum/functions_enum.dart';
 export 'package:app_with_apps/core/models/enum/history_sort_state.dart';
 export 'package:app_with_apps/core/utils/constants/constants_uikit.dart';

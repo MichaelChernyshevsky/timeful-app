@@ -19,7 +19,7 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
       GetIt.I.get<AppProvider>().sortParametrs;
 
   Enum pageState = EconomySortState.all;
-  List<HistoryElement> elements = [];
+  List<EconomyElement> elements = [];
   bool loading = true;
   EconomyBloc? bloc;
 
@@ -58,7 +58,7 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
 
   void onError() => debugPrint(AppLocalizations.current.errorLoading);
 
-  void setElements(List<HistoryElement> elementsBloc) => setState(() {
+  void setElements(List<EconomyElement> elementsBloc) => setState(() {
         elements = elementsBloc;
         loading = false;
       });

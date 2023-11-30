@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class EditSpendingScreen extends StatefulWidget {
   EditSpendingScreen({super.key, required this.element});
 
-  HistoryElement element;
+  EconomyElement element;
 
   @override
   State<EditSpendingScreen> createState() => _EditSpendingScreenState();

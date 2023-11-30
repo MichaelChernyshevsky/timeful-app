@@ -1,12 +1,12 @@
-import 'package:app_with_apps/core/models/class/history_class.dart';
+import 'package:app_with_apps/core/models/class/economy_class.dart';
 import 'package:app_with_apps/core/models/class/part_time__class.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/core/models/enum/part_time__enum.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
 class AppRepo {
-  List<HistoryElement> history = [
-    HistoryElement(
+  List<EconomyElement> history = [
+    EconomyElement(
       id: 1,
       title: 'title',
       count: 1,
@@ -14,7 +14,7 @@ class AppRepo {
       description: '',
       date: null,
     ),
-    HistoryElement(
+    EconomyElement(
       id: 3,
       title: 'title',
       count: 1,
@@ -22,7 +22,7 @@ class AppRepo {
       description: '',
       date: null,
     ),
-    HistoryElement(
+    EconomyElement(
       id: 4,
       title: 'title',
       count: 1,
@@ -30,7 +30,7 @@ class AppRepo {
       description: '',
       date: null,
     ),
-    HistoryElement(
+    EconomyElement(
       id: 6,
       title: 'title',
       count: 1,
@@ -38,7 +38,7 @@ class AppRepo {
       description: '',
       date: null,
     ),
-    HistoryElement(
+    EconomyElement(
       id: 8,
       title: 'title',
       count: 1,
@@ -48,11 +48,11 @@ class AppRepo {
     ),
   ];
 
-  List<HistoryElement> getHistory() => history;
+  List<EconomyElement> getHistory() => history;
 
-  void addHistory({required HistoryElement element}) => history.add(element);
+  void addHistory({required EconomyElement element}) => history.add(element);
 
-  void editHistory({required HistoryElement element}) {
+  void editHistory({required EconomyElement element}) {
     for (final el in history) {
       if (el.id == element.id) {
         final index = history.indexOf(el);

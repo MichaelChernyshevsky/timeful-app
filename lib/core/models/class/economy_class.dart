@@ -1,5 +1,5 @@
-class HistoryElement {
-  HistoryElement({
+class EconomyElement {
+  EconomyElement({
     required this.id,
     required this.title,
     required this.count,

@@ -25,10 +25,9 @@ dev_dependencies:
   flutter_svg: ^2.0.9
   flutter_test:
     sdk: flutter
+  hive_flutter: ^1.1.0
   http: any
   intl: ^0.18.0
-
-
 
 flutter:
   assets:

@@ -22,7 +22,7 @@ class DeleteSucess extends EconomyBlocState {
 class GetHistorySuccess extends EconomyBlocState {
   GetHistorySuccess(this.elements);
 
-  final List<HistoryElement> elements;
+  final List<EconomyElement> elements;
   @override
   List<Object?> get props => [elements];
 }

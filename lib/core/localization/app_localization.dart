@@ -30,6 +30,10 @@ class AppLocalizations {
         AppLocalizations();
   }
 
+  // repo
+  String get taskRepo => Intl.message('taskRepo');
+  String get economyRepo => Intl.message('economyRepo');
+
   // auth
   String get signIn => Intl.message('Sign in');
   String get signUp => Intl.message('Sign up');

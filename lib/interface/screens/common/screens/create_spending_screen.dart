@@ -23,7 +23,7 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
   TextEditingController contorllerTitle = TextEditingController();
   TextEditingController contorllerCost = TextEditingController();
   TextEditingController contorllerDescription = TextEditingController();
-  HistoryElement? element;
+  EconomyElement? element;
   Color buttonColor = UTILSConstants.purple;
   bool currentDate = true;
   DateTime? date;
@@ -35,14 +35,14 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
     super.initState();
   }
 
-  HistoryElement? createElement() {
+  EconomyElement? createElement() {
     if (contorllerTitle.text.isEmpty) {
       return null;
     }
     if (contorllerCost.text.isEmpty) {
       return null;
     }
-    final createdElement = HistoryElement(
+    final createdElement = EconomyElement(
       id: 0,
       title: contorllerTitle.text,
       count: int.parse(contorllerCost.text),

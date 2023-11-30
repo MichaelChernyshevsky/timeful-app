@@ -13,7 +13,9 @@ class EconomyRepo {
     );
   }
 
-  List<EconomyElement> getMoneys({DateTime? dateFilter}) {
+  List<EconomyElement> get() {
+    // List<EconomyElement> get({DateTime? dateFilter}) {
+
     // if (dateFilter != null) {
     //   return moneyBox.values
     //       .where((money) => money.wastedDate.month == dateFilter.month)
@@ -23,8 +25,8 @@ class EconomyRepo {
     return box.values.toList();
   }
 
-  Future<bool> addMoney(EconomyElement money) async {
-    return (await box.add(money)) != -1;
+  Future<bool> add({required EconomyElement element}) async {
+    return (await box.add(element)) != -1;
   }
 
   Future<bool> removeMoney(TaskElement money) => money.delete().then((_) {

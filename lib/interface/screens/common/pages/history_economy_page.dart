@@ -26,7 +26,7 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
   @override
   void initState() {
     bloc = BlocProvider.of<EconomyBloc>(context);
-    bloc!.add(GetSpendingsEvent());
+    bloc!.add(GetEconomyEvent());
     super.initState();
   }
 

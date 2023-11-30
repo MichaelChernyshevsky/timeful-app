@@ -10,11 +10,11 @@ part 'economy_state.dart';
 
 class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   EconomyBloc() : super(NotesInitial()) {
-    on<DeleteSpendingEvent>(_deleteSpending);
-    on<AddSpendingEvent>(_addSpending);
-    on<GetSpendingsEvent>(_getSpending);
+    on<DeleteEconomyEvent>(_deleteSpending);
+    on<AddEconoomyEvent>(_addSpending);
+    on<GetEconomyEvent>(_getSpending);
     on<DisposeEvent>(_dispose);
-    on<EditSpendingEvent>(_edit);
+    on<EditEconomyEvent>(_edit);
     on<WipeEconomyEvent>(_wipeData);
   }
 
@@ -31,14 +31,14 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   }
 
   Future<void> _edit(
-    EditSpendingEvent event,
+    EditEconomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
     emit(EmptyEconomy());
   }
 
   Future<void> _deleteSpending(
-    DeleteSpendingEvent event,
+    DeleteEconomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
     try {
@@ -50,7 +50,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   }
 
   Future<void> _addSpending(
-    AddSpendingEvent event,
+    AddEconoomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
     repo.addHistory(element: event.element);
@@ -63,7 +63,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
   }
 
   Future<void> _getSpending(
-    GetSpendingsEvent event,
+    GetEconomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
     try {

@@ -5,7 +5,7 @@ part of 'economy_bloc.dart';
 
 abstract class EconomyBlocEvent extends Equatable {}
 
-class GetSpendingsEvent extends EconomyBlocEvent {
+class GetEconomyEvent extends EconomyBlocEvent {
   @override
   List<Object?> get props => [];
 }
@@ -20,23 +20,23 @@ class DisposeEvent extends EconomyBlocEvent {
   List<Object?> get props => [];
 }
 
-class DeleteSpendingEvent extends EconomyBlocEvent {
+class DeleteEconomyEvent extends EconomyBlocEvent {
   int id;
-  DeleteSpendingEvent({required this.id});
+  DeleteEconomyEvent({required this.id});
   @override
   List<Object?> get props => [id];
 }
 
-class AddSpendingEvent extends EconomyBlocEvent {
+class AddEconoomyEvent extends EconomyBlocEvent {
   EconomyElement element;
-  AddSpendingEvent({required this.element});
+  AddEconoomyEvent({required this.element});
   @override
   List<Object?> get props => [element];
 }
 
-class EditSpendingEvent extends EconomyBlocEvent {
+class EditEconomyEvent extends EconomyBlocEvent {
   EconomyElement element;
-  EditSpendingEvent({required this.element});
+  EditEconomyEvent({required this.element});
   @override
   List<Object?> get props => [element];
 }

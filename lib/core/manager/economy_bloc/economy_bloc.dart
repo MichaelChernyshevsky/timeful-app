@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'package:app_with_apps/core/data/hive/economy_repo.dart';
-import 'package:app_with_apps/core/data/repo.dart';
+import 'package:app_with_apps/core/data/hive/service_hive.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +18,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     on<WipeEconomyEvent>(_wipeData);
   }
 
-  AppRepo repo = AppRepo();
-  final EconomyRepo _repo = EconomyRepo();
+  ServiceHive repo = ServiceHive();
 
   // ServiceApiNotes service = ServiceApiNotes();
 
@@ -53,13 +52,8 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     AddEconoomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
-    repo.addHistory(element: event.element);
-
-    // await _repo.add(element: event.element);
+    await repo.addEconomy(element: event.element);
     emit(BlocSuccess());
-    // try {} catch (error) {
-    //   emit(BlocError());
-    // }
   }
 
   Future<void> _getSpending(
@@ -71,7 +65,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
 
       // emit(GetHistorySuccess(_repo.get()));
 
-      emit(GetHistorySuccess(repo.getHistory()));
+      emit(GetHistorySuccess(await repo.getEconomy()));
     } catch (error) {
       emit(BlocError());
     }
@@ -82,7 +76,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      await _repo.wipeData();
+      await repo.wipeEconomy();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

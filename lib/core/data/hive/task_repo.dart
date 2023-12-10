@@ -1,9 +1,8 @@
-import 'package:app_with_apps/core/localization/app_localization.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class TaskRepo {
-  List<TaskElement> get({required Box<TaskElement> box}) {
+  List<TaskElement> get({required Box<TaskElement> box, filter}) {
     // List<TaskElement> get({DateTime? dateFilter}) {
 
     // if (dateFilter != null) {
@@ -12,6 +11,7 @@ class TaskRepo {
     //       .toList();
     // }
 
+    if (filter != null) {}
     return box.values.toList();
   }
 
@@ -22,18 +22,18 @@ class TaskRepo {
     return (await box.add(task)) != -1;
   }
 
-  // Future<bool> remove(TaskElement task) => money.delete().then((_) {
-  //       return true;
-  //     }).catchError((_) {
-  //       return false;
-  //     });
+  Future edit({
+    required Box<TaskElement> box,
+    required TaskElement element,
+    required int index,
+  }) async {
+    // final elementIndex = task.id;
+  }
 
-  Future wipeData({
+  Future<bool> remove({
+    required int id,
     required Box<TaskElement> box,
   }) async {
-    await Hive.deleteFromDisk();
-    box = await Hive.openBox<TaskElement>(
-      AppLocalizations.current.taskRepo,
-    );
+    return true;
   }
 }

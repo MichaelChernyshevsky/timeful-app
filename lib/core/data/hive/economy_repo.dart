@@ -1,10 +1,8 @@
-import 'package:app_with_apps/core/localization/app_localization.dart';
 import 'package:app_with_apps/core/models/class/economy_class.dart';
-import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class EconomyRepo {
-  List<EconomyElement> get({required Box<EconomyElement> box}) {
+  List<EconomyElement> get({required Box<EconomyElement> box, filter}) {
     // List<EconomyElement> get({DateTime? dateFilter}) {
 
     // if (dateFilter != null) {
@@ -12,7 +10,7 @@ class EconomyRepo {
     //       .where((money) => money.wastedDate.month == dateFilter.month)
     //       .toList();
     // }
-
+    if (filter != null) {}
     return box.values.toList();
   }
 
@@ -23,16 +21,16 @@ class EconomyRepo {
     return (await box.add(element)) != -1;
   }
 
-  // Future<bool> removeMoney(TaskElement money) => money.delete().then((_) {
-  //       return true;
-  //     }).catchError((_) {
-  //       return false;
-  //     });
+  Future edit({
+    required Box<EconomyElement> box,
+    required EconomyElement element,
+    required int index,
+  }) async {}
 
-  Future wipeData() async {
-    await Hive.deleteFromDisk();
-    // box = await Hive.openBox<EconomyElement>(
-    //   AppLocalizations.current.economyRepo,
-    // );
+  Future<bool> removeMoney({
+    required Box<EconomyElement> box,
+    required int id,
+  }) async {
+    return true;
   }
 }

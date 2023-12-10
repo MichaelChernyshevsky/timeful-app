@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
-import 'package:app_with_apps/core/data/repo.dart';
-import 'package:app_with_apps/core/data/hive/task_repo.dart';
+import 'package:app_with_apps/core/data/hive/service_hive.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
@@ -19,9 +18,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     on<WipeToDoEvent>(_wipeData);
   }
 
-  AppRepo repo = AppRepo();
-
-  final TaskRepo _repo = TaskRepo();
+  ServiceHive repo = ServiceHive();
 
   // ServiceApiNotes service = ServiceApiNotes();
 
@@ -55,7 +52,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     AddTaskEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    repo.addTask(element: event.task);
+    await repo.addTask(element: event.task);
     emit(BlocSuccess());
 
     // await _repo.add(task: event.task);
@@ -69,11 +66,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      // await service.deleteFolder(event.id);
-
-      // emit(GetTasksSuccess(_repo.get()));
-
-      emit(GetTasksSuccess(repo.getTasks()));
+      emit(GetTasksSuccess(await repo.getTasks()));
     } catch (error) {
       emit(BlocError());
     }
@@ -84,7 +77,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      // _repo.wipeData();
+      await repo.wipeTasks();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

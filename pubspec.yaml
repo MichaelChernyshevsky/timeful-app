@@ -16,6 +16,7 @@ dependencies:
 
 dev_dependencies:
   bloc: ^8.1.2
+  build_runner: ^2.4.7
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
   flutter_bloc: ^8.1.3
@@ -25,7 +26,9 @@ dev_dependencies:
   flutter_svg: ^2.0.9
   flutter_test:
     sdk: flutter
+  hive: ^2.2.3
   hive_flutter: ^1.1.0
+  hive_generator: ^2.0.1
   http: any
   intl: ^0.18.0
 

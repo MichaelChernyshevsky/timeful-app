@@ -34,9 +34,8 @@ class _BodyState extends State<Body> {
       child: Scaffold(
         body: Padding(
           padding: getPadding(
-            // right: 10,
-            // left: 10,
-            all: 0,
+            right: 10,
+            left: 10,
           ),
           child: widget.widget,
         ),

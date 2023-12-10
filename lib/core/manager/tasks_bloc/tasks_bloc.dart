@@ -1,9 +1,7 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'package:app_with_apps/core/data/repo.dart';
-import 'package:app_with_apps/core/data/task_repo.dart';
-import 'package:app_with_apps/core/models/class/part_time__class.dart';
+import 'package:app_with_apps/core/data/hive/task_repo.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
-import 'package:app_with_apps/core/models/enum/part_time__enum.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +58,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     repo.addTask(element: event.task);
     emit(BlocSuccess());
 
-    await _repo.add(task: event.task);
+    // await _repo.add(task: event.task);
     // try {} catch (error) {
     //   emit(BlocError());
     // }
@@ -73,7 +71,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     try {
       // await service.deleteFolder(event.id);
 
-      emit(GetTasksSuccess(_repo.get()));
+      // emit(GetTasksSuccess(_repo.get()));
 
       emit(GetTasksSuccess(repo.getTasks()));
     } catch (error) {
@@ -86,7 +84,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      _repo.wipeData();
+      // _repo.wipeData();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

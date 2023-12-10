@@ -1,23 +1,25 @@
+import 'package:app_with_apps/core/data/hive/service_hive.dart';
 import 'package:app_with_apps/core/localization/app_localization.dart';
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 // import 'package:app_with_apps/core/manager/bloc/economy_bloc.dart';
 import 'package:app_with_apps/core/manager/get.it/app_provider.dart';
 import 'package:app_with_apps/core/manager/provider/ordinaryProvider.dart';
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
-import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/core/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/interface/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
   GetIt.I.registerSingleton<AppProvider>(AppProvider());
 
-  
+  await Hive.initFlutter();
+
+  GetIt.I.registerSingletonAsync<ServiceHive>(await ServiceHive().initApp());
 
   runApp(
     MultiBlocProvider(

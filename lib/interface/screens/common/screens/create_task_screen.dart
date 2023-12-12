@@ -27,7 +27,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   TextEditingController contorllerTitle = TextEditingController();
   int count = 1;
   int countOnDay = 1;
-  Icon icon = const Icon(Icons.abc);
+  // Icon icon = const Icon(Icons.abc);
   Color color = Colors.white;
   int timeOfDay = 0;
   TasksBloc? bloc;
@@ -103,8 +103,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       title: contorllerTitle.text,
       count: count,
       id: 123,
-      icon: icon,
-      color: color,
+      // icon: icon,
+      // color: color,
       countOnDay: countOnDay,
       timeOfDay: PartTime(
         index: timeOfDay,
@@ -129,8 +129,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     if (contorllerTitle.text.isNotEmpty) {
       final task = TaskElement(
         title: contorllerTitle.text,
-        icon: icon,
-        color: color,
+        // icon: icon,
+        // color: color,
         id: 1,
         count: count,
         countOnDay: countOnDay,

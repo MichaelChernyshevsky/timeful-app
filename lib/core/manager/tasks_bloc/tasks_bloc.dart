@@ -52,7 +52,10 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     AddTaskEvent event,
     Emitter<TasksBlocState> state,
   ) async {
+    print('+' * 10);
     await repo.addTask(element: event.task);
+    print('+' * 10);
+
     emit(BlocSuccess());
 
     // await _repo.add(task: event.task);
@@ -65,11 +68,20 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     GetTasksEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    try {
-      emit(GetTasksSuccess(await repo.getTasks()));
-    } catch (error) {
-      emit(BlocError());
-    }
+    print('+' * 10);
+    final tasks = await repo.getTasks();
+    print('+' * 10);
+
+    emit(GetTasksSuccess(tasks));
+    // try {
+    //   print('+' * 10);
+    //   final tasks = await repo.getTasks();
+    //   print('+' * 10);
+
+    //   emit(GetTasksSuccess(tasks));
+    // } catch (error) {
+    //   emit(BlocError());
+    // }
   }
 
   Future<void> _wipeData(

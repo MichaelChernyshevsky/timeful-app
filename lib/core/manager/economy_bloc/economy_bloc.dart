@@ -18,9 +18,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     on<WipeEconomyEvent>(_wipeData);
   }
 
-  ServiceHive repo = ServiceHive();
-
-  // ServiceApiNotes service = ServiceApiNotes();
+  ServiceHive service = ServiceHive();
 
   Future<void> _dispose(
     DisposeEvent event,
@@ -52,7 +50,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     AddEconoomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
-    await repo.addEconomy(element: event.element);
+    await service.addEconomy(element: event.element);
     emit(BlocSuccess());
   }
 
@@ -65,7 +63,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
 
       // emit(GetHistorySuccess(_repo.get()));
 
-      emit(GetHistorySuccess(await repo.getEconomy()));
+      emit(GetHistorySuccess(service.getEconomy()));
     } catch (error) {
       emit(BlocError());
     }
@@ -76,7 +74,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      await repo.wipeEconomy();
+      await service.wipeEconomy();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

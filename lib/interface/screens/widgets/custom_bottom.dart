@@ -31,9 +31,7 @@ class _CustomButtonState extends State<CustomButton> {
     return Padding(
       padding: widget.padding ?? getPadding(all: 0),
       child: GestureDetector(
-        onTap: () {
-          widget.tap();
-        },
+        onTap: widget.tap,
         child: widget.element == null
             ? CustomContainer(
                 color: widget.color,

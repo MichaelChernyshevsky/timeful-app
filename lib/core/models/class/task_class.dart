@@ -11,22 +11,20 @@ class TaskElement {
   int id;
   @HiveField(1)
   String title;
+
+  // @HiveField(2)
+  // Color? color;
   @HiveField(2)
-  Icon icon;
-  @HiveField(3)
-  Color? color;
-  @HiveField(4)
   int countOnDay;
-  @HiveField(5)
+  @HiveField(3)
   int count;
-  @HiveField(6)
+  @HiveField(4)
   PartTime timeOfDay;
 
   TaskElement({
     required this.id,
     required this.title,
-    required this.icon,
-    required this.color,
+    // required this.color,
     required this.countOnDay,
     required this.count,
     required this.timeOfDay,

@@ -2,32 +2,10 @@ import 'package:app_with_apps/core/data/hive/economy_repo.dart';
 import 'package:app_with_apps/core/data/hive/task_repo.dart';
 import 'package:app_with_apps/core/models/class/economy_class.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class ServiceHive {
-  late Box<TaskElement> boxTasks;
-  late Box<EconomyElement> boxEconomy;
-
-  static const String _boxTasks = 'boxTasks';
-  static const String _boxEconomy = 'boxEconomy';
-
-  final economyRepo = EconomyRepo();
-  final taskRepo = TaskRepo();
-
-  List<TaskElement> tasks = [];
-  List<EconomyElement> economy = [];
-
-  Future initApp() async {
-    if (!Hive.isAdapterRegistered(0)) {
-      Hive.registerAdapter(TaskElementAdapter());
-      boxTasks = await Hive.openBox<TaskElement>(_boxTasks);
-    }
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(EconomyElementAdapter());
-      boxEconomy = await Hive.openBox<EconomyElement>(_boxEconomy);
-    }
-  }
-
   int getIndex({required int id, required Box box}) {
     for (var index = 0; index <= box.length; index += 1) {
       if (box.values.elementAt(index).id == id) {
@@ -38,40 +16,35 @@ class ServiceHive {
   }
 
   Future addTask({required TaskElement element}) =>
-      taskRepo.add(box: boxTasks, task: element);
+      GetIt.I.get<TaskRepo>().add(task: element);
 
   Future addEconomy({required EconomyElement element}) =>
-      economyRepo.add(box: boxEconomy, element: element);
+      GetIt.I.get<EconomyRepo>().add(element: element);
 
   Future wipeAll() async {
-    await wipeEconomy();
-    await wipeTasks();
+    await GetIt.I.get<EconomyRepo>().wipe();
+    await GetIt.I.get<TaskRepo>().wipe();
   }
 
-  Future wipeTasks() async {
-    await Hive.deleteBoxFromDisk(_boxTasks);
-    boxTasks = await Hive.openBox<TaskElement>(_boxTasks);
+  Future wipeEconomy() async => GetIt.I.get<EconomyRepo>().wipe();
+  Future wipeTasks() async => GetIt.I.get<TaskRepo>().wipe();
+  //  Future wipeTasks() async
+
+  Future<List<TaskElement>> getTasks() async => GetIt.I.get<TaskRepo>().get();
+
+  List<EconomyElement> getEconomy() {
+    return GetIt.I.get<EconomyRepo>().get();
   }
-
-  Future wipeEconomy() async {
-    await Hive.deleteBoxFromDisk(_boxEconomy);
-    boxEconomy = await Hive.openBox<EconomyElement>(_boxEconomy);
-  }
-
-  Future getTasks() async {}
-
-  Future getEconomy() async {}
 
   Future editEconomy({required EconomyElement element}) async =>
-      economyRepo.edit(
-        box: boxEconomy,
-        element: element,
-        index: getIndex(box: boxEconomy, id: element.id),
-      );
+      GetIt.I.get<EconomyRepo>().edit(
+            element: element,
+            // index: getIndex(box: boxEconomy, id: element.id),
+          );
 
-  Future editTask({required TaskElement element}) async => taskRepo.edit(
-        box: boxTasks,
-        element: element,
-        index: getIndex(box: boxTasks, id: element.id),
-      );
+  Future editTask({required TaskElement element}) async =>
+      GetIt.I.get<TaskRepo>().edit(
+            element: element,
+            // index: getIndex( id: element.id),
+          );
 }

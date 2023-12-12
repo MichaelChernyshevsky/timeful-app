@@ -1,7 +1,8 @@
+import 'package:app_with_apps/core/data/hive/economy_repo.dart';
 import 'package:app_with_apps/core/data/hive/service_hive.dart';
+import 'package:app_with_apps/core/data/hive/task_repo.dart';
 import 'package:app_with_apps/core/localization/app_localization.dart';
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
-// import 'package:app_with_apps/core/manager/bloc/economy_bloc.dart';
 import 'package:app_with_apps/core/manager/get.it/app_provider.dart';
 import 'package:app_with_apps/core/manager/provider/ordinaryProvider.dart';
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
@@ -19,7 +20,23 @@ Future<void> main() async {
 
   await Hive.initFlutter();
 
-  GetIt.I.registerSingletonAsync<ServiceHive>(await ServiceHive().initApp());
+  GetIt.I.registerSingletonAsync<TaskRepo>(
+    () async {
+      final hivePacks = TaskRepo();
+      await hivePacks.init();
+      return hivePacks;
+    },
+  );
+
+  GetIt.I.registerSingletonAsync<EconomyRepo>(
+    () async {
+      final hivePacks = EconomyRepo();
+      await hivePacks.init();
+      return hivePacks;
+    },
+  );
+
+  await GetIt.I.allReady();
 
   runApp(
     MultiBlocProvider(

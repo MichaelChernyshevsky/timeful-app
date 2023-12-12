@@ -15,7 +15,7 @@ class DisposeEvent extends TasksBlocEvent {
 
 class DeleteTaskEvent extends TasksBlocEvent {
   DeleteTaskEvent({required this.id});
-  int id;
+  String id;
   @override
   List<Object?> get props => [id];
 }

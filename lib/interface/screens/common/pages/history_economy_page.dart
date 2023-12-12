@@ -99,12 +99,15 @@ class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
                   onError();
                 } else if (state is GetHistorySuccess) {
                   setElements(state.elements);
+                } else if (state is Delete) {
+                  if (state.isDeleted) {
+                    bloc!.add(GetEconomyEvent());
+                  }
                 }
               },
               child: ListView.builder(
                 padding: getPadding(all: 0),
                 itemCount: elements.length,
-                reverse: true,
                 itemBuilder: (context, index) {
                   return SpendingWidget(element: elements[index]);
                 },

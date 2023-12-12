@@ -3,23 +3,19 @@ import 'package:app_with_apps/core/data/hive/task_repo.dart';
 import 'package:app_with_apps/core/models/class/economy_class.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class ServiceHive {
-  int getIndex({required int id, required Box box}) {
-    for (var index = 0; index <= box.length; index += 1) {
-      if (box.values.elementAt(index).id == id) {
-        return index;
-      }
-    }
-    return -1;
-  }
-
   Future addTask({required TaskElement element}) =>
       GetIt.I.get<TaskRepo>().add(task: element);
 
   Future addEconomy({required EconomyElement element}) =>
       GetIt.I.get<EconomyRepo>().add(element: element);
+
+  Future deleteEconomy({required String id}) =>
+      GetIt.I.get<EconomyRepo>().delete(id: id);
+
+  Future deleteTask({required String id}) =>
+      GetIt.I.get<TaskRepo>().delete(id: id);
 
   Future wipeAll() async {
     await GetIt.I.get<EconomyRepo>().wipe();

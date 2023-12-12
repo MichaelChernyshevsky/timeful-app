@@ -13,10 +13,13 @@ class EmptyEconomy extends EconomyBlocState {
   List<Object?> get props => [];
 }
 
-class DeleteSucess extends EconomyBlocState {
-  DeleteSucess();
+class Delete extends EconomyBlocState {
+  Delete(
+    this.isDeleted,
+  );
+  final bool isDeleted;
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [isDeleted];
 }
 
 class GetHistorySuccess extends EconomyBlocState {

@@ -1,3 +1,4 @@
+import 'package:app_with_apps/core/data/hive/func/hive_func.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -44,9 +45,11 @@ class TaskRepo {
     // final elementIndex = task.id;
   }
 
-  Future<bool> remove({
-    required int id,
+  Future<bool> delete({
+    required String id,
   }) async {
+    final indexElement = getIndex(id: id, box: boxTasks);
+    await boxTasks.deleteAt(indexElement);
     return true;
   }
 }

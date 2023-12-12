@@ -68,6 +68,7 @@ class AppLocalizations {
   String get add => Intl.message('Add');
   String get isSpending => Intl.message('Spending');
   String get isIncome => Intl.message('Income');
+  String get delete => Intl.message('Delete');
 
   String get addSpending => Intl.message('Add Spending');
   String get pasteTitle => Intl.message('Paste title');

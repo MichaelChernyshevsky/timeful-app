@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:app_with_apps/core/func/uuid.dart';
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
 import 'package:app_with_apps/core/models/class/part_time__class.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
@@ -102,7 +105,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     final createdElement = TaskElement(
       title: contorllerTitle.text,
       count: count,
-      id: 123,
+      id: getUUID(),
       // icon: icon,
       // color: color,
       countOnDay: countOnDay,
@@ -126,20 +129,10 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   }
 
   void addTask() {
-    if (contorllerTitle.text.isNotEmpty) {
-      final task = TaskElement(
-        title: contorllerTitle.text,
-        // icon: icon,
-        // color: color,
-        id: 1,
-        count: count,
-        countOnDay: countOnDay,
-        timeOfDay: GetIt.I.get<AppProvider>().partTime[timeOfDay],
-      );
+    final newTask = createElement();
 
-      element = task;
-
-      bloc!.add(AddTaskEvent(task: task));
+    if (newTask != null) {
+      bloc!.add(AddTaskEvent(task: newTask));
     }
   }
 

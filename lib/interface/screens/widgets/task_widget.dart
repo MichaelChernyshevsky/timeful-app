@@ -15,13 +15,13 @@ class TaskWidget extends StatefulWidget {
 }
 
 class _TaskWidgetState extends State<TaskWidget> {
-  Color color = Colors.transparent;
+  Color color = UTILSConstants.undone;
 
   void changeColor() => setState(() {
-        if (color == UTILSConstants.transparent) {
+        if (color == UTILSConstants.undone) {
           color = UTILSConstants.done;
         } else {
-          color = UTILSConstants.transparent;
+          color = UTILSConstants.undone;
         }
       });
 
@@ -47,9 +47,7 @@ class _TaskWidgetState extends State<TaskWidget> {
             children: [
               CustomContainer(
                 // colorBorder: widget.element.color,
-                colorBorder: Colors.red,
-
-                color: color,
+                colorBorder: color,
                 height: 50,
                 width: 350,
                 widget: Row(

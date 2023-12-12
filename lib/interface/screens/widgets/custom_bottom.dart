@@ -9,7 +9,7 @@ class CustomButton extends StatefulWidget {
     required this.color,
     this.text = '',
     this.padding,
-    this.element,
+    this.child,
     required this.tap,
   });
 
@@ -19,7 +19,7 @@ class CustomButton extends StatefulWidget {
   final String text;
   final EdgeInsetsGeometry? padding;
   final VoidCallback tap;
-  Widget? element;
+  Widget? child;
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -32,7 +32,7 @@ class _CustomButtonState extends State<CustomButton> {
       padding: widget.padding ?? getPadding(all: 0),
       child: GestureDetector(
         onTap: widget.tap,
-        child: widget.element == null
+        child: widget.child == null
             ? CustomContainer(
                 color: widget.color,
                 height: widget.height,

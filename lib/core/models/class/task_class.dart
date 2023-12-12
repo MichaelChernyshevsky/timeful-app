@@ -8,7 +8,7 @@ part 'task_class.g.dart';
 @HiveType(typeId: 1)
 class TaskElement {
   @HiveField(0)
-  int id;
+  String id;
   @HiveField(1)
   String title;
 

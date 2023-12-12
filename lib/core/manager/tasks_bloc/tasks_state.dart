@@ -12,10 +12,13 @@ class EmptyTasks extends TasksBlocState {
   List<Object?> get props => [];
 }
 
-class DeleteSucess extends TasksBlocState {
-  DeleteSucess();
+class Delete extends TasksBlocState {
+  Delete(
+    this.isDeleted,
+  );
+  final isDeleted;
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [isDeleted];
 }
 
 class GetTasksSuccess extends TasksBlocState {

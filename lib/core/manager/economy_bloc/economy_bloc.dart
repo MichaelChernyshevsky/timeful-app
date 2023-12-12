@@ -1,5 +1,4 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
-import 'package:app_with_apps/core/data/hive/economy_repo.dart';
 import 'package:app_with_apps/core/data/hive/service_hive.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
@@ -39,8 +38,8 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      // await service.deleteFolder(event.id);
-      emit(DeleteSucess());
+      final isDeleted = await service.deleteEconomy(id: event.id);
+      emit(Delete(isDeleted));
     } catch (error) {
       emit(BlocError());
     }
@@ -59,10 +58,6 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      // await service.deleteFolder(event.id);
-
-      // emit(GetHistorySuccess(_repo.get()));
-
       emit(GetHistorySuccess(service.getEconomy()));
     } catch (error) {
       emit(BlocError());

@@ -13,7 +13,7 @@ class EconomyElement {
     required this.date,
   });
   @HiveField(0)
-  int id;
+  String id;
   @HiveField(1)
   String title;
   @HiveField(2)

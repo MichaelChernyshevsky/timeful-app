@@ -21,7 +21,7 @@ class DisposeEvent extends EconomyBlocEvent {
 }
 
 class DeleteEconomyEvent extends EconomyBlocEvent {
-  int id;
+  String id;
   DeleteEconomyEvent({required this.id});
   @override
   List<Object?> get props => [id];

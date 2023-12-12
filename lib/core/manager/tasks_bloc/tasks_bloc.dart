@@ -41,8 +41,8 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      // await service.deleteFolder(event.id);
-      emit(DeleteSucess());
+      final isDeleted = repo.deleteTask(id: event.id);
+      emit(Delete(isDeleted));
     } catch (error) {
       emit(BlocError());
     }

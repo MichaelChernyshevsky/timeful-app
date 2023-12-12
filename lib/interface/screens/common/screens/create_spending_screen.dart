@@ -1,3 +1,4 @@
+import 'package:app_with_apps/core/func/uuid.dart';
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/widgets/body.dart';
@@ -43,7 +44,7 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
       return null;
     }
     final createdElement = EconomyElement(
-      id: 0,
+      id: getUUID(),
       title: contorllerTitle.text,
       count: int.parse(contorllerCost.text),
       description: contorllerDescription.text,

@@ -1,3 +1,5 @@
+// ignore_for_file: type_annotate_public_apis, must_be_immutable
+
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/screens/edit_spending_screen.dart';
 

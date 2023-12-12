@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:app_with_apps/core/data/hive/func/hive_func.dart';
 import 'package:app_with_apps/core/models/class/economy_class.dart';
 import 'package:app_with_apps/core/models/class/part_time__class.dart';
 import 'package:app_with_apps/core/models/enum/part_time__enum.dart';
@@ -48,9 +51,11 @@ class EconomyRepo {
     // required int index,
   }) async {}
 
-  Future<bool> removeMoney({
-    required int id,
+  Future<bool> delete({
+    required String id,
   }) async {
+    final indexElement = getIndex(id: id, box: boxEconomy);
+    await boxEconomy.deleteAt(indexElement);
     return true;
   }
 }

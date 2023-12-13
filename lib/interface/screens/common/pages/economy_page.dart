@@ -7,14 +7,14 @@ import 'package:app_with_apps/interface/screens/common/screens/create_spending_s
 import 'package:app_with_apps/interface/screens/widgets/body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HistoryEconomyPage extends StatefulWidget {
-  const HistoryEconomyPage({super.key});
+class EconomyPage extends StatefulWidget {
+  const EconomyPage({super.key});
 
   @override
-  State<HistoryEconomyPage> createState() => _HistoryEconomyPageState();
+  State<EconomyPage> createState() => _EconomyPageState();
 }
 
-class _HistoryEconomyPageState extends State<HistoryEconomyPage> {
+class _EconomyPageState extends State<EconomyPage> {
   final List<SortParametrs> sortParametrs =
       GetIt.I.get<AppProvider>().sortParametrs;
 

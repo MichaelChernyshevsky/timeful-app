@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             ListView.builder(
               shrinkWrap: true,
-              itemCount: AppConstants.iconsBottomBar.length,
+              itemCount: NavigationConstants.iconsBottomBar.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => InkWell(
                 onTap: () => changePage(index),
@@ -56,8 +56,8 @@ class _MainScreenState extends State<MainScreen> {
                       curve: Curves.fastLinearToSlowEaseIn,
                       margin: EdgeInsets.only(
                         bottom: index == _selectedIndex ? 0 : size.width * .02,
-                        right: size.width * .02,
-                        left: size.width * .02,
+                        right: size.width * .01,
+                        left: size.width * .01,
                       ),
                       width: size.width * .128,
                       height: index == _selectedIndex ? size.width * .014 : 0,
@@ -69,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                     ),
                     Icon(
-                      AppConstants.iconsBottomBar[index],
+                      NavigationConstants.iconsBottomBar[index],
                       size: size.width * .046,
                       color: index == _selectedIndex
                           ? UTILSConstants.purple

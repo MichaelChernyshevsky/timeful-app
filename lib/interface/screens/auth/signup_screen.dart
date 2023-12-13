@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/interface/screens/widgets/textfield.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

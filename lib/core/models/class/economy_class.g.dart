@@ -17,7 +17,7 @@ class EconomyElementAdapter extends TypeAdapter<EconomyElement> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return EconomyElement(
-      id: fields[0] as int,
+      id: fields[0] as String,
       title: fields[1] as String,
       count: fields[2] as int,
       isSpending: fields[5] as bool,

@@ -2,7 +2,7 @@ import 'package:app_with_apps/core/exports/exports.dart';
 import 'package:app_with_apps/core/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/core/utils/enum/text_enum.dart';
 import 'package:app_with_apps/core/utils/funcs/text_func.dart';
-import 'package:app_with_apps/core/utils/utils.dart';
+import 'package:app_with_apps/core/utils/utils_size.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({

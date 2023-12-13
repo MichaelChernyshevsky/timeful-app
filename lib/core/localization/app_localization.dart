@@ -30,6 +30,14 @@ class AppLocalizations {
         AppLocalizations();
   }
 
+  // timer
+  String get timer => Intl.message('timer');
+  String get stop => Intl.message('stop');
+  String get work => Intl.message('Work');
+  String get relax => Intl.message('Relax');
+  String get plus => Intl.message('+');
+  String get minus => Intl.message('-');
+
   // repo
   String get taskRepo => Intl.message('taskRepo');
   String get economyRepo => Intl.message('economyRepo');

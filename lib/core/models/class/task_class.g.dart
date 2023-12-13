@@ -17,7 +17,7 @@ class TaskElementAdapter extends TypeAdapter<TaskElement> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskElement(
-      id: fields[0] as int,
+      id: fields[0] as String,
       title: fields[1] as String,
       countOnDay: fields[2] as int,
       count: fields[3] as int,

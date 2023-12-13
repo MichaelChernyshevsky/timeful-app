@@ -1,5 +1,4 @@
 import 'package:app_with_apps/core/data/hive/economy_repo.dart';
-import 'package:app_with_apps/core/data/hive/service_hive.dart';
 import 'package:app_with_apps/core/data/hive/task_repo.dart';
 import 'package:app_with_apps/core/localization/app_localization.dart';
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';

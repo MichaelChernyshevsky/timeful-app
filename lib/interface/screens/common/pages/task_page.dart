@@ -1,19 +1,19 @@
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/interface/screens/common/pages/widget/task_widget.dart';
 import 'package:app_with_apps/interface/screens/common/screens/create_task_screen.dart';
 import 'package:app_with_apps/interface/screens/widgets/body.dart';
-import 'package:app_with_apps/interface/screens/widgets/task_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ToDoPage extends StatefulWidget {
-  const ToDoPage({super.key});
+class TaskPage extends StatefulWidget {
+  const TaskPage({super.key});
 
   @override
-  State<ToDoPage> createState() => _ToDoPageState();
+  State<TaskPage> createState() => _TaskPageState();
 }
 
-class _ToDoPageState extends State<ToDoPage> {
+class _TaskPageState extends State<TaskPage> {
   List<TaskElement> tasks = [];
   bool loading = true;
   TasksBloc? bloc;

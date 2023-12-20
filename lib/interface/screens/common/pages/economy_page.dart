@@ -74,22 +74,19 @@ class _EconomyPageState extends State<EconomyPage> {
     return Body(
       widget: Column(
         children: [
-          SizedBox(
-            height: size.height * 0.1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomContainer(
-                  color: UTILSConstants.black,
-                  widget: const Row(),
-                ),
-                CustomButton(
-                  color: UTILSConstants.white,
-                  text: AppLocalizations.current.add,
-                  tap: goToCreate,
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomContainer(
+                color: UTILSConstants.black,
+                widget: const Row(),
+              ),
+              CustomButton(
+                color: UTILSConstants.white,
+                text: AppLocalizations.current.add,
+                tap: goToCreate,
+              ),
+            ],
           ),
           SizedBox(
             height: size.height * 0.74,

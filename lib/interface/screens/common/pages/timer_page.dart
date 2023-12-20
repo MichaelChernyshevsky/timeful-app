@@ -13,7 +13,7 @@ class TimerPage extends StatefulWidget {
 }
 
 class _TimerPageState extends State<TimerPage> {
-  int _timeWork = 1 * 30;
+  int _timeWork = 1 * 60;
   int _timeRelax = 1 * 60;
   int timeWork = 0;
   int timeRelax = 0;

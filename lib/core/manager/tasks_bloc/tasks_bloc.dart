@@ -20,6 +20,8 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
 
   ServiceHive repo = ServiceHive();
 
+  List<TaskElement> tasks = [];
+
   // ServiceApiNotes service = ServiceApiNotes();
 
   Future<void> _dispose(
@@ -52,9 +54,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     AddTaskEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    print('+' * 10);
     await repo.addTask(element: event.task);
-    print('+' * 10);
 
     emit(BlocSuccess());
 
@@ -68,9 +68,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     GetTasksEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    print('+' * 10);
     final tasks = await repo.getTasks();
-    print('+' * 10);
 
     emit(GetTasksSuccess(tasks));
     // try {

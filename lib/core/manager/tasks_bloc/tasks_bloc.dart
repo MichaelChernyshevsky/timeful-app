@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'package:app_with_apps/core/data/hive/service_hive.dart';
+import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
@@ -69,17 +70,15 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     final tasks = await repo.getTasks();
-
+    final listId = GetIt.I.get<StatProvider>().getTasksDone();
+    for (var i = 0; i <= tasks.length - 1; i++) {
+      for (final id in listId) {
+        if (tasks[i].id == id) {
+          tasks[i].isDone = true;
+        }
+      }
+    }
     emit(GetTasksSuccess(tasks));
-    // try {
-    //   print('+' * 10);
-    //   final tasks = await repo.getTasks();
-    //   print('+' * 10);
-
-    //   emit(GetTasksSuccess(tasks));
-    // } catch (error) {
-    //   emit(BlocError());
-    // }
   }
 
   Future<void> _wipeData(

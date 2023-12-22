@@ -106,6 +106,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       id: getUUID(),
       // icon: icon,
       // color: color,
+      isDone: false,
       countOnDay: countOnDay,
       timeOfDay: PartTime(
         index: timeOfDay,

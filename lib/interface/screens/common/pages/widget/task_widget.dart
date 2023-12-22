@@ -1,27 +1,39 @@
+import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
 import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/screens/edit_todo_screen.dart';
 
 class TaskWidget extends StatefulWidget {
-  const TaskWidget({
+  TaskWidget({
     super.key,
     required this.element,
   });
 
-  final TaskElement element;
+  TaskElement element;
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
 }
 
 class _TaskWidgetState extends State<TaskWidget> {
-  Color color = UTILSConstants.undone;
+  Color? color;
 
-  void changeColor() => setState(() {
-        if (color == UTILSConstants.undone) {
-          color = UTILSConstants.done;
-        } else {
+  @override
+  void initState() {
+    color = widget.element.isDone ? UTILSConstants.done : UTILSConstants.undone;
+
+    super.initState();
+  }
+
+  void changeState({required id, required isDone}) => setState(() {
+        if (isDone) {
+          GetIt.I.get<StatProvider>().setTaskUndone(id: id);
           color = UTILSConstants.undone;
+          widget.element.isDone = false;
+        } else {
+          GetIt.I.get<StatProvider>().setTaskDone(id: id);
+          color = UTILSConstants.done;
+          widget.element.isDone = true;
         }
       });
 
@@ -41,7 +53,10 @@ class _TaskWidgetState extends State<TaskWidget> {
       child: SizedBox(
         width: getWidth(100),
         child: GestureDetector(
-          onTap: changeColor,
+          onTap: () => changeState(
+            id: widget.element.id,
+            isDone: widget.element.isDone,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RepoString {
   Future<String> getData({required String key}) async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key)!;
+    return prefs.getString(key) == null ? '' : prefs.getString(key)!;
   }
 
   Future saveData({
@@ -18,7 +18,8 @@ class RepoString {
 class RepoInt {
   Future<int> getData({required String key}) async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(key)!;
+
+    return prefs.getInt(key) == null ? 0 : prefs.getInt(key)!;
   }
 
   Future saveData({

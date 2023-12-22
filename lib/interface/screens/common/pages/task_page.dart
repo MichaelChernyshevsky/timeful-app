@@ -51,6 +51,8 @@ class _TaskPageState extends State<TaskPage> {
         loading = false;
       });
 
+  void changeTaskState({required id, required isDone}) {}
+
   @override
   Widget build(BuildContext context) {
     return Body(

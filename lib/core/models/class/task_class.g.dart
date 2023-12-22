@@ -22,13 +22,14 @@ class TaskElementAdapter extends TypeAdapter<TaskElement> {
       countOnDay: fields[2] as int,
       count: fields[3] as int,
       timeOfDay: fields[4] as PartTime,
+      isDone: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskElement obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class TaskElementAdapter extends TypeAdapter<TaskElement> {
       ..writeByte(3)
       ..write(obj.count)
       ..writeByte(4)
-      ..write(obj.timeOfDay);
+      ..write(obj.timeOfDay)
+      ..writeByte(5)
+      ..write(obj.isDone);
   }
 
   @override

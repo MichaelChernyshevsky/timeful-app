@@ -23,7 +23,7 @@ class StatProvider extends ChangeNotifier {
 
   void taskCheck() {
     if (!checkDate(str: _tasksDone)) {
-      _tasksDone = '${getDate()}-date-';
+      _tasksDone = '${getDate()}*****date*****';
     }
   }
 
@@ -35,12 +35,17 @@ class StatProvider extends ChangeNotifier {
 
   int getMinutesInWork() => _minutesInWork;
 
-  String getTasksDone() {
+  List<String> getTasksDone() {
     taskCheck();
-    return _tasksDone;
+    return getIdDone(str: _tasksDone);
   }
 
   void setTaskDone({required String id}) {
+    _tasksDone += '*****$id';
+    RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
+  }
+
+  void setTaskUndone({required String id}) {
     _tasksDone += '-$id';
     RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
   }

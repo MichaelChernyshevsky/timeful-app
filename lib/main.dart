@@ -63,8 +63,10 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    GetIt.I.get<StatProvider>().initStat();
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

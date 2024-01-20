@@ -37,5 +37,8 @@ class RepoKeys {
   // static const String moneyMounth = 'moneyMounth';
   static const String income = 'income';
   static const String minutesInWork = 'minutesInWork';
+  static const String minutesInRelax = 'minutesInRelax';
   static const String doneTasks = 'doneTasks';
+  static const String doneTask = 'doneTask';
+  static const String undoneTask = 'undoneTask';
 }

@@ -151,7 +151,7 @@ class _TimerPageState extends State<TimerPage> {
             padding: getPadding(all: 20),
             color: UTILSConstants.done,
             tap: startTimer,
-            text: AppLocalizations.current.stop,
+            text: AppLocalizations.current.start,
           ),
           CustomButton(
             padding: getPadding(all: 20),

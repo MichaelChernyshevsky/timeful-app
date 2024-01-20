@@ -30,9 +30,24 @@ class AppLocalizations {
         AppLocalizations();
   }
 
+  // stat
+  String get dayStat => Intl.message('Day analyze');
+  String get weekStat => Intl.message('Week analyze');
+  String get mounthStat => Intl.message('Mounth analyze');
+  String get allStat => Intl.message('All analyze');
+  String get income => Intl.message('Income');
+  String get spending => Intl.message('Spending');
+
+  String get minutesInWork => Intl.message('Minutes in work');
+  String get minutesInRelax => Intl.message('Minutes in relax');
+  String get taskDone => Intl.message('Task done');
+  String get taskUnDone => Intl.message('Task undone');
+
   // timer
   String get timer => Intl.message('timer');
-  String get stop => Intl.message('stop');
+  String get stop => Intl.message('Stop');
+  String get start => Intl.message('Start');
+
   String get work => Intl.message('Work');
   String get relax => Intl.message('Relax');
   String get plus => Intl.message('+');

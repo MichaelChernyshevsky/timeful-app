@@ -1,4 +1,3 @@
-export 'package:app_with_apps/core/constants/navigation.dart';
 export 'package:app_with_apps/core/exports/exports.dart';
 export 'package:app_with_apps/core/localization/app_localization.dart';
 export 'package:app_with_apps/core/manager/get.it/app_provider.dart';
@@ -18,8 +17,7 @@ export 'package:app_with_apps/interface/screens/common/pages/economy_page.dart';
 export 'package:app_with_apps/interface/screens/common/pages/news_page.dart';
 export 'package:app_with_apps/interface/screens/common/pages/task_page.dart';
 export 'package:app_with_apps/interface/screens/common/pages/user_page.dart';
-export 'package:app_with_apps/interface/screens/common/pages/widget/spending_widget.dart';
-export 'package:app_with_apps/interface/screens/common/service/pages_service.dart';
+export 'package:app_with_apps/interface/screens/common/pages/widget/widgets_spending.dart';
 export 'package:app_with_apps/interface/screens/start/splash_screen.dart';
 export 'package:app_with_apps/interface/screens/widgets/bottom_text.dart';
 export 'package:app_with_apps/interface/screens/widgets/container.dart';

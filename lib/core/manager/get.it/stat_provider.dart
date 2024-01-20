@@ -9,6 +9,11 @@ class StatProvider extends ChangeNotifier {
 
   int _minutesInWork = 0;
 
+  int _minutesInRelax = 0;
+
+  int _doneTask = 0;
+  int _undoneTask = 0;
+
   String _tasksDone = '';
 
   Future<void> initStat() async {
@@ -17,7 +22,11 @@ class StatProvider extends ChangeNotifier {
     // _moneyMounth = await RepoInt.getData(key: RepoKeys.moneyMounth);
     _income = await RepoInt().getData(key: RepoKeys.income);
     _minutesInWork = await RepoInt().getData(key: RepoKeys.minutesInWork);
+    _minutesInRelax = await RepoInt().getData(key: RepoKeys.minutesInRelax);
     _tasksDone = await RepoString().getData(key: RepoKeys.doneTasks);
+    _doneTask = await RepoInt().getData(key: RepoKeys.doneTask);
+    _undoneTask = await RepoInt().getData(key: RepoKeys.undoneTask);
+
     taskCheck();
   }
 
@@ -33,11 +42,44 @@ class StatProvider extends ChangeNotifier {
 
   int getIncome() => _income;
 
+  int getSpending() => _moneyAll - _income;
+
+  int getMinutesInRelax() => _minutesInRelax;
+
   int getMinutesInWork() => _minutesInWork;
+
+  int getDoneTask() => _doneTask;
+
+  int getUnDoneTask() => _undoneTask;
 
   List<String> getTasksDone() {
     taskCheck();
     return getIdDone(str: _tasksDone);
+  }
+
+  int getMinuteInRelax() => _minutesInRelax;
+
+  int getTask({required bool isDone}) {
+    if (isDone) {
+      return _doneTask;
+    } else {
+      return _undoneTask;
+    }
+  }
+
+  void setTask({required bool isDone}) {
+    if (isDone) {
+      _doneTask += 1;
+      RepoInt().saveData(key: RepoKeys.doneTask, data: _doneTask);
+    } else {
+      _undoneTask += 1;
+      RepoInt().saveData(key: RepoKeys.undoneTask, data: _undoneTask);
+    }
+  }
+
+  void setMinutesInRelax({required int minut}) {
+    _minutesInRelax += minut;
+    RepoString().saveData(key: RepoKeys.minutesInRelax, data: _tasksDone);
   }
 
   void setTaskDone({required String id}) {

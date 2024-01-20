@@ -39,3 +39,15 @@ class BlocSuccess extends EconomyBlocState {
   @override
   List<Object?> get props => [];
 }
+
+// class Stat extends EconomyBlocState {
+//   @override
+//   List<Object?> get props => [];
+// }
+
+
+// class Loading extends EconomyBlocState {
+//   @override
+//   List<Object?> get props => [];
+// }
+

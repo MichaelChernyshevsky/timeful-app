@@ -15,6 +15,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     on<DisposeEvent>(_dispose);
     on<EditEconomyEvent>(_edit);
     on<WipeEconomyEvent>(_wipeData);
+    // on<GetStatEvent>(_getStat);
   }
 
   ServiceHive service = ServiceHive();
@@ -75,4 +76,13 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
       emit(BlocError());
     }
   }
+
+  // Future<void> _getStat(
+  //   GetStatEvent event,
+  //   Emitter<EconomyBlocState> state,
+  // ) async {
+  //   emit(Loading());
+
+  //   emit(Stat());
+  // }
 }

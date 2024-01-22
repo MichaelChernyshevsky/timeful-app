@@ -62,30 +62,34 @@ class StatProvider extends ChangeNotifier {
     }
   }
 
-  void setTask({required bool isDone}) {
+  void setTask({required bool isDone, required bool withMinus}) {
     if (isDone) {
       _doneTask += 1;
       RepoInt().saveData(key: RepoKeys.doneTask, data: _doneTask);
+      if (withMinus) {
+        _undoneTask -= 1;
+        RepoInt().saveData(key: RepoKeys.undoneTask, data: _undoneTask);
+      }
     } else {
       _undoneTask += 1;
       RepoInt().saveData(key: RepoKeys.undoneTask, data: _undoneTask);
+      if (withMinus) {
+        _doneTask -= 1;
+        RepoInt().saveData(key: RepoKeys.doneTask, data: _doneTask);
+      }
     }
   }
 
   void setTaskDone({required String id}) {
     _tasksDone += '*****$id';
     RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
-    _undoneTask -= 1;
-
-    _doneTask += 1;
+    setTask(isDone: true, withMinus: true);
   }
 
   void setTaskUndone({required String id}) {
     _tasksDone += '-$id';
     RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
-    _undoneTask += 1;
-
-    _doneTask -= 1;
+    setTask(isDone: false, withMinus: true);
   }
 
   void increaseMinutesInWork({required int minute}) {

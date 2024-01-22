@@ -4,16 +4,11 @@ import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
 class StatProvider extends ChangeNotifier {
   int _moneyAll = 0;
-
   int _income = 0;
-
   int _minutesInWork = 0;
-
   int _minutesInRelax = 0;
-
   int _doneTask = 0;
   int _undoneTask = 0;
-
   String _tasksDone = '';
 
   Future<void> initStat() async {
@@ -42,7 +37,7 @@ class StatProvider extends ChangeNotifier {
 
   int getIncome() => _income;
 
-  int getSpending() => _moneyAll - _income;
+  int getSpending() => _moneyAll;
 
   int getMinutesInRelax() => _minutesInRelax;
 
@@ -77,19 +72,20 @@ class StatProvider extends ChangeNotifier {
     }
   }
 
-  void setMinutesInRelax({required int minut}) {
-    _minutesInRelax += minut;
-    RepoString().saveData(key: RepoKeys.minutesInRelax, data: _tasksDone);
-  }
-
   void setTaskDone({required String id}) {
     _tasksDone += '*****$id';
     RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
+    _undoneTask -= 1;
+
+    _doneTask += 1;
   }
 
   void setTaskUndone({required String id}) {
     _tasksDone += '-$id';
     RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
+    _undoneTask += 1;
+
+    _doneTask -= 1;
   }
 
   void increaseMinutesInWork({required int minute}) {
@@ -97,13 +93,20 @@ class StatProvider extends ChangeNotifier {
     RepoInt().saveData(key: RepoKeys.minutesInWork, data: _minutesInWork);
   }
 
-  void increaseIncome({required int money}) {
-    _income += money;
-    RepoInt().saveData(key: RepoKeys.income, data: _income);
+  void increaseMinutesInRelax({required int minute}) {
+    _minutesInRelax += minute;
+    RepoInt().saveData(key: RepoKeys.minutesInRelax, data: _minutesInRelax);
   }
 
-  void setMoneyAll({required int money}) {
-    _moneyAll += money;
+  void setMoneyAll({required int money, required bool isSpending}) {
+    if (isSpending) {
+      _moneyAll -= money;
+    } else {
+      _moneyAll += money;
+      _income += money;
+      RepoInt().saveData(key: RepoKeys.income, data: _income);
+    }
+
     RepoInt().saveData(key: RepoKeys.moneyAll, data: _moneyAll);
   }
 
@@ -124,6 +127,4 @@ class StatProvider extends ChangeNotifier {
   //   _moneyYear -= money;
   //   _moneyAll -= money;
   // }
-
-  void setMinutesInWork({required int minute}) => _minutesInWork += minute;
 }

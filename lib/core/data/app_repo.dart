@@ -18,7 +18,6 @@ class RepoString {
 class RepoInt {
   Future<int> getData({required String key}) async {
     final prefs = await SharedPreferences.getInstance();
-
     return prefs.getInt(key) == null ? 0 : prefs.getInt(key)!;
   }
 

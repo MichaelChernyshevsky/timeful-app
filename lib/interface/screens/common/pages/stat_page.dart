@@ -41,7 +41,7 @@ class _StatPageState extends State<StatPage> {
                     text: AppLocalizations.current.income,
                   ),
                   CustomText(
-                    text: AppLocalizations.current.spending,
+                    text: AppLocalizations.current.allMoney,
                   ),
                   CustomText(
                     text: AppLocalizations.current.minutesInWork,

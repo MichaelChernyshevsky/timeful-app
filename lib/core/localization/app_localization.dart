@@ -36,7 +36,7 @@ class AppLocalizations {
   String get mounthStat => Intl.message('Mounth analyze');
   String get allStat => Intl.message('All analyze');
   String get income => Intl.message('Income');
-  String get spending => Intl.message('Spending');
+  String get allMoney => Intl.message('All money');
 
   String get minutesInWork => Intl.message('Minutes in work');
   String get minutesInRelax => Intl.message('Minutes in relax');
@@ -47,11 +47,12 @@ class AppLocalizations {
   String get timer => Intl.message('timer');
   String get stop => Intl.message('Stop');
   String get start => Intl.message('Start');
-
   String get work => Intl.message('Work');
   String get relax => Intl.message('Relax');
   String get plus => Intl.message('+');
   String get minus => Intl.message('-');
+  String get timerError => Intl.message(
+      'Now we have some wrong,\nif the timer is running\ndo not go to other pages');
 
   // repo
   String get taskRepo => Intl.message('taskRepo');

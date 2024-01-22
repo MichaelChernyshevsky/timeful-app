@@ -1,6 +1,7 @@
 // ignore_for_file: type_annotate_public_apis, unnecessary_statements
 
 import 'package:app_with_apps/core/func/timer.dart';
+import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
 import 'package:app_with_apps/core/models/enum/timer_state.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/widgets/body.dart';
@@ -13,43 +14,28 @@ class TimerPage extends StatefulWidget {
 }
 
 class _TimerPageState extends State<TimerPage> {
-  int _timeWork = 1 * 60;
-  int _timeRelax = 1 * 60;
+  int _timeWork = 1 * 3;
+  int _timeRelax = 1 * 3;
   int timeWork = 0;
   int timeRelax = 0;
   TimerState timerState = TimerState.stop;
+  bool isFirst = true;
   Timer? timer;
 
   String time = 'Stop';
 
+  void onTapStart() => setState(() {
+        timeWork = _timeWork;
+        timeRelax = _timeRelax;
+        timerState = TimerState.work;
+        timerHandler();
+      });
+
   void onTapStop() => setState(() {
         timerState = TimerState.stop;
         time = 'stop';
-
         timer?.cancel();
       });
-
-  void change({required isWork, required isIncrease}) {
-    setState(() {
-      if (isWork) {
-        if (isIncrease) {
-          _timeWork += 60;
-        } else {
-          if (timeWork > 0) {
-            _timeWork -= 60;
-          }
-        }
-      } else {
-        if (isIncrease) {
-          _timeRelax += 60;
-        } else {
-          if (timeRelax > 0) {
-            _timeRelax -= 60;
-          }
-        }
-      }
-    });
-  }
 
   void timerHandler() {
     setState(() {
@@ -63,6 +49,28 @@ class _TimerPageState extends State<TimerPage> {
     }
   }
 
+  void change({required isWork, required isIncrease}) {
+    setState(() {
+      if (isWork) {
+        if (isIncrease) {
+          _timeWork += 60;
+        } else {
+          if (_timeWork > 0) {
+            _timeWork -= 60;
+          }
+        }
+      } else {
+        if (isIncrease) {
+          _timeRelax += 60;
+        } else {
+          if (_timeRelax > 0) {
+            _timeRelax -= 60;
+          }
+        }
+      }
+    });
+  }
+
   Timer workTimer() => Timer.periodic(const Duration(seconds: 1), (_) {
         setState(() {
           if (timeWork > 0) {
@@ -71,6 +79,9 @@ class _TimerPageState extends State<TimerPage> {
           } else {
             timeWork = _timeWork;
             timerState = TimerState.relax;
+            GetIt.I
+                .get<StatProvider>()
+                .increaseMinutesInWork(minute: _timeWork ~/ 60);
             timerHandler();
           }
         });
@@ -84,16 +95,12 @@ class _TimerPageState extends State<TimerPage> {
           } else {
             timeRelax = _timeRelax;
             timerState = TimerState.work;
+            GetIt.I
+                .get<StatProvider>()
+                .increaseMinutesInRelax(minute: _timeRelax ~/ 60);
             timerHandler();
           }
         });
-      });
-
-  void startTimer() => setState(() {
-        timeWork = _timeWork;
-        timeRelax = _timeRelax;
-        timerState = TimerState.work;
-        timerHandler();
       });
 
   @override
@@ -101,12 +108,14 @@ class _TimerPageState extends State<TimerPage> {
     return Body(
       widget: Column(
         children: [
+          const Spacer(),
           Padding(
             padding: getPadding(all: 20),
             child: Column(
               children: [
                 CustomText(text: time),
                 CustomText(text: AppLocalizations.current.work),
+                // work
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -126,6 +135,7 @@ class _TimerPageState extends State<TimerPage> {
                   ],
                 ),
                 CustomText(text: AppLocalizations.current.relax),
+                // relax
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -150,7 +160,7 @@ class _TimerPageState extends State<TimerPage> {
           CustomButton(
             padding: getPadding(all: 20),
             color: UTILSConstants.done,
-            tap: startTimer,
+            tap: onTapStart,
             text: AppLocalizations.current.start,
           ),
           CustomButton(
@@ -159,6 +169,9 @@ class _TimerPageState extends State<TimerPage> {
             tap: onTapStop,
             text: AppLocalizations.current.stop,
           ),
+          const Spacer(),
+          CustomText(text: AppLocalizations.current.timerError),
+          const Spacer(),
         ],
       ),
     );

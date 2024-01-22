@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'package:app_with_apps/core/data/hive/service_hive.dart';
+import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,6 +52,11 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     await service.addEconomy(element: event.element);
+    GetIt.I.get<StatProvider>().setMoneyAll(
+          money: event.element.count,
+          isSpending: event.element.isSpending,
+        );
+
     emit(BlocSuccess());
   }
 

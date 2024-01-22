@@ -21,7 +21,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   void initState() {
     color = widget.element.isDone ? UTILSConstants.done : UTILSConstants.undone;
-
+    GetIt.I.get<StatProvider>().setTask(isDone: widget.element.isDone);
     super.initState();
   }
 

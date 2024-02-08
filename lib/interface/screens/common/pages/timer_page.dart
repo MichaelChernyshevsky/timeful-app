@@ -103,6 +103,24 @@ class _TimerPageState extends State<TimerPage> {
         });
       });
 
+  void setTimerForm(int index) {
+    setState(() {
+      _timeWork = 0;
+      _timeRelax = 0;
+
+      if (index == 1) {
+        _timeWork = 30 * 60;
+        _timeRelax = 10 * 60;
+      } else if (index == 2) {
+        _timeWork += 20 * 60;
+        _timeRelax = 5 * 60;
+      } else {
+        _timeWork += 10 * 60;
+        _timeRelax = 2 * 60;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Body(
@@ -113,8 +131,15 @@ class _TimerPageState extends State<TimerPage> {
             padding: getPadding(all: 20),
             child: Column(
               children: [
-                CustomText(text: time),
-                CustomText(text: AppLocalizations.current.work),
+                CustomText(
+                  text: time,
+                  fontSize: TextEnum.title,
+                ),
+
+                CustomText(
+                  text: AppLocalizations.current.work,
+                  color: UTILSConstants.grey,
+                ),
                 // work
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +159,9 @@ class _TimerPageState extends State<TimerPage> {
                     ),
                   ],
                 ),
-                CustomText(text: AppLocalizations.current.relax),
+                CustomText(
+                    text: AppLocalizations.current.relax,
+                    color: UTILSConstants.grey),
                 // relax
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -156,6 +183,26 @@ class _TimerPageState extends State<TimerPage> {
                 ),
               ],
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CustomButton(
+                color: UTILSConstants.white,
+                text: AppLocalizations.current.m30m10,
+                tap: () => setTimerForm(1),
+              ),
+              CustomButton(
+                color: UTILSConstants.white,
+                text: AppLocalizations.current.m20m5,
+                tap: () => setTimerForm(2),
+              ),
+              CustomButton(
+                color: UTILSConstants.white,
+                text: AppLocalizations.current.m10m2,
+                tap: () => setTimerForm(3),
+              ),
+            ],
           ),
           CustomButton(
             padding: getPadding(all: 20),

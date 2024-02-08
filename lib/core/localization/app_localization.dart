@@ -52,7 +52,11 @@ class AppLocalizations {
   String get plus => Intl.message('+');
   String get minus => Intl.message('-');
   String get timerError => Intl.message(
-      'Now we have some wrong,\nif the timer is running\ndo not go to other pages');
+        'Now we have some wrong,\nif the timer is running\ndo not go to other pages',
+      );
+  String get m30m10 => Intl.message('30:10');
+  String get m20m5 => Intl.message('20:5');
+  String get m10m2 => Intl.message('10:2');
 
   // repo
   String get taskRepo => Intl.message('taskRepo');

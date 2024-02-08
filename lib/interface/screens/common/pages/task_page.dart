@@ -61,10 +61,10 @@ class _TaskPageState extends State<TaskPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomContainer(
-                color: UTILSConstants.black,
-                widget: const Row(),
-              ),
+              // CustomContainer(
+              //   color: UTILSConstants.black,
+              //   widget: const Row(),
+              // ),
               CustomButton(
                 color: UTILSConstants.white,
                 text: AppLocalizations.current.add,

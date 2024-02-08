@@ -52,9 +52,9 @@ class _StatPageState extends State<StatPage> {
                   CustomText(
                     text: AppLocalizations.current.taskDone,
                   ),
-                  CustomText(
-                    text: AppLocalizations.current.taskUnDone,
-                  ),
+                  // CustomText(
+                  //   text: AppLocalizations.current.taskUnDone,
+                  // ),
                 ],
               ),
               Column(
@@ -74,9 +74,9 @@ class _StatPageState extends State<StatPage> {
                   CustomText(
                     text: statProvider.getTask(isDone: true).toString(),
                   ),
-                  CustomText(
-                    text: statProvider.getTask(isDone: false).toString(),
-                  ),
+                  // CustomText(
+                  //   text: statProvider.getTask(isDone: false).toString(),
+                  // ),
                 ],
               ),
             ],

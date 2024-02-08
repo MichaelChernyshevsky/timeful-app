@@ -10,6 +10,7 @@ class StatProvider extends ChangeNotifier {
   int _doneTask = 0;
   int _undoneTask = 0;
   String _tasksDone = '';
+  List<String> idList = [];
 
   Future<void> initStat() async {
     _moneyAll = await RepoInt().getData(key: RepoKeys.moneyAll);
@@ -27,8 +28,16 @@ class StatProvider extends ChangeNotifier {
 
   void taskCheck() {
     if (!checkDate(str: _tasksDone)) {
-      _tasksDone = '${getDate()}*****date*****';
+      updateTaskDoneString(idList);
+    } else {
+      idList = getIdDone(str: _tasksDone);
     }
+  }
+
+  void updateTaskDoneString(List<String> list) {
+    _tasksDone = '';
+    _tasksDone = '${getDate()}*****date*****';
+    _tasksDone += getStr(idList: list);
   }
 
   // int getMoneyYear() => _moneyYear;
@@ -64,30 +73,45 @@ class StatProvider extends ChangeNotifier {
 
   void setTask({required bool isDone, required bool withMinus}) {
     if (isDone) {
-      _doneTask += 1;
+      // _doneTask += 1;
       RepoInt().saveData(key: RepoKeys.doneTask, data: _doneTask);
       if (withMinus) {
-        _undoneTask -= 1;
+        // _undoneTask -= 1;
         RepoInt().saveData(key: RepoKeys.undoneTask, data: _undoneTask);
       }
     } else {
-      _undoneTask += 1;
+      // _undoneTask += 1;
       RepoInt().saveData(key: RepoKeys.undoneTask, data: _undoneTask);
       if (withMinus) {
-        _doneTask -= 1;
+        // _doneTask -= 1;
         RepoInt().saveData(key: RepoKeys.doneTask, data: _doneTask);
       }
     }
   }
 
   void setTaskDone({required String id}) {
-    _tasksDone += '*****$id';
+    if (!checkIDInList(id: id, idList: idList)) {
+      _tasksDone += '*****$id';
+      idList.add(id);
+      updateTaskDoneString(idList);
+
+      _doneTask += 1;
+      if (_undoneTask > 0) {
+        _undoneTask -= 1;
+      }
+    }
+
     RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
     setTask(isDone: true, withMinus: true);
   }
 
   void setTaskUndone({required String id}) {
-    _tasksDone += '-$id';
+    idList = deleteId(idList: idList, id: id);
+    updateTaskDoneString(idList);
+
+    _doneTask -= 1;
+    _undoneTask += 1;
+
     RepoString().saveData(key: RepoKeys.doneTasks, data: _tasksDone);
     setTask(isDone: false, withMinus: true);
   }

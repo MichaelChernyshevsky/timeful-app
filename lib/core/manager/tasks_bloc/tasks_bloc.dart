@@ -71,6 +71,8 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
   ) async {
     final tasks = await repo.getTasks();
     final listId = GetIt.I.get<StatProvider>().getTasksDone();
+    print('-');
+    print(listId);
     for (var i = 0; i <= tasks.length - 1; i++) {
       for (final id in listId) {
         if (tasks[i].id == id) {

@@ -13,8 +13,7 @@ class AppLocalizations {
   }
 
   static Future<AppLocalizations> load(Locale locale) {
-    final name =
-        locale.countryCode == null ? locale.languageCode : locale.toString();
+    final name = locale.countryCode == null ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((bool _) {
@@ -26,17 +25,22 @@ class AppLocalizations {
   }
 
   static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations) ??
-        AppLocalizations();
+    return Localizations.of<AppLocalizations>(context, AppLocalizations) ?? AppLocalizations();
   }
 
+  String get appName => Intl.message('Timeful');
+
   // stat
+  String get wallet => Intl.message('Wallet');
+
   String get dayStat => Intl.message('Day analyze');
   String get weekStat => Intl.message('Week analyze');
   String get mounthStat => Intl.message('Mounth analyze');
-  String get allStat => Intl.message('All analyze');
+  String get statistics => Intl.message('Statistics');
   String get income => Intl.message('Income');
-  String get allMoney => Intl.message('All money');
+  String get money => Intl.message('Money');
+  String get time => Intl.message('Time');
+  String get tasks => Intl.message('Tasks');
 
   String get minutesInWork => Intl.message('Minutes in work');
   String get minutesInRelax => Intl.message('Minutes in relax');
@@ -44,7 +48,7 @@ class AppLocalizations {
   String get taskUnDone => Intl.message('Task undone');
 
   // timer
-  String get timer => Intl.message('timer');
+  String get timer => Intl.message('Timer');
   String get stop => Intl.message('Stop');
   String get start => Intl.message('Start');
   String get work => Intl.message('Work');
@@ -83,6 +87,7 @@ class AppLocalizations {
   String get historyEconomy => Intl.message('historyEconomy');
   String get historyToDo => Intl.message('historyToDo');
   String get createTask => Intl.message('Create task');
+  String get create => Intl.message('Create');
 
   String get user => Intl.message('User');
   // splash screen
@@ -94,6 +99,9 @@ class AppLocalizations {
   String get sortMax => Intl.message('Max -> Min');
   // create
   String get add => Intl.message('Add');
+  String get addTask => Intl.message('Add task');
+  String get addMoney => Intl.message('Add money');
+
   String get isSpending => Intl.message('Spending');
   String get isIncome => Intl.message('Income');
   String get delete => Intl.message('Delete');
@@ -111,6 +119,7 @@ class AppLocalizations {
   String get pasteCountOnDay => Intl.message('Paste count on day');
 
   String get color => Intl.message('Color');
+  String get exit => Intl.message('Exit');
 
   // notification
   String get errorLoading => Intl.message('Error loading');

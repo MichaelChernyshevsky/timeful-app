@@ -17,28 +17,31 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
+    final padding = EdgeInsets.only(
+      right: w * 0.08,
+      left: w * 0.08,
+      top: h * 0.05,
+      bottom: h * 0.05,
+    );
+
     if (widget.appBar != null) {
       return Scaffold(
         appBar: widget.appBar,
         body: Padding(
-          padding: getPadding(
-            right: 10,
-            left: 10,
-          ),
+          padding: padding,
           child: widget.widget,
         ),
       );
     }
 
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: getPadding(
-            right: 10,
-            left: 10,
-          ),
-          child: widget.widget,
-        ),
+    return Scaffold(
+      backgroundColor: UTILSConstants.grey1,
+      body: Padding(
+        padding: padding,
+        child: widget.widget,
       ),
     );
   }

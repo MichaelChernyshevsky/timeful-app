@@ -71,9 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                     Icon(
                       NavigationConstants.iconsBottomBar[index],
                       size: size.width * .046,
-                      color: index == _selectedIndex
-                          ? UTILSConstants.purple
-                          : UTILSConstants.grey,
+                      color: index == _selectedIndex ? UTILSConstants.purple : UTILSConstants.grey1,
                     ),
                     SizedBox(height: size.width * .03),
                   ],

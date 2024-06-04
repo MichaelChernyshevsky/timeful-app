@@ -1,7 +1,7 @@
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
-import 'package:app_with_apps/interface/screens/common/pages/stat_page.dart';
-import 'package:app_with_apps/interface/screens/common/pages/timer_page.dart';
-import 'package:app_with_apps/interface/screens/common/screens/create_spending_screen.dart';
+import 'package:app_with_apps/interface/screens/common/pages/stat/stat_page.dart';
+import 'package:app_with_apps/interface/screens/common/pages/timer/timer_page.dart';
+import 'package:app_with_apps/interface/screens/common/pages/economy/create/create_spending_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';

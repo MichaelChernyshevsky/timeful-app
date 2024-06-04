@@ -10,12 +10,14 @@ class CustomButton extends StatefulWidget {
     this.text = '',
     this.padding,
     this.child,
+    this.colorBorder,
     required this.tap,
   });
 
   final double? width;
   final double height;
   final Color color;
+  final Color? colorBorder;
   final String text;
   final EdgeInsetsGeometry? padding;
   final VoidCallback tap;
@@ -37,8 +39,11 @@ class _CustomButtonState extends State<CustomButton> {
                 color: widget.color,
                 height: widget.height,
                 width: widget.width,
+                colorBorder: widget.colorBorder,
                 widget: Center(
-                  child: CustomText(text: widget.text),
+                  child: CustomText(
+                    text: widget.text,
+                  ),
                 ),
               )
             : widget,

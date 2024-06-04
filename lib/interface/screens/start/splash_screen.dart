@@ -19,24 +19,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            const Spacer(),
-            GestureDetector(
-              onTap: _goToNext,
-              child: SvgPicture.asset(
-                'assets/money-bag-pixel-art_505135-55.jpg.svg',
-                height: getHeight(100),
-                width: getWidth(100),
+      body: GestureDetector(
+        onTap: _goToNext,
+        child: Center(
+          child: Column(
+            children: [
+              const Spacer(),
+              Text(AppLocalizations.current.appName),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 25),
+                child: Text(AppLocalizations.current.pressToContinue),
               ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 25),
-              child: Text(AppLocalizations.current.pressToContinue),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

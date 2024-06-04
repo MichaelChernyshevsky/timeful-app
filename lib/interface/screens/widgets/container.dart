@@ -25,12 +25,12 @@ class CustomContainer extends StatelessWidget {
       decoration = BoxDecoration(
         border: Border.all(color: colorBorder!, width: getWidth(2)),
         color: color ?? UTILSConstants.transparent,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(100),
       );
     } else {
       decoration = BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(100),
       );
     }
 

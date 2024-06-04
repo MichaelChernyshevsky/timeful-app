@@ -46,7 +46,7 @@ class StatProvider extends ChangeNotifier {
 
   int getIncome() => _income;
 
-  int getSpending() => _moneyAll;
+  int getWallet() => _moneyAll;
 
   int getMinutesInRelax() => _minutesInRelax;
 

@@ -21,9 +21,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   void initState() {
     color = widget.element.isDone ? UTILSConstants.done : UTILSConstants.undone;
-    GetIt.I
-        .get<StatProvider>()
-        .setTask(isDone: widget.element.isDone, withMinus: false);
+    GetIt.I.get<StatProvider>().setTask(isDone: widget.element.isDone, withMinus: false);
     super.initState();
   }
 
@@ -50,52 +48,36 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: SizedBox(
-        width: getWidth(100),
-        child: GestureDetector(
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+    return Row(
+      children: [
+        GestureDetector(
           onTap: () => changeState(
             id: widget.element.id,
             isDone: widget.element.isDone,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomContainer(
-                // colorBorder: widget.element.color,
-                colorBorder: color,
-                height: 50,
-                width: 350,
-                widget: Row(
-                  children: [
-                    // Icon(
-                    //   widget.element.icon.icon,
-                    //   color: widget.element.color,
-                    // ),
-                    const Spacer(),
-                    Text(
-                      widget.element.title,
-                      // style: TextStyle(color: widget.element.color),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-              ),
-              // Padding(
-              //   padding: getPadding(left: 20),
-              //   child: GestureDetector(
-              //     onTap: changeColor,
-              //     child: Icon(
-              //       Icons.check_circle_outline_rounded,
-              //       color: color,
-              //     ),
-              //   ),
-              // ),
-            ],
+          child: Icon(
+            widget.element.isDone ? Icons.check_box_outlined : Icons.check_box_outline_blank,
           ),
         ),
-      ),
+        Padding(
+          padding: EdgeInsets.only(left: w * 0.05),
+          child: SizedBox(
+            width: w * 0.68,
+            child: Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    widget.element.title,
+                    style: TextStyle(fontSize: h * 0.03),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

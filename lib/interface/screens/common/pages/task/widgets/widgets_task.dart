@@ -1,4 +1,4 @@
-import 'package:app_with_apps/service/stat/stat.dart';
+import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/screens/edit_todo_screen.dart';
 

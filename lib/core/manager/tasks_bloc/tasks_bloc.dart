@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
-import 'package:app_with_apps/service/stat/stat.dart';
+import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

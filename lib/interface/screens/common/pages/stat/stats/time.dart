@@ -1,4 +1,4 @@
-import 'package:app_with_apps/service/stat/stat.dart';
+import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/widgets.dart';
 
@@ -51,7 +51,7 @@ class TimeStat extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${statProvider.getMinutesInWork()} min',
+                          '${statProvider.timer.getMinutesInWork()} min',
                           style: TextStyle(fontSize: h * 0.03),
                         ),
                       ],
@@ -76,7 +76,7 @@ class TimeStat extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${statProvider.getMinutesInRelax()} min',
+                          '${statProvider.timer.getMinutesInRelax()} min',
                           style: TextStyle(fontSize: h * 0.03),
                         ),
                       ],

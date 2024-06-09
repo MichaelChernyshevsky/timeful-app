@@ -1,4 +1,4 @@
-import 'package:app_with_apps/service/stat/stat.dart';
+import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/stats/money.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/stats/tasks.dart';

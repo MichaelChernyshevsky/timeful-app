@@ -5,7 +5,7 @@ import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
 import 'package:app_with_apps/core/service/notification_service.dart';
 import 'package:app_with_apps/interface/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/interface/routes/app_routes.dart';
-import 'package:app_with_apps/service/stat/stat.dart';
+import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

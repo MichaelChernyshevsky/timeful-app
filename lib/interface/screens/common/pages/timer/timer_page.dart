@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:app_with_apps/interface/func/timer.dart';
-import 'package:app_with_apps/service/stat/stat.dart';
+import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/core/models/enum/timer_state.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/timer/widgets/widgets.dart';
@@ -84,7 +84,7 @@ class _TimerPageState extends State<TimerPage> {
           } else {
             timeWork = _timeWork;
             timerState = TimerState.relax;
-            GetIt.I.get<StatService>().increaseMinutesInWork(minute: _timeWork ~/ 60);
+            GetIt.I.get<StatService>().timer.increaseMinutesInWork(minute: _timeWork ~/ 60);
             timerHandler();
           }
         });
@@ -98,7 +98,7 @@ class _TimerPageState extends State<TimerPage> {
           } else {
             timeRelax = _timeRelax;
             timerState = TimerState.work;
-            GetIt.I.get<StatService>().increaseMinutesInRelax(minute: _timeRelax ~/ 60);
+            GetIt.I.get<StatService>().timer.increaseMinutesInRelax(minute: _timeRelax ~/ 60);
             timerHandler();
           }
         });

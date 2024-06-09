@@ -10,19 +10,28 @@ class TaskStat {
   @HiveField(1)
   int undone;
   @HiveField(2)
-  String history;
+  String date;
+  @HiveField(3)
+  List<String> doneList;
 
   TaskStat({
     required this.done,
     required this.undone,
-    required this.history,
+    required this.date,
+    required this.doneList,
   });
 
-  TaskStat edit({required int done, required int undone, required String history}) {
-    return TaskStat(done: this.done + done, undone: this.undone + undone, history: this.history + history);
-  }
+  TaskStat wipeHistory({required int done, required int undone, required String date}) => TaskStat(
+        done: this.done + done,
+        undone: this.undone + undone,
+        date: date,
+        doneList: [],
+      );
 
-  TaskStat wipeHistory() => TaskStat(done: done, undone: undone, history: '');
-
-  factory TaskStat.empty() => TaskStat(done: 0, undone: 0, history: '');
+  factory TaskStat.empty() => TaskStat(
+        done: 0,
+        undone: 0,
+        date: '',
+        doneList: [],
+      );
 }

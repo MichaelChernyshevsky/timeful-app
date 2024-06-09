@@ -12,15 +12,12 @@ class TaskRepo {
   static const String _boxTasksStat = 'boxTasksStat';
 
   Future init() async {
-    if (!Hive.isAdapterRegistered(2)) {}
     Hive.registerAdapter(TaskModelAdapter());
     Hive.registerAdapter(TaskStatAdapter());
-
-    print(Hive.isAdapterRegistered(3));
-    if (!Hive.isAdapterRegistered(3)) {}
     await initializeStat();
 
     boxTasks = await Hive.openBox<TaskModel>(_boxTasks);
+    validTasks();
   }
 
   Future initializeStat() async {
@@ -31,16 +28,40 @@ class TaskRepo {
     }
   }
 
+  String get date => DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString().split(' ')[0];
+
+  void validTasks() {
+    bool checkDate({required String str}) {
+      return date == str.split('*****date*****')[0];
+    }
+
+    int done = 0;
+    int undone = 0;
+    if (!checkDate(str: boxTasksStat.values.first.date)) {
+      final tasks = get();
+      boxTasks.deleteAt(0);
+      for (var index = 0; index < tasks.length; index += 1) {
+        tasks[index].isDone ? done += 1 : undone += 1;
+        tasks[index].isDone = false;
+        boxTasks.add(tasks[index]);
+      }
+      final newStatModel = boxTasksStat.values.first.wipeHistory(date: date, done: done, undone: undone);
+      boxTasksStat.deleteAt(0);
+      boxTasksStat.add(newStatModel);
+    }
+  }
+
   TaskStat get stat => boxTasksStat.values.first;
 
-  Future changeStat({
-    required int done,
-    required int undone,
-    required String history,
-  }) async {
-    final statModel = boxTasksStat.values.first.edit(done: done, undone: undone, history: history);
-    boxTasksStat.deleteAt(0);
-    boxTasksStat.add(statModel);
+  void changeDoneState(String id) {
+    final tasks = get();
+    boxTasks.deleteAt(0);
+    for (var index = 0; index < tasks.length; index += 1) {
+      if (tasks[index].id == id) {
+        tasks[index].isDone = !tasks[index].isDone;
+      }
+      boxTasks.add(tasks[index]);
+    }
   }
 
   Future wipe() async {
@@ -69,17 +90,17 @@ class TaskRepo {
   Future<bool> delete({
     required String id,
   }) async {
+    int getIndex({required String id, required Box box}) {
+      for (var index = 0; index <= box.length; index += 1) {
+        if (box.values.elementAt(index).id == id) {
+          return index;
+        }
+      }
+      return -1;
+    }
+
     final indexElement = getIndex(id: id, box: boxTasks);
     await boxTasks.deleteAt(indexElement);
     return true;
-  }
-
-  int getIndex({required String id, required Box box}) {
-    for (var index = 0; index <= box.length; index += 1) {
-      if (box.values.elementAt(index).id == id) {
-        return index;
-      }
-    }
-    return -1;
   }
 }

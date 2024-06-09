@@ -19,20 +19,23 @@ class TaskStatAdapter extends TypeAdapter<TaskStat> {
     return TaskStat(
       done: fields[0] as int,
       undone: fields[1] as int,
-      history: fields[2] as String,
+      date: fields[2] as String,
+      doneList: (fields[3] as List).cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskStat obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.done)
       ..writeByte(1)
       ..write(obj.undone)
       ..writeByte(2)
-      ..write(obj.history);
+      ..write(obj.date)
+      ..writeByte(3)
+      ..write(obj.doneList);
   }
 
   @override

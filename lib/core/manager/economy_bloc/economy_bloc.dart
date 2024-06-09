@@ -1,6 +1,4 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
-import 'package:app_with_apps/core/data/hive/service_hive.dart';
-import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +16,6 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     on<WipeEconomyEvent>(_wipeData);
     // on<GetStatEvent>(_getStat);
   }
-
-  ServiceHive service = ServiceHive();
 
   Future<void> _dispose(
     DisposeEvent event,
@@ -40,7 +36,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      final isDeleted = await service.deleteEconomy(id: event.id);
+      final isDeleted = await GetIt.I.get<EconomyRepo>().delete(id: event.id);
       emit(Delete(isDeleted));
     } catch (error) {
       emit(BlocError());
@@ -51,11 +47,19 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     AddEconoomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
-    await service.addEconomy(element: event.element);
-    GetIt.I.get<StatProvider>().setMoneyAll(
-          money: event.element.count,
-          isSpending: event.element.isSpending,
-        );
+    await GetIt.I.get<EconomyRepo>().add(element: event.element);
+
+    if (event.element.isSpending) {
+      await GetIt.I.get<EconomyRepo>().changeStat(
+            income: 0,
+            moneyAll: -event.element.count,
+          );
+    } else {
+      await GetIt.I.get<EconomyRepo>().changeStat(
+            income: event.element.count,
+            moneyAll: event.element.count,
+          );
+    }
 
     emit(BlocSuccess());
   }
@@ -65,7 +69,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      emit(GetHistorySuccess(service.getEconomy()));
+      emit(GetHistorySuccess(GetIt.I.get<EconomyRepo>().get()));
     } catch (error) {
       emit(BlocError());
     }
@@ -76,7 +80,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      await service.wipeEconomy();
+      await GetIt.I.get<EconomyRepo>().wipe();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

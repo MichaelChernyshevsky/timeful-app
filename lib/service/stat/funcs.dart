@@ -4,9 +4,7 @@ bool checkDate({required String str}) {
 }
 
 String getDate() {
-  return DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)
-      .toString()
-      .split(' ')[0];
+  return DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString().split(' ')[0];
 }
 
 List<String> getIdDone({required String str}) {

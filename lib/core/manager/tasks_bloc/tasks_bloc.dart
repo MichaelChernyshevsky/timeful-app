@@ -1,8 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
-import 'package:app_with_apps/core/data/hive/service_hive.dart';
-import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
-import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/service/stat/stat.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,12 +16,6 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     on<EditToDoEvent>(_edit);
     on<WipeToDoEvent>(_wipeData);
   }
-
-  ServiceHive repo = ServiceHive();
-
-  List<TaskElement> tasks = [];
-
-  // ServiceApiNotes service = ServiceApiNotes();
 
   Future<void> _dispose(
     DisposeEvent event,
@@ -44,7 +36,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      final isDeleted = repo.deleteTask(id: event.id);
+      final isDeleted = await GetIt.I.get<TaskRepo>().delete(id: event.id);
       emit(Delete(isDeleted));
     } catch (error) {
       emit(BlocError());
@@ -55,7 +47,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     AddTaskEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    await repo.addTask(element: event.task);
+    await GetIt.I.get<TaskRepo>().add(task: event.task);
 
     emit(BlocSuccess());
 
@@ -69,10 +61,9 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     GetTasksEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    final tasks = await repo.getTasks();
-    final listId = GetIt.I.get<StatProvider>().getTasksDone();
-    print('-');
-    print(listId);
+    final tasks = GetIt.I.get<TaskRepo>().get();
+
+    final listId = GetIt.I.get<StatService>().getTasksDone();
     for (var i = 0; i <= tasks.length - 1; i++) {
       for (final id in listId) {
         if (tasks[i].id == id) {
@@ -88,7 +79,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      await repo.wipeTasks();
+      await GetIt.I.get<TaskRepo>().wipe();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

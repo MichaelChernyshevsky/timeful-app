@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:app_with_apps/core/exports/exports.dart';
-import 'package:app_with_apps/core/utils/constants/constants_uikit.dart';
-import 'package:app_with_apps/core/utils/enum/text_enum.dart';
-import 'package:app_with_apps/core/utils/funcs/text_func.dart';
-import 'package:app_with_apps/core/utils/utils_size.dart';
+
+import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/interface/utils/funcs/text_func.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({

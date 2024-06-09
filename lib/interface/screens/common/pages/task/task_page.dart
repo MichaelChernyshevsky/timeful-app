@@ -1,6 +1,6 @@
-import 'package:app_with_apps/core/exports/exports.dart';
+import 'package:app_with_apps/interface/exports/screens_exports.dart';
+
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
-import 'package:app_with_apps/core/models/class/task_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/widget/widgets.dart';
 import 'package:app_with_apps/interface/screens/common/pages/task/widgets/widgets_task.dart';
@@ -16,7 +16,7 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
-  List<TaskElement> tasks = [];
+  List<TaskModel> tasks = [];
   bool loading = true;
   TasksBloc? bloc;
 
@@ -48,7 +48,7 @@ class _TaskPageState extends State<TaskPage> {
 
   void onError() => debugPrint(AppLocalizations.current.errorLoading);
 
-  void setElements(List<TaskElement> elementsBloc) => setState(() {
+  void setElements(List<TaskModel> elementsBloc) => setState(() {
         tasks = elementsBloc;
         loading = false;
       });

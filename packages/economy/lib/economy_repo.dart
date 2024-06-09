@@ -1,35 +1,55 @@
+import 'package:economy/stat/model/economy_stat.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'models/economy_class.dart';
 
 class EconomyRepo {
   late Box<EconomyModel> boxEconomy;
+  late Box<EconomyStat> boxEconomyStat;
 
   static const String _boxEconomy = 'boxEconomy';
+  static const String _boxEconomyStat = 'boxEconomyStat';
 
   Future init() async {
     if (!Hive.isAdapterRegistered(0)) {
       Hive.registerAdapter(EconomyModelAdapter());
-
-      boxEconomy = await Hive.openBox<EconomyModel>(_boxEconomy);
     }
+    if (!Hive.isAdapterRegistered(1)) {
+      Hive.registerAdapter(EconomyStatAdapter());
+      await initializeStat();
+    }
+
+    boxEconomy = await Hive.openBox<EconomyModel>(_boxEconomy);
+  }
+
+  Future initializeStat() async {
+    boxEconomyStat = await Hive.openBox<EconomyStat>(_boxEconomyStat);
+
+    if (boxEconomyStat.values.toList().isEmpty) {
+      boxEconomyStat.add(EconomyStat.empty());
+    }
+  }
+
+  EconomyStat get stat => boxEconomyStat.values.first;
+
+  Future changeStat({
+    required int income,
+    required int moneyAll,
+  }) async {
+    final statModel = boxEconomyStat.values.first.edit(income: income, moneyAll: moneyAll);
+    boxEconomyStat.deleteAt(0);
+    boxEconomyStat.add(statModel);
   }
 
   Future wipe() async {
     await Hive.deleteBoxFromDisk(_boxEconomy);
+    await Hive.deleteBoxFromDisk(_boxEconomyStat);
+
     boxEconomy = await Hive.openBox<EconomyModel>(_boxEconomy);
+    await initializeStat();
   }
 
-  List<EconomyModel> get() {
-    // List<EconomyModel> get({DateTime? dateFilter}) {
-
-    // if (dateFilter != null) {
-    //   return moneyBox.values
-    //       .where((money) => money.wastedDate.month == dateFilter.month)
-    //       .toList();
-    // }
-    return boxEconomy.values.toList();
-  }
+  List<EconomyModel> get() => boxEconomy.values.toList().reversed.toList();
 
   Future<bool> add({
     required EconomyModel element,

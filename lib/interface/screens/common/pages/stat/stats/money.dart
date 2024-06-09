@@ -1,4 +1,4 @@
-import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
+import 'package:app_with_apps/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/widgets.dart';
 
@@ -8,7 +8,7 @@ class MoneyStat extends StatelessWidget {
     required this.statProvider,
   });
 
-  final StatProvider statProvider;
+  final StatService statProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class MoneyStat extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${statProvider.getIncome()}',
+                          '${statProvider.economy.income}',
                           style: TextStyle(fontSize: h * 0.03),
                         ),
                       ],
@@ -76,7 +76,7 @@ class MoneyStat extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${statProvider.getWallet()}',
+                          '${statProvider.economy.moneyAll}',
                           style: TextStyle(fontSize: h * 0.03),
                         ),
                       ],

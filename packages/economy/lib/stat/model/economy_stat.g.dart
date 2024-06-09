@@ -1,44 +1,40 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'part_time__class.dart';
+part of 'economy_stat.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PartTimeAdapter extends TypeAdapter<PartTime> {
+class EconomyStatAdapter extends TypeAdapter<EconomyStat> {
   @override
-  final int typeId = 2;
+  final int typeId = 1;
 
   @override
-  PartTime read(BinaryReader reader) {
+  EconomyStat read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return PartTime(
-      index: fields[0] as int,
-      partTime: fields[1] as PartTimeEnum,
+    return EconomyStat(
+      income: fields[0] as int,
+      moneyAll: fields[1] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, PartTime obj) {
+  void write(BinaryWriter writer, EconomyStat obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.index)
+      ..write(obj.income)
       ..writeByte(1)
-      ..write(obj.partTime);
+      ..write(obj.moneyAll);
   }
 
   @override
   int get hashCode => typeId.hashCode;
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PartTimeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+  bool operator ==(Object other) => identical(this, other) || other is EconomyStatAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

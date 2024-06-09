@@ -1,4 +1,5 @@
-import 'package:app_with_apps/core/exports/exports.dart';
+import 'package:app_with_apps/interface/exports/screens_exports.dart';
+
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
 // ignore: must_be_immutable

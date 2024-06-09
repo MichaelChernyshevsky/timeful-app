@@ -1,5 +1,5 @@
-import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
-import 'package:app_with_apps/core/utils/constants/constants_uikit.dart';
+import 'package:app_with_apps/service/stat/stat.dart';
+import 'package:app_with_apps/interface/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/widgets.dart';
 
@@ -9,7 +9,7 @@ class TasksStat extends StatelessWidget {
     required this.statProvider,
   });
 
-  final StatProvider statProvider;
+  final StatService statProvider;
 
   @override
   Widget build(BuildContext context) {

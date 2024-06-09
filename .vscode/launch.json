@@ -1,0 +1,65 @@
+{
+    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Daytime",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Daytime (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Daytime (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "economy",
+            "cwd": "packages/economy",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "economy (profile mode)",
+            "cwd": "packages/economy",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "economy (release mode)",
+            "cwd": "packages/economy",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "tasks",
+            "cwd": "packages/tasks",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "tasks (profile mode)",
+            "cwd": "packages/tasks",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "tasks (release mode)",
+            "cwd": "packages/tasks",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

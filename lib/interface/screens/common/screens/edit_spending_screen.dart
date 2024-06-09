@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class EditSpendingScreen extends StatefulWidget {
   EditSpendingScreen({super.key, required this.element});
 
-  EconomyElement element;
+  EconomyModel element;
 
   @override
   State<EditSpendingScreen> createState() => _EditSpendingScreenState();

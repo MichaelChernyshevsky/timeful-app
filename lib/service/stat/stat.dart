@@ -1,10 +1,11 @@
-import 'package:app_with_apps/core/data/app_repo.dart';
-import 'package:app_with_apps/core/func/stat_funcs.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
+import 'package:app_with_apps/service/stat/funcs.dart';
+import 'package:app_with_apps/service/stat/repo.dart';
+import 'package:app_with_apps/service/stat/services/economy.dart';
 
-class StatProvider extends ChangeNotifier {
-  int _moneyAll = 0;
-  int _income = 0;
+class StatService extends ChangeNotifier {
+  EconomyStatService get economy => EconomyStatService();
+
   int _minutesInWork = 0;
   int _minutesInRelax = 0;
   int _doneTask = 0;
@@ -13,10 +14,6 @@ class StatProvider extends ChangeNotifier {
   List<String> idList = [];
 
   Future<void> initStat() async {
-    _moneyAll = await RepoInt().getData(key: RepoKeys.moneyAll);
-    // _moneyYear = await RepoInt.getData(key: RepoKeys.moneyYear);
-    // _moneyMounth = await RepoInt.getData(key: RepoKeys.moneyMounth);
-    _income = await RepoInt().getData(key: RepoKeys.income);
     _minutesInWork = await RepoInt().getData(key: RepoKeys.minutesInWork);
     _minutesInRelax = await RepoInt().getData(key: RepoKeys.minutesInRelax);
     _tasksDone = await RepoString().getData(key: RepoKeys.doneTasks);
@@ -39,14 +36,6 @@ class StatProvider extends ChangeNotifier {
     _tasksDone = '${getDate()}*****date*****';
     _tasksDone += getStr(idList: list);
   }
-
-  // int getMoneyYear() => _moneyYear;
-
-  // int getMoneyMounthl() => _moneyMounth;
-
-  int getIncome() => _income;
-
-  int getWallet() => _moneyAll;
 
   int getMinutesInRelax() => _minutesInRelax;
 
@@ -124,18 +113,6 @@ class StatProvider extends ChangeNotifier {
   void increaseMinutesInRelax({required int minute}) {
     _minutesInRelax += minute;
     RepoInt().saveData(key: RepoKeys.minutesInRelax, data: _minutesInRelax);
-  }
-
-  void setMoneyAll({required int money, required bool isSpending}) {
-    if (isSpending) {
-      _moneyAll -= money;
-    } else {
-      _moneyAll += money;
-      _income += money;
-      RepoInt().saveData(key: RepoKeys.income, data: _income);
-    }
-
-    RepoInt().saveData(key: RepoKeys.moneyAll, data: _moneyAll);
   }
 
   // void increaseMoneyYear({required int money}) {

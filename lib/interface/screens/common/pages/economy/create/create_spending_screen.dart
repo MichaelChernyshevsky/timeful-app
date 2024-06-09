@@ -1,4 +1,4 @@
-import 'package:app_with_apps/core/func/uuid.dart';
+import 'package:app_with_apps/interface/func/uuid.dart';
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/widget/widgets.dart';
@@ -25,7 +25,7 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
   TextEditingController contorllerTitle = TextEditingController();
   TextEditingController contorllerCost = TextEditingController();
   TextEditingController contorllerDescription = TextEditingController();
-  EconomyElement? element;
+  EconomyModel? element;
   Color buttonColor = UTILSConstants.purple;
   bool currentDate = true;
   DateTime? date;
@@ -37,14 +37,14 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
     super.initState();
   }
 
-  EconomyElement? createElement() {
+  EconomyModel? createElement() {
     if (contorllerTitle.text.isEmpty) {
       return null;
     }
     if (contorllerCost.text.isEmpty) {
       return null;
     }
-    final createdElement = EconomyElement(
+    final createdElement = EconomyModel(
       id: getUUID(),
       title: contorllerTitle.text,
       count: int.parse(contorllerCost.text),
@@ -61,9 +61,7 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
   void addSpending() {
     final element = createElement();
     if (element != null) {
-      bloc!.add(
-        AddEconoomyEvent(element: element),
-      );
+      bloc!.add(AddEconoomyEvent(element: element));
     } else {
       setState(() {
         buttonColor = UTILSConstants.grey1;

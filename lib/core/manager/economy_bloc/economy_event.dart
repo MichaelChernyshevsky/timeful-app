@@ -33,14 +33,14 @@ class DeleteEconomyEvent extends EconomyBlocEvent {
 }
 
 class AddEconoomyEvent extends EconomyBlocEvent {
-  EconomyElement element;
+  EconomyModel element;
   AddEconoomyEvent({required this.element});
   @override
   List<Object?> get props => [element];
 }
 
 class EditEconomyEvent extends EconomyBlocEvent {
-  EconomyElement element;
+  EconomyModel element;
   EditEconomyEvent({required this.element});
   @override
   List<Object?> get props => [element];

@@ -15,11 +15,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController password_1 = TextEditingController();
   final TextEditingController password_2 = TextEditingController();
 
-  Future<Object?> goToSignIp() =>
-      Navigator.of(context).popAndPushNamed(AppRoutes.signInScreen);
+  Future<Object?> goToSignIp() => Navigator.of(context).popAndPushNamed(AppRoutes.signInScreen);
 
-  Future<Object?> goNext() =>
-      Navigator.of(context).popAndPushNamed(AppRoutes.setUserScreen);
+  Future<Object?> goNext() => Navigator.of(context).popAndPushNamed(AppRoutes.setUserScreen);
 
   void signIn() => print(1);
 

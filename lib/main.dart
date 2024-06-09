@@ -1,20 +1,19 @@
-import 'package:app_with_apps/core/data/hive/economy_repo.dart';
-import 'package:app_with_apps/core/data/hive/task_repo.dart';
-import 'package:app_with_apps/core/localization/app_localization.dart';
+import 'package:app_with_apps/interface/localization/app_localization.dart';
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/core/manager/get.it/app_provider.dart';
-import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
-import 'package:app_with_apps/core/manager/provider/ordinaryProvider.dart';
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
 import 'package:app_with_apps/core/service/notification_service.dart';
-import 'package:app_with_apps/core/utils/constants/constants_uikit.dart';
+import 'package:app_with_apps/interface/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/interface/routes/app_routes.dart';
+import 'package:app_with_apps/service/stat/stat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:tasks/tasks.dart';
+import 'package:economy/economy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,15 +22,7 @@ Future<void> main() async {
   await Hive.initFlutter();
 
   GetIt.I.registerSingleton<AppProvider>(AppProvider());
-  GetIt.I.registerSingleton<StatProvider>(StatProvider());
-
-  GetIt.I.registerSingletonAsync<TaskRepo>(
-    () async {
-      final hivePacks = TaskRepo();
-      await hivePacks.init();
-      return hivePacks;
-    },
-  );
+  GetIt.I.registerSingleton<StatService>(StatService());
 
   GetIt.I.registerSingletonAsync<EconomyRepo>(
     () async {
@@ -41,6 +32,13 @@ Future<void> main() async {
     },
   );
 
+  GetIt.I.registerSingletonAsync<TaskRepo>(
+    () async {
+      final hivePacks = TaskRepo();
+      await hivePacks.init();
+      return hivePacks;
+    },
+  );
   await GetIt.I.allReady();
 
   runApp(
@@ -49,14 +47,7 @@ Future<void> main() async {
         BlocProvider<EconomyBloc>(create: (context) => EconomyBloc()),
         BlocProvider<TasksBloc>(create: (context) => TasksBloc()),
       ],
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => OrdinaryProvider(),
-          ),
-        ],
-        child: const MyApp(),
-      ),
+      child: const MyApp(),
     ),
   );
 }
@@ -66,7 +57,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetIt.I.get<StatProvider>().initStat();
+    GetIt.I.get<StatService>().initStat();
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

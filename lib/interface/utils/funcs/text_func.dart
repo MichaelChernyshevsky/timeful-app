@@ -1,5 +1,5 @@
-import 'package:app_with_apps/core/utils/constants/constants_uikit.dart';
-import 'package:app_with_apps/core/utils/enum/text_enum.dart';
+import 'package:app_with_apps/interface/utils/constants/constants_uikit.dart';
+import 'package:app_with_apps/interface/utils/enum/text_enum.dart';
 
 class UtilsFuns {
   static double getFontSize({required TextEnum style}) {

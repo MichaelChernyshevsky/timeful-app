@@ -1,7 +1,6 @@
 // ignore_for_file: eol_at_end_of_file, lines_longer_than_80_chars
 
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
-import 'package:app_with_apps/core/models/class/sort_parametrs_class.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/widget/widgets.dart';
 import 'package:app_with_apps/interface/screens/common/pages/economy/create/create_spending_screen.dart';
@@ -16,10 +15,8 @@ class EconomyPage extends StatefulWidget {
 }
 
 class _EconomyPageState extends State<EconomyPage> {
-  final List<SortParametrs> sortParametrs = GetIt.I.get<AppProvider>().sortParametrs;
-
   Enum pageState = EconomySortState.all;
-  List<EconomyElement> elements = [];
+  List<EconomyModel> elements = [];
   bool loading = true;
   EconomyBloc? bloc;
 
@@ -58,7 +55,7 @@ class _EconomyPageState extends State<EconomyPage> {
 
   void onError() => debugPrint(AppLocalizations.current.errorLoading);
 
-  void setElements(List<EconomyElement> elementsBloc) => setState(() {
+  void setElements(List<EconomyModel> elementsBloc) => setState(() {
         elements = elementsBloc;
         loading = false;
       });

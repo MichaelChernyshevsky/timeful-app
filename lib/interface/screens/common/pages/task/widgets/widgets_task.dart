@@ -1,5 +1,4 @@
-import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
-import 'package:app_with_apps/core/models/class/task_class.dart';
+import 'package:app_with_apps/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/screens/edit_todo_screen.dart';
 
@@ -9,7 +8,7 @@ class TaskWidget extends StatefulWidget {
     required this.element,
   });
 
-  TaskElement element;
+  TaskModel element;
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -21,17 +20,17 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   void initState() {
     color = widget.element.isDone ? UTILSConstants.done : UTILSConstants.undone;
-    GetIt.I.get<StatProvider>().setTask(isDone: widget.element.isDone, withMinus: false);
+    GetIt.I.get<StatService>().setTask(isDone: widget.element.isDone, withMinus: false);
     super.initState();
   }
 
   void changeState({required id, required isDone}) => setState(() {
         if (isDone) {
-          GetIt.I.get<StatProvider>().setTaskUndone(id: id);
+          GetIt.I.get<StatService>().setTaskUndone(id: id);
           color = UTILSConstants.undone;
           widget.element.isDone = false;
         } else {
-          GetIt.I.get<StatProvider>().setTaskDone(id: id);
+          GetIt.I.get<StatService>().setTaskDone(id: id);
           color = UTILSConstants.done;
           widget.element.isDone = true;
         }

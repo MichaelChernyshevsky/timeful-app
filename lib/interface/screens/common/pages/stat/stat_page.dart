@@ -1,4 +1,4 @@
-import 'package:app_with_apps/core/manager/get.it/stat_provider.dart';
+import 'package:app_with_apps/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/stats/money.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/stats/tasks.dart';
@@ -14,7 +14,7 @@ class StatPage extends StatefulWidget {
 }
 
 class _StatPageState extends State<StatPage> {
-  final statProvider = GetIt.I.get<StatProvider>();
+  final statProvider = GetIt.I.get<StatService>();
 
   @override
   Widget build(BuildContext context) {

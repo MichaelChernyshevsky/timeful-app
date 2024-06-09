@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 part 'task_class.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class TaskModel {
   @HiveField(0)
   String id;

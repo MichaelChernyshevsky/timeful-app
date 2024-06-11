@@ -12,6 +12,18 @@ enum TimerState {
   relax,
 }
 
+class TimerModel {
+  final String title;
+  final int timeRelax;
+  final int timeWork;
+
+  TimerModel({
+    required this.title,
+    required this.timeRelax,
+    required this.timeWork,
+  });
+}
+
 class TimerRepo extends ChangeNotifier {
   late Box<TimerStat> boxStat;
 
@@ -73,6 +85,9 @@ class TimerRepo extends ChangeNotifier {
   TimerStat get stat => boxStat.values.first;
   History get history => boxStat.values.first.history;
 
+  ////////
+  StreamController<TimerModel> timeModel = StreamController<TimerModel>.broadcast();
+
   void addTimeWork(int time) {
     final newStat = boxStat.values.first.edit(work: time, relax: 0, history: null);
     boxStat.deleteAt(0);
@@ -97,28 +112,26 @@ class TimerRepo extends ChangeNotifier {
     await initializeStat();
   }
 
-  ////////
-  final int _timeWork = 1 * 60;
-  final int _timeRelax = 1 * 60;
+  int tw = 1 * 60;
+  int tr = 1 * 60;
   int timeWork = 0;
   int timeRelax = 0;
   TimerState timerState = TimerState.stop;
   bool isFirst = true;
   Timer? timer;
-  String time = 'Stop';
 
-  void startTimer({required int work, required int relax}) {
-    timeWork = _timeWork;
-    timeRelax = _timeRelax;
-    changeHistory(work: _timeWork, relax: _timeRelax);
+  void startTimer() {
+    timeWork = tw;
+    timeRelax = tr;
+    changeHistory(work: tw, relax: tr);
     timerState = TimerState.work;
     timerHandler();
-    notifyListeners();
   }
 
   void get stop {
     timerState = TimerState.stop;
-    time = 'stop';
+    timeModel.add(TimerModel(title: 'stop', timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
+
     timer?.cancel();
   }
 
@@ -134,16 +147,40 @@ class TimerRepo extends ChangeNotifier {
     }
   }
 
+  void change({required isWork, required isIncrease}) {
+    if (isWork) {
+      if (isIncrease) {
+        tw += 60;
+      } else {
+        if (tw > 0) {
+          tw -= 60;
+        }
+      }
+    } else {
+      if (isIncrease) {
+        tr += 60;
+      } else {
+        if (tr > 0) {
+          tr -= 60;
+        }
+      }
+    }
+    timeModel.add(TimerModel(title: 'stop', timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
+  }
+
   Timer workTimer() => Timer.periodic(const Duration(seconds: 1), (_) {
         if (timeWork > 0) {
           timeWork -= 1;
-          time = getNumber(timeWork);
+
+          // time = Stream.value(getNumber(timeWork));
+          timeModel.add(TimerModel(title: getNumber(timeWork), timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
         } else {
-          timeWork = _timeWork;
+          timeWork = tw;
           timerState = TimerState.relax;
-          addTimeWork(_timeWork ~/ 60);
+          addTimeWork(tw ~/ 60);
           timerHandler();
         }
+        notifyListeners();
       });
 
   Timer relaxTimer() => Timer.periodic(
@@ -151,13 +188,32 @@ class TimerRepo extends ChangeNotifier {
         (_) {
           if (timeRelax > 0) {
             timeRelax -= 1;
-            time = getNumber(timeRelax);
+            // time = Stream.value(getNumber(timeRelax));
+            timeModel.add(TimerModel(title: getNumber(timeRelax), timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
           } else {
-            timeRelax = _timeRelax;
+            timeRelax = tr;
             timerState = TimerState.work;
-            addTimeRelax(_timeRelax ~/ 60);
+            addTimeRelax(tr ~/ 60);
             timerHandler();
           }
+          notifyListeners();
         },
       );
+
+  void setTimerForm(int index) {
+    tw = 0;
+    tr = 0;
+
+    if (index == 1) {
+      tw = 30 * 60;
+      tr = 10 * 60;
+    } else if (index == 2) {
+      tw += 20 * 60;
+      tr = 5 * 60;
+    } else {
+      tw += 10 * 60;
+      tr = 2 * 60;
+    }
+    timeModel.add(TimerModel(title: 'stop', timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
+  }
 }

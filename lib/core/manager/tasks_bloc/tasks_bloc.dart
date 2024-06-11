@@ -48,7 +48,6 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     await GetIt.I.get<TaskRepo>().add(task: event.task);
-
     emit(BlocSuccess());
 
     // await _repo.add(task: event.task);
@@ -61,17 +60,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     GetTasksEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    final tasks = GetIt.I.get<TaskRepo>().get();
-
-    final listId = GetIt.I.get<StatService>().getTasksDone();
-    for (var i = 0; i <= tasks.length - 1; i++) {
-      for (final id in listId) {
-        if (tasks[i].id == id) {
-          tasks[i].isDone = true;
-        }
-      }
-    }
-    emit(GetTasksSuccess(tasks));
+    emit(GetTasksSuccess(GetIt.I.get<TaskRepo>().get()));
   }
 
   Future<void> _wipeData(

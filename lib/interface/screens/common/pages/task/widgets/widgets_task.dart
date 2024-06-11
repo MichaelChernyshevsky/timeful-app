@@ -20,23 +20,21 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   void initState() {
     color = widget.element.isDone ? UTILSConstants.done : UTILSConstants.undone;
-    GetIt.I.get<StatService>().setTask(isDone: widget.element.isDone, withMinus: false);
     super.initState();
   }
 
-  void changeState({required id, required isDone}) => setState(() {
+  void changeState({required String id, required bool isDone}) => setState(() {
+        GetIt.I.get<StatService>().tasks.changeStateElement(id);
         if (isDone) {
-          GetIt.I.get<StatService>().setTaskUndone(id: id);
           color = UTILSConstants.undone;
           widget.element.isDone = false;
         } else {
-          GetIt.I.get<StatService>().setTaskDone(id: id);
           color = UTILSConstants.done;
           widget.element.isDone = true;
         }
       });
 
-  void goToElement(context) => Navigator.push(
+  void goToElement() => Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => EditToDoScreen(

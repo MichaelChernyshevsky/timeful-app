@@ -13,7 +13,6 @@ class TaskModel {
   int countOnDay;
   @HiveField(3)
   int count;
-
   @HiveField(4)
   bool isDone;
 

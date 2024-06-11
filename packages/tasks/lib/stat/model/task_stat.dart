@@ -28,10 +28,10 @@ class TaskStat {
         doneList: [],
       );
 
-  factory TaskStat.empty() => TaskStat(
+  factory TaskStat.empty(date) => TaskStat(
         done: 0,
         undone: 0,
-        date: '',
+        date: date,
         doneList: [],
       );
 }

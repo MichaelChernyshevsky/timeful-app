@@ -102,8 +102,6 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       title: contorllerTitle.text,
       count: count,
       id: getUUID(),
-      // icon: icon,
-      // color: color,
       isDone: false,
       countOnDay: countOnDay,
     );

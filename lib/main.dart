@@ -11,9 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:tasks/tasks.dart';
 import 'package:economy/economy.dart';
+import 'package:timer/repo.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +21,7 @@ Future<void> main() async {
 
   await Hive.initFlutter();
 
-  GetIt.I.registerSingleton<AppProvider>(AppProvider());
+  GetIt.I.registerSingleton<AppStat>(AppStat());
   GetIt.I.registerSingleton<StatService>(StatService());
 
   GetIt.I.registerSingletonAsync<EconomyRepo>(
@@ -35,6 +35,14 @@ Future<void> main() async {
   GetIt.I.registerSingletonAsync<TaskRepo>(
     () async {
       final hivePacks = TaskRepo();
+      await hivePacks.init();
+      return hivePacks;
+    },
+  );
+
+  GetIt.I.registerSingletonAsync<TimerRepo>(
+    () async {
+      final hivePacks = TimerRepo();
       await hivePacks.init();
       return hivePacks;
     },
@@ -57,7 +65,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetIt.I.get<StatService>().initStat();
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

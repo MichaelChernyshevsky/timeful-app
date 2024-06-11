@@ -51,7 +51,7 @@ class TasksStat extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(left: w * 0.03),
                             child: Text(
-                              '${statProvider.getTask(isDone: true)} tasks done',
+                              '${statProvider.tasks.done} tasks done',
                               style: TextStyle(fontSize: h * 0.036),
                             ),
                           ),

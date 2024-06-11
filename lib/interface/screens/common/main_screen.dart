@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          GetIt.I.get<AppProvider>().pages[_selectedIndex],
+          GetIt.I.get<AppStat>().pages[_selectedIndex],
         ],
       ),
       bottomNavigationBar: Container(

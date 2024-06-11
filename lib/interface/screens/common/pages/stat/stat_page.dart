@@ -28,56 +28,6 @@ class _StatPageState extends State<StatPage> {
           MoneyStat(statProvider: statProvider),
           TimeStat(statProvider: statProvider),
           TasksStat(statProvider: statProvider),
-
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     Column(
-          //       children: [
-          //         CustomText(
-          //           text: AppLocalizations.current.income,
-          //         ),
-          //         CustomText(
-          //           text: AppLocalizations.current.money,
-          //         ),
-          //         CustomText(
-          //           text: AppLocalizations.current.minutesInWork,
-          //         ),
-          //         CustomText(
-          //           text: AppLocalizations.current.minutesInRelax,
-          //         ),
-          //         CustomText(
-          //           text: AppLocalizations.current.taskDone,
-          //         ),
-          //         // CustomText(
-          //         //   text: AppLocalizations.current.taskUnDone,
-          //         // ),
-          //       ],
-          //     ),
-          //     Column(
-          //       children: [
-          //         CustomText(
-          //           text: statProvider.getIncome().toString(),
-          //         ),
-          //         CustomText(
-          //           text: statProvider.getSpending().toString(),
-          //         ),
-          //         CustomText(
-          //           text: statProvider.getMinutesInWork().toString(),
-          //         ),
-          //         CustomText(
-          //           text: statProvider.getMinuteInRelax().toString(),
-          //         ),
-          //         CustomText(
-          //           text: statProvider.getTask(isDone: true).toString(),
-          //         ),
-          //         // CustomText(
-          //         //   text: statProvider.getTask(isDone: false).toString(),
-          //         // ),
-          //       ],
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );

@@ -51,7 +51,7 @@ class TimeStat extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${statProvider.timer.getMinutesInWork()} min',
+                          statProvider.timer.work,
                           style: TextStyle(fontSize: h * 0.03),
                         ),
                       ],
@@ -76,7 +76,7 @@ class TimeStat extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${statProvider.timer.getMinutesInRelax()} min',
+                          statProvider.timer.relax,
                           style: TextStyle(fontSize: h * 0.03),
                         ),
                       ],

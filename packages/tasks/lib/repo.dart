@@ -24,7 +24,7 @@ class TaskRepo {
     boxTasksStat = await Hive.openBox<TaskStat>(_boxTasksStat);
 
     if (boxTasksStat.values.toList().isEmpty) {
-      boxTasksStat.add(TaskStat.empty());
+      boxTasksStat.add(TaskStat.empty(date));
     }
   }
 

@@ -38,6 +38,8 @@ dev_dependencies:
     path: './packages/tasks'
   economy:
     path: './packages/economy'
+  timer:
+    path: './packages/timer'
 
 flutter:
   assets:

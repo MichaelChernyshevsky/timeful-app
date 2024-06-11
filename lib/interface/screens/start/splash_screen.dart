@@ -9,7 +9,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void _goToNext() {
-    if (GetIt.I.get<AppProvider>().loggined) {
+    if (GetIt.I.get<AppStat>().loggined) {
       Navigator.of(context).popAndPushNamed(AppRoutes.apps);
     } else {
       Navigator.of(context).popAndPushNamed(AppRoutes.signInScreen);

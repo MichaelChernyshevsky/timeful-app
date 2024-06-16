@@ -29,8 +29,8 @@ class TimerRepo extends ChangeNotifier {
   static const String _boxTimerStat = 'boxTimerStat';
   StreamController<TimerModel> timeModel = StreamController<TimerModel>.broadcast();
 
-  int tw = 1 * 60;
-  int tr = 1 * 60;
+  int tw = 0 * 60;
+  int tr = 0 * 60;
   int timeWork = 0;
   int timeRelax = 0;
   TimerState timerState = TimerState.stop;
@@ -114,25 +114,27 @@ class TimerRepo extends ChangeNotifier {
     await initializeStat();
   }
 
-  void change({required isWork, required isIncrease}) {
+  void change({required isWork, required isIncrease, required work, required relax}) {
+    work = int.parse(work) * 60;
+    relax = int.parse(relax) * 60;
     if (isWork) {
       if (isIncrease) {
-        tw += 60;
+        work += 60;
       } else {
-        if (tw > 0) {
-          tw -= 60;
+        if (work > 0) {
+          work -= 60;
         }
       }
     } else {
       if (isIncrease) {
-        tr += 60;
+        relax += 60;
       } else {
-        if (tr > 0) {
-          tr -= 60;
+        if (relax > 0) {
+          relax -= 60;
         }
       }
     }
-    timeModel.add(TimerModel(title: 'stop', timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
+    timeModel.add(TimerModel(title: 'stop', timeRelax: (relax / 60).round(), timeWork: (work / 60).round()));
   }
 
   void setTimerForm(int index) {

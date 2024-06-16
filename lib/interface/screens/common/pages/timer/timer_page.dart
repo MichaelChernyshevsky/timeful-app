@@ -49,32 +49,30 @@ class _TimerPageState extends State<TimerPage> {
                     // work
                     Padding(
                       padding: EdgeInsets.only(top: h * 0.06),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          RoundedButton(
-                            isPlus: false,
-                            size: h * 0.08,
-                            color: Colors.purple,
-                            tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: false, isWork: true),
-                          ),
-                          StreamBuilder<TimerModel>(
-                            stream: GetIt.I.get<TimerRepo>().timeModel.stream,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return CustomText(text: snapshot.data!.timeWork.toString());
-                              } else {
-                                return CustomText(text: (GetIt.I.get<TimerRepo>().history.work / 60).round().toString());
-                              }
-                            },
-                          ),
-                          RoundedButton(
-                            color: Colors.purple,
-                            isPlus: true,
-                            size: h * 0.08,
-                            tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: true, isWork: true),
-                          ),
-                        ],
+                      child: StreamBuilder<TimerModel>(
+                        stream: GetIt.I.get<TimerRepo>().timeModel.stream,
+                        builder: (context, snapshot) {
+                          final relax = snapshot.hasData ? snapshot.data!.timeRelax.toString() : (GetIt.I.get<TimerRepo>().history.relax / 60).round().toString();
+                          final work = snapshot.hasData ? snapshot.data!.timeWork.toString() : (GetIt.I.get<TimerRepo>().history.work / 60).round().toString();
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              RoundedButton(
+                                isPlus: false,
+                                size: h * 0.08,
+                                color: Colors.purple,
+                                tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: false, isWork: true, work: work, relax: relax),
+                              ),
+                              CustomText(text: work),
+                              RoundedButton(
+                                color: Colors.purple,
+                                isPlus: true,
+                                size: h * 0.08,
+                                tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: true, isWork: true, work: work, relax: relax),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -89,33 +87,31 @@ class _TimerPageState extends State<TimerPage> {
                     // work
                     Padding(
                       padding: EdgeInsets.only(top: h * 0.06),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          RoundedButton(
-                            color: Colors.purple,
-                            isPlus: false,
-                            size: h * 0.08,
-                            tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: false, isWork: false),
-                          ),
-                          StreamBuilder<TimerModel>(
-                            stream: GetIt.I.get<TimerRepo>().timeModel.stream,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return CustomText(text: snapshot.data!.timeRelax.toString());
-                              } else {
-                                return CustomText(text: (GetIt.I.get<TimerRepo>().history.relax / 60).round().toString());
-                              }
-                            },
-                          ),
-                          // CustomText(text: (GetIt.I.get<TimerRepo>().tr / 60).toString()),
-                          RoundedButton(
-                            color: Colors.purple,
-                            isPlus: true,
-                            size: h * 0.08,
-                            tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: true, isWork: false),
-                          ),
-                        ],
+                      child: StreamBuilder<TimerModel>(
+                        stream: GetIt.I.get<TimerRepo>().timeModel.stream,
+                        builder: (context, snapshot) {
+                          final relax = snapshot.hasData ? snapshot.data!.timeRelax.toString() : (GetIt.I.get<TimerRepo>().history.relax / 60).round().toString();
+                          final work = snapshot.hasData ? snapshot.data!.timeWork.toString() : (GetIt.I.get<TimerRepo>().history.work / 60).round().toString();
+
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              RoundedButton(
+                                color: Colors.purple,
+                                isPlus: false,
+                                size: h * 0.08,
+                                tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: false, isWork: false, work: work, relax: relax),
+                              ),
+                              CustomText(text: relax),
+                              RoundedButton(
+                                color: Colors.purple,
+                                isPlus: true,
+                                size: h * 0.08,
+                                tap: () => GetIt.I.get<TimerRepo>().change(isIncrease: true, isWork: false, work: work, relax: relax),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ],

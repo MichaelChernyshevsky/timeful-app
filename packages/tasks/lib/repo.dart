@@ -30,6 +30,8 @@ class TaskRepo {
 
   String get date => DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString().split(' ')[0];
 
+  void wipeTasks() => boxTasks.deleteAll(boxTasks.keys);
+
   void validTasks() {
     bool checkDate({required String str}) {
       return date == str.split('*****date*****')[0];
@@ -38,11 +40,9 @@ class TaskRepo {
     int done = 0;
     int undone = 0;
 
-    if (checkDate(str: boxTasksStat.values.first.date)) {
+    if (!checkDate(str: boxTasksStat.values.first.date)) {
       final tasks = get();
-      for (int index = 0; index < boxTasks.values.length; index++) {
-        boxTasks.deleteAt(index);
-      }
+      wipeTasks();
 
       for (var index = 0; index < tasks.length; index += 1) {
         tasks[index].isDone ? done += 1 : undone += 1;
@@ -60,7 +60,8 @@ class TaskRepo {
 
   void changeDoneState(String id) {
     final tasks = get();
-    boxTasks.deleteAt(0);
+    wipeTasks();
+
     for (var index = 0; index < tasks.length; index += 1) {
       if (tasks[index].id == id) {
         tasks[index].isDone = !tasks[index].isDone;

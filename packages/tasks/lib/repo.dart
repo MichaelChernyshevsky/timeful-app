@@ -37,14 +37,19 @@ class TaskRepo {
 
     int done = 0;
     int undone = 0;
-    if (!checkDate(str: boxTasksStat.values.first.date)) {
+
+    if (checkDate(str: boxTasksStat.values.first.date)) {
       final tasks = get();
-      boxTasks.deleteAt(0);
+      for (int index = 0; index < boxTasks.values.length; index++) {
+        boxTasks.deleteAt(index);
+      }
+
       for (var index = 0; index < tasks.length; index += 1) {
         tasks[index].isDone ? done += 1 : undone += 1;
         tasks[index].isDone = false;
         boxTasks.add(tasks[index]);
       }
+
       final newStatModel = boxTasksStat.values.first.wipeHistory(date: date, done: done, undone: undone);
       boxTasksStat.deleteAt(0);
       boxTasksStat.add(newStatModel);

@@ -47,7 +47,7 @@ Future<void> main() async {
       return hivePacks;
     },
   );
-  await GetIt.I.allReady();
+  // await GetIt.I.allReady();
 
   runApp(
     MultiBlocProvider(

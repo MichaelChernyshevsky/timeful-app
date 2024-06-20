@@ -1,19 +1,62 @@
 import 'package:helpers/common/templates/repository.dart';
-import 'package:helpers/parts/auth/models/auth_service.dart';
+import 'package:helpers/parts/user/interface/packages.dart';
+import 'package:helpers/parts/user/interface/user.dart';
+
 import 'package:helpers/parts/user/models/user.dart';
 
-class UserRepository extends Repository {
-  UserRepository({required super.httpService, required this.authService});
+class UserRepository extends Repository implements UserInterface, PackagesInterface {
+  UserRepository({required super.httpService});
 
-  final AuthService authService;
-
-  bool get loggined => authService.userId != 0;
-
-  int get userId => authService.userId;
-
-  Future<UserModel> getUserInfo() async {
-    // final resp = await httpService.get(userInfo());
-    // return UserModel.fromJson(resp.data);
-    return UserModel();
+  @override
+  void addPackage() {
+    // TODO: implement addPackage
   }
+
+  @override
+  void deletePackages() {
+    // TODO: implement deletePackages
+  }
+
+  @override
+  void deleteUser() {
+    // TODO: implement deleteUser
+  }
+
+  @override
+  void editUser() {
+    // TODO: implement editUser
+  }
+
+  @override
+  void getPackages() {
+    // TODO: implement getPackages
+  }
+
+  @override
+  void getUser() {
+    // TODO: implement getUser
+  }
+
+  @override
+  void signIn() {
+    // TODO: implement signIn
+  }
+
+  @override
+  void signOut() {
+    // TODO: implement signOut
+  }
+
+  @override
+  void signUp() {
+    // TODO: implement signUp
+  }
+
+  @override
+  // TODO: implement loggined
+  bool get loggined => throw UnimplementedError();
+
+  @override
+  // TODO: implement userId
+  int get userId => throw UnimplementedError();
 }

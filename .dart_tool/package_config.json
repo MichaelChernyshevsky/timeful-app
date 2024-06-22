@@ -146,12 +146,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "economy",
-      "rootUri": "../packages/economy",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
       "name": "equatable",
       "rootUri": "file:///Users/mihailcernysevskii/.pub-cache/hosted/pub.dev/equatable-2.0.5",
       "packageUri": "lib/",
@@ -294,12 +288,6 @@
       "rootUri": "file:///Users/mihailcernysevskii/.pub-cache/hosted/pub.dev/hive_generator-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "http",
-      "rootUri": "file:///Users/mihailcernysevskii/.pub-cache/hosted/pub.dev/http-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
     },
     {
       "name": "http_multi_server",
@@ -602,12 +590,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "tasks",
-      "rootUri": "../packages/tasks",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
       "name": "term_glyph",
       "rootUri": "file:///Users/mihailcernysevskii/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -618,12 +600,6 @@
       "rootUri": "file:///Users/mihailcernysevskii/.pub-cache/hosted/pub.dev/test_api-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
-    },
-    {
-      "name": "timer",
-      "rootUri": "../packages/timer",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
     },
     {
       "name": "timezone",
@@ -722,7 +698,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-06-17T10:40:44.057156Z",
+  "generated": "2024-06-22T11:02:18.566885Z",
   "generator": "pub",
   "generatorVersion": "3.4.3",
   "flutterRoot": "file:///Users/mihailcernysevskii/Development/flutter",

@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:helpers/common/templates/api.dart';
-import 'package:helpers/parts/api/interseptors/interseptors.dart';
-import 'package:helpers/parts/api/models/base_response.dart';
-import 'package:helpers/parts/api/models/http_exception.dart';
-import 'package:helpers/parts/api/models/http_service.dart';
+import 'package:helpers/common/api.dart';
+import 'package:helpers/common/repository.dart';
+import 'package:helpers/api/interseptors/interseptors.dart';
+import 'package:helpers/api/models/http_exception.dart';
 
 class DioHttpService implements HttpService {
   /// Creates new instance of [DioHttpService]

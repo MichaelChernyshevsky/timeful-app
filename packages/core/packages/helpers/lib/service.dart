@@ -1,3 +1,1 @@
-class HelpersService {
-  void initialize() {}
-}
+class HelpersService {}

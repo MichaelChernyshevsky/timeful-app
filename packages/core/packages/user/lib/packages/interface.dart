@@ -1,4 +1,4 @@
-import 'package:helpers/parts/packages/model.dart';
+import 'model.dart';
 
 abstract class PackagesInterface {
   void getPackages({required String userId}) {}

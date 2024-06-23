@@ -1,24 +1,29 @@
 // ignore_for_file: depend_on_referenced_packages
-
-import 'package:helpers/parts/api/service.dart';
-import 'package:helpers/parts/packages/model.dart';
-import 'package:helpers/parts/packages/repo.dart';
-import 'package:helpers/parts/user/repo.dart';
-import 'package:helpers/parts/api/models/base_response.dart';
-import 'package:helpers/parts/user/model.dart';
+import 'package:helpers/api/service.dart';
+import 'package:user/packages/model.dart';
+import 'package:user/packages/repo.dart';
+import 'package:user/user/repo.dart';
+import 'package:economy/repo.dart';
+import 'package:economy/model.dart';
+import 'package:timer/repo.dart';
+import 'package:timer/model.dart';
 
 class CoreService {
   late UserRepository userRepo;
   late PackagesRepository packageRepo;
+  late EconomyRepository economyRepo;
+  late TimerRepository timerRepo;
 
   void initialize() {
     final httpService = DioHttpService(baseUrl: 'http://127.0.0.1:5000');
     userRepo = UserRepository(httpService: httpService);
     packageRepo = PackagesRepository(httpService: httpService);
+    economyRepo = EconomyRepository(httpService: httpService);
+    timerRepo = TimerRepository(httpService: httpService);
   }
 
   // User
-  Future<bool> editUser({
+  Future<bool> userEdit({
     String? name,
     String? name2,
     String? sex,
@@ -34,9 +39,9 @@ class CoreService {
         age: age,
       );
 
-  Future<UserModel?> get user async => userRepo.user;
+  Future get user async => userRepo.user;
 
-  Future<BaseResponse> signIn({
+  Future signIn({
     required String email,
     required String password,
   }) async =>
@@ -47,7 +52,7 @@ class CoreService {
 
   void signOut() => userRepo.signOut();
 
-  void deleteUser() => userRepo.deleteUser();
+  void userDelete() => userRepo.deleteUser();
 
   void signUp({required String email, required String password}) => userRepo.signUp(email: email, password: password);
 
@@ -56,9 +61,53 @@ class CoreService {
   String get userId => userRepo.userId;
 
   // Package
-  Future<bool> changePackage({required PackageType type}) async => packageRepo.changePackage(type: type, userId: userRepo.userId);
+  Future<bool> packageChange({required PackageType type}) async => packageRepo.changePackage(type: type, userId: userRepo.userId);
 
-  Future<Packages> getPackages() async => packageRepo.getPackages(userId: userRepo.userId);
+  Future<Packages> packageGet() async => packageRepo.getPackages(userId: userRepo.userId);
 
-  Future<PackagesInfo> infoPackages() async => packageRepo.infoPackages();
+  Future<PackagesInfo> packageInfo() async => packageRepo.infoPackages();
+
+  // Economy
+  Future<bool> economyAdd({
+    required String title,
+    required String description,
+    required int count,
+    required int date,
+    required int income,
+  }) =>
+      economyRepo.add(
+        title: title,
+        description: description,
+        count: count,
+        date: date,
+        income: income,
+        userId: userId,
+      );
+
+  Future<bool> economyDelete({required String id}) => economyRepo.delete(id: id);
+
+  Future<EconomyModels> economyGet() => economyRepo.get(userId: userId);
+
+  // Timer
+  Future<bool> timerEditHistory({
+    required String work,
+    required String relax,
+  }) =>
+      timerRepo.editHistory(
+        userId: userId,
+        work: work,
+        relax: relax,
+      );
+
+  Future<bool> timerEditStat({
+    required String timeWork,
+    required String timeRelax,
+  }) =>
+      timerRepo.editStat(
+        userId: userId,
+        timeWork: timeWork,
+        timeRelax: timeRelax,
+      );
+
+  Future<TimerModel1> timerGet() => timerRepo.get(userId: userId);
 }

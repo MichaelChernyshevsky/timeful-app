@@ -1,10 +1,7 @@
-import 'package:helpers/common/templates/repository.dart';
-import 'package:helpers/parts/api/models/base_response.dart';
-import 'package:helpers/parts/api/state.dart';
-import 'package:helpers/parts/packages/interface.dart';
-import 'package:helpers/parts/packages/model.dart';
-import 'package:helpers/parts/packages/uri.dart';
-import 'package:helpers/parts/user/repo.dart';
+import 'interface.dart';
+import 'model.dart';
+import 'uri.dart';
+import 'package:helpers/common/repository.dart';
 
 class PackagesRepository extends Repository implements PackagesInterface {
   PackagesRepository({required super.httpService});

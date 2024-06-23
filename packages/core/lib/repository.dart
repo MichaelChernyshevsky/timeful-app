@@ -1,4 +1,8 @@
-import 'package:helpers/parts/api/models/base_response.dart';
+abstract class Repository {
+  Repository({required this.httpService});
+
+  final HttpService httpService;
+}
 
 abstract class HttpService {
   Future<BaseResponse> get(
@@ -25,3 +29,15 @@ abstract class HttpService {
     Object? data,
   });
 }
+
+class BaseResponse {
+  final Map<String, dynamic> data;
+  final String message;
+
+  factory BaseResponse.fromJson(Map<String, Object?> json) => BaseResponse(data: json['data'] as Map<String, dynamic>, message: json['message'].toString());
+
+  BaseResponse({required this.data, required this.message});
+}
+
+String get MESSAGE_SUCCESS => 'success';
+String get MESSAGE_UNSUCCESS => 'unsuccess';

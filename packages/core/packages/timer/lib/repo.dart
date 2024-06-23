@@ -3,8 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:timer/func.dart';
+import 'package:timer/interface.dart';
+import 'package:timer/model.dart';
 import 'package:timer/stat/history.dart';
 import 'package:timer/stat/timer_stat.dart';
+import 'package:helpers/common/repository.dart';
+import 'package:helpers/tools/internet.dart';
+
+import 'package:timer/uri.dart';
 
 enum TimerState {
   work,
@@ -24,7 +30,20 @@ class TimerModel {
   });
 }
 
-class TimerRepo extends ChangeNotifier {
+Map<String, dynamic> isolateEmpty = {
+  "editHistory": {"work": 0, "relax": 0},
+  "editStat": {
+    "timeWork": 0,
+    "timeRelax": 0,
+  }
+};
+
+class TimerRepository extends ChangeNotifier implements Repository, TimerInterface {
+  TimerRepository({required this.httpService});
+
+  @override
+  final HttpService httpService;
+
   late Box<TimerStat> boxStat;
   static const String _boxTimerStat = 'boxTimerStat';
   StreamController<TimerModel> timeModel = StreamController<TimerModel>.broadcast();
@@ -35,6 +54,13 @@ class TimerRepo extends ChangeNotifier {
   int timeRelax = 0;
   TimerState timerState = TimerState.stop;
   Timer? timer;
+  Map<String, dynamic> isolate = {
+    "editHistory": {"work": 0, "relax": 0},
+    "editStat": {
+      "timeWork": 0,
+      "timeRelax": 0,
+    }
+  };
 
   Future init() async {
     Hive.registerAdapter(TimerStatAdapter());
@@ -42,6 +68,8 @@ class TimerRepo extends ChangeNotifier {
     await initializeStat();
     boxStat = await Hive.openBox<TimerStat>(_boxTimerStat);
   }
+
+  void refresh() {}
 
   Future initializeStat() async {
     boxStat = await Hive.openBox<TimerStat>(_boxTimerStat);
@@ -90,24 +118,6 @@ class TimerRepo extends ChangeNotifier {
     }
   }
 
-  void _addTimeWork(int time) {
-    final newStat = boxStat.values.first.edit(work: time, relax: 0, history: null);
-    boxStat.deleteAt(0);
-    boxStat.add(newStat);
-  }
-
-  void _addTimeRelax(int time) {
-    final newStat = boxStat.values.first.edit(work: 0, relax: time, history: null);
-    boxStat.deleteAt(0);
-    boxStat.add(newStat);
-  }
-
-  void _changeHistory({required int work, required int relax}) {
-    final newStat = boxStat.values.first.edit(work: 0, relax: 0, history: History(work: work, relax: relax));
-    boxStat.deleteAt(0);
-    boxStat.add(newStat);
-  }
-
   Future wipe() async {
     await Hive.deleteBoxFromDisk(_boxTimerStat);
     boxStat = await Hive.openBox<TimerStat>(_boxTimerStat);
@@ -154,8 +164,78 @@ class TimerRepo extends ChangeNotifier {
   }
 
   Duration get duration => const Duration(seconds: 1);
+  @override
+  Future<bool> editHistory({required String userId, required String work, required String relax}) async {
+    final BaseResponse resp = await httpService.patch(timerEditHistory, data: {"userId": userId, "work": work, "relax": relax});
+    return resp.message == MESSAGE_SUCCESS;
+  }
 
-  void startTimer() {
+  @override
+  Future<bool> editStat({required String userId, required String timeWork, required String timeRelax}) async {
+    final BaseResponse resp = await httpService.patch(timerEditStat, data: {
+      "userId": userId,
+      "timeWork": timeWork,
+      "timeRelax": timeRelax,
+    });
+    return resp.message == MESSAGE_SUCCESS;
+  }
+
+  @override
+  Future<TimerModel1> get({required String userId}) async {
+    final BaseResponse resp = await httpService.post(timerGet, data: {"userId": userId});
+    return TimerModel1.fromJson(json: resp.data);
+  }
+
+  void action({required bool start}) {
+    Future<void> sendHistory({required String userId, required String work, required String relax}) async {
+      if (await internetConnected) {
+        editHistory(
+          relax: (int.parse(isolate['editHistory']['relax']) + int.parse(relax)).toString(),
+          work: (int.parse(isolate['editHistory']['work']) + int.parse(work)).toString(),
+          userId: userId,
+        );
+        isolate['editHistory'] = isolateEmpty['editHistory'];
+      } else {
+        isolate['editHistory']['work'] += int.parse(work);
+        isolate['editHistory']['relax'] += int.parse(relax);
+      }
+    }
+
+    Future<void> sendStat({required String userId, required String timeWork, required String timeRelax}) async {
+      if (await internetConnected) {
+        editStat(
+          userId: userId,
+          timeWork: (int.parse(isolate['editStat']['timeWork']) + int.parse(timeWork)).toString(),
+          timeRelax: (int.parse(isolate['editStat']['timeRelax']) + int.parse(timeRelax)).toString(),
+        );
+        isolate['editStat'] = isolateEmpty['editStat'];
+      } else {
+        isolate['editStat']['timeWork'] += int.parse(timeWork);
+        isolate['editStat']['timeRelax'] += int.parse(timeRelax);
+      }
+    }
+
+    void addTimeWork(int time) {
+      // sendStat(timeRelax: '', timeWork: time.toString());
+      final newStat = boxStat.values.first.edit(work: time, relax: 0, history: null);
+      boxStat.deleteAt(0);
+      boxStat.add(newStat);
+    }
+
+    void addTimeRelax(int time) {
+      // sendStat(timeRelax: time.toString(), timeWork: '');
+      final newStat = boxStat.values.first.edit(work: 0, relax: time, history: null);
+      boxStat.deleteAt(0);
+      boxStat.add(newStat);
+    }
+
+    void changeHistory({required int work, required int relax}) {
+      // sendHistory(relax: relax.toString(), work: work.toString());
+      final newStat = boxStat.values.first.edit(work: 0, relax: 0, history: History(work: work, relax: relax));
+      boxStat.deleteAt(0);
+      boxStat.add(newStat);
+    }
+
     void timerHandler() {
       Timer workTimer() => Timer.periodic(duration, (_) {
             if (timeWork > 0) {
@@ -164,7 +244,7 @@ class TimerRepo extends ChangeNotifier {
             } else {
               timeWork = tw;
               timerState = TimerState.relax;
-              _addTimeWork(tw ~/ 60);
+              addTimeWork(tw ~/ 60);
               timerHandler();
             }
             notifyListeners();
@@ -178,7 +258,7 @@ class TimerRepo extends ChangeNotifier {
               } else {
                 timeRelax = tr;
                 timerState = TimerState.work;
-                _addTimeRelax(tr ~/ 60);
+                addTimeRelax(tr ~/ 60);
                 timerHandler();
               }
               notifyListeners();
@@ -193,16 +273,16 @@ class TimerRepo extends ChangeNotifier {
       }
     }
 
-    timeWork = tw;
-    timeRelax = tr;
-    _changeHistory(work: tw, relax: tr);
-    timerState = TimerState.work;
-    timerHandler();
-  }
-
-  void stop() {
-    timerState = TimerState.stop;
-    timeModel.add(TimerModel(title: 'stop', timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
-    timer?.cancel();
+    if (start) {
+      timeWork = tw;
+      timeRelax = tr;
+      changeHistory(work: tw, relax: tr);
+      timerState = TimerState.work;
+      timerHandler();
+    } else {
+      timerState = TimerState.stop;
+      timeModel.add(TimerModel(title: 'stop', timeRelax: (tr / 60).round(), timeWork: (tw / 60).round()));
+      timer?.cancel();
+    }
   }
 }

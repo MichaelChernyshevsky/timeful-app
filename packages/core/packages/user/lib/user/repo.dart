@@ -1,10 +1,7 @@
-import 'package:helpers/common/templates/repository.dart';
-import 'package:helpers/helpers.dart';
-import 'package:helpers/parts/api/state.dart';
-import 'package:helpers/parts/user/interface.dart';
-import 'package:helpers/parts/user/uri.dart';
-
-import 'package:helpers/parts/user/model.dart';
+import 'interface.dart';
+import 'uri.dart';
+import 'model.dart';
+import 'package:helpers/common/repository.dart';
 
 class UserRepository extends Repository implements UserInterface {
   UserRepository({required super.httpService});

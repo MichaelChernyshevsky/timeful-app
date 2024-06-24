@@ -1,13 +1,13 @@
 abstract class TimerInterface {
-  void get({required String userId}) {}
+  void getTimerApi({required String userId}) {}
 
-  void editHistory({
+  void editTimerHistoryApi({
     required String userId,
     required String work,
     required String relax,
   }) {}
 
-  void editStat({
+  void editTimerStatApi({
     required String userId,
     required String timeWork,
     required String timeRelax,

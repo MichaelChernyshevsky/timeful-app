@@ -24,6 +24,4 @@ export 'package:app_with_apps/interface/screens/widgets/text.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:get_it/get_it.dart';
-export 'package:tasks/tasks.dart';
-export 'package:economy/economy.dart';
-export 'package:timer/repo.dart';
+export 'package:core/core.dart';

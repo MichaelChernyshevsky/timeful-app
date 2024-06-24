@@ -1,44 +1,50 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_class.dart';
+part of 'model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskModelAdapter extends TypeAdapter<TaskModel> {
+class EconomyModelAdapter extends TypeAdapter<EconomyModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 0;
 
   @override
-  TaskModel read(BinaryReader reader) {
+  EconomyModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TaskModel(
+    return EconomyModel(
       id: fields[0] as String,
       title: fields[1] as String,
-      countOnDay: fields[2] as int,
-      count: fields[3] as int,
-      isDone: fields[4] as bool,
+      count: fields[2] as String,
+      income: fields[5] as bool,
+      description: fields[3] as String?,
+      date: fields[4] as int,
+      userId: fields[6] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, TaskModel obj) {
+  void write(BinaryWriter writer, EconomyModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.countOnDay)
-      ..writeByte(3)
       ..write(obj.count)
+      ..writeByte(3)
+      ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.isDone);
+      ..write(obj.date)
+      ..writeByte(5)
+      ..write(obj.income)
+      ..writeByte(6)
+      ..write(obj.userId);
   }
 
   @override
@@ -47,7 +53,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskModelAdapter &&
+      other is EconomyModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

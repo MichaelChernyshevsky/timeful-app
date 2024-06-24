@@ -1,5 +1,5 @@
 library economy;
 
-export 'repo.dart';
-export 'model.dart';
 export 'stat/model/economy_stat.dart';
+export 'package:economy/repo.dart';
+export 'package:economy/model.dart';

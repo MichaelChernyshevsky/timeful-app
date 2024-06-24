@@ -24,7 +24,7 @@ class AddTaskEvent extends TasksBlocEvent {
   AddTaskEvent({required this.task});
   TaskModel task;
   @override
-  List<Object?> get props => [task];
+  List<TaskModel> get props => [task];
 }
 
 class EditToDoEvent extends TasksBlocEvent {

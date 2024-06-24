@@ -69,7 +69,7 @@ class TimerRepository extends ChangeNotifier implements Repository, TimerInterfa
     boxStat = await Hive.openBox<TimerStat>(_boxTimerStat);
   }
 
-  void refresh() {}
+  void refresh({required String userId}) {}
 
   Future initializeStat() async {
     boxStat = await Hive.openBox<TimerStat>(_boxTimerStat);
@@ -165,13 +165,13 @@ class TimerRepository extends ChangeNotifier implements Repository, TimerInterfa
 
   Duration get duration => const Duration(seconds: 1);
   @override
-  Future<bool> editHistory({required String userId, required String work, required String relax}) async {
+  Future<bool> editTimerHistoryApi({required String userId, required String work, required String relax}) async {
     final BaseResponse resp = await httpService.patch(timerEditHistory, data: {"userId": userId, "work": work, "relax": relax});
     return resp.message == MESSAGE_SUCCESS;
   }
 
   @override
-  Future<bool> editStat({required String userId, required String timeWork, required String timeRelax}) async {
+  Future<bool> editTimerStatApi({required String userId, required String timeWork, required String timeRelax}) async {
     final BaseResponse resp = await httpService.patch(timerEditStat, data: {
       "userId": userId,
       "timeWork": timeWork,
@@ -181,15 +181,15 @@ class TimerRepository extends ChangeNotifier implements Repository, TimerInterfa
   }
 
   @override
-  Future<TimerModel1> get({required String userId}) async {
+  Future<TimerModel1> getTimerApi({required String userId}) async {
     final BaseResponse resp = await httpService.post(timerGet, data: {"userId": userId});
     return TimerModel1.fromJson(json: resp.data);
   }
 
-  void action({required bool start}) {
+  void action({required bool start, required String userId}) {
     Future<void> sendHistory({required String userId, required String work, required String relax}) async {
       if (await internetConnected) {
-        editHistory(
+        editTimerHistoryApi(
           relax: (int.parse(isolate['editHistory']['relax']) + int.parse(relax)).toString(),
           work: (int.parse(isolate['editHistory']['work']) + int.parse(work)).toString(),
           userId: userId,
@@ -203,7 +203,7 @@ class TimerRepository extends ChangeNotifier implements Repository, TimerInterfa
 
     Future<void> sendStat({required String userId, required String timeWork, required String timeRelax}) async {
       if (await internetConnected) {
-        editStat(
+        editTimerStatApi(
           userId: userId,
           timeWork: (int.parse(isolate['editStat']['timeWork']) + int.parse(timeWork)).toString(),
           timeRelax: (int.parse(isolate['editStat']['timeRelax']) + int.parse(timeRelax)).toString(),
@@ -216,21 +216,21 @@ class TimerRepository extends ChangeNotifier implements Repository, TimerInterfa
     }
 
     void addTimeWork(int time) {
-      // sendStat(timeRelax: '', timeWork: time.toString());
+      sendStat(timeRelax: '', timeWork: time.toString(), userId: userId);
       final newStat = boxStat.values.first.edit(work: time, relax: 0, history: null);
       boxStat.deleteAt(0);
       boxStat.add(newStat);
     }
 
     void addTimeRelax(int time) {
-      // sendStat(timeRelax: time.toString(), timeWork: '');
+      sendStat(timeRelax: time.toString(), timeWork: '', userId: userId);
       final newStat = boxStat.values.first.edit(work: 0, relax: time, history: null);
       boxStat.deleteAt(0);
       boxStat.add(newStat);
     }
 
     void changeHistory({required int work, required int relax}) {
-      // sendHistory(relax: relax.toString(), work: work.toString());
+      sendHistory(relax: relax.toString(), work: work.toString(), userId: userId);
       final newStat = boxStat.values.first.edit(work: 0, relax: 0, history: History(work: work, relax: relax));
       boxStat.deleteAt(0);
       boxStat.add(newStat);

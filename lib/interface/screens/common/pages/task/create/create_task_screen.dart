@@ -1,3 +1,4 @@
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/func/uuid.dart';
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
 import 'package:app_with_apps/interface/utils/constants/constants_uikit.dart';
@@ -98,17 +99,18 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       return null;
     }
 
-    final createdElement = TaskModel(
-      title: contorllerTitle.text,
-      count: count,
-      id: getUUID(),
-      isDone: false,
-      countOnDay: countOnDay,
-    );
+    // final createdElement = TaskModel(
+    //   title: contorllerTitle.text,
+    //   count: count,
+    //   id: getUUID(),
+    //   isDone: false,
+    //   countOnDay: countOnDay,
+    // );
 
-    element = createdElement;
+    // element = createdElement;
 
-    return createdElement;
+    // return createdElement;
+    return null;
   }
 
   void stateFunc(TasksBlocState state) {

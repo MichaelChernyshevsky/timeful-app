@@ -1,15 +1,9 @@
-import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/interface/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/widgets.dart';
 
 class TasksStat extends StatelessWidget {
-  const TasksStat({
-    super.key,
-    required this.statProvider,
-  });
-
-  final StatService statProvider;
+  const TasksStat({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +42,13 @@ class TasksStat extends StatelessWidget {
                             size: h * 0.06,
                             color: UTILSConstants.done,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: w * 0.03),
-                            child: Text(
-                              '${statProvider.tasks.done} tasks done',
-                              style: TextStyle(fontSize: h * 0.036),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(left: w * 0.03),
+                          //   child: Text(
+                          //     '${statProvider.tasks.done} tasks done',
+                          //     style: TextStyle(fontSize: h * 0.036),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

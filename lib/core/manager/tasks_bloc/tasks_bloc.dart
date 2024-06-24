@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
-import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +36,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      final isDeleted = await GetIt.I.get<TaskRepo>().delete(id: event.id);
+      final isDeleted = await GetIt.I.get<CoreService>().deleteTasks(id: event.id);
       emit(Delete(isDeleted));
     } catch (error) {
       emit(BlocError());
@@ -47,20 +47,22 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     AddTaskEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    await GetIt.I.get<TaskRepo>().add(task: event.task);
     emit(BlocSuccess());
 
     // await _repo.add(task: event.task);
-    // try {} catch (error) {
-    //   emit(BlocError());
-    // }
+    try {
+      final state = await GetIt.I.get<CoreService>().addTasks(element: event.task);
+      state ? emit(BlocSuccess()) : emit(BlocError());
+    } catch (error) {
+      emit(BlocError());
+    }
   }
 
   Future<void> _getTasks(
     GetTasksEvent event,
     Emitter<TasksBlocState> state,
   ) async {
-    emit(GetTasksSuccess(GetIt.I.get<TaskRepo>().get()));
+    emit(GetTasksSuccess(await GetIt.I.get<CoreService>().getTasks()));
   }
 
   Future<void> _wipeData(
@@ -68,7 +70,7 @@ class TasksBloc extends Bloc<TasksBlocEvent, TasksBlocState> {
     Emitter<TasksBlocState> state,
   ) async {
     try {
-      await GetIt.I.get<TaskRepo>().wipe();
+      await GetIt.I.get<CoreService>().tasksWipe();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

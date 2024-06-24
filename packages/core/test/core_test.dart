@@ -5,6 +5,7 @@ library;
 import 'package:economy/repo.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:helpers/api/service.dart';
+import 'package:tasks/tasks.dart';
 import 'package:timer/repo.dart';
 import 'package:user/packages/model.dart';
 import 'package:user/packages/repo.dart';
@@ -20,6 +21,7 @@ void main() {
   late CoreService coreService;
   late EconomyRepository economyRepo;
   late TimerRepository timerRepo;
+  late TaskRepository taskRepo;
 
   setUpAll(() async {
     final httpService = DioHttpService(baseUrl: 'http://127.0.0.1:5000');
@@ -27,6 +29,7 @@ void main() {
     packageRepo = PackagesRepository(httpService: httpService);
     economyRepo = EconomyRepository(httpService: httpService);
     timerRepo = TimerRepository(httpService: httpService);
+    taskRepo = TaskRepository(httpService: httpService);
     coreService = CoreService();
   });
 
@@ -69,33 +72,76 @@ void main() {
   group('Economy ', () {
     test("-  add", () async {
       expect(
-        await economyRepo.add(title: 'title', description: 'description', count: 1, date: 1, income: 1, userId: userId),
+        await economyRepo.addEconomyApi(title: 'title', description: 'description', count: 1, date: 1, income: 1, userId: userId),
         true,
       );
     });
 
     late String economyId;
     test("-  get", () async {
-      final resp = await economyRepo.get(userId: userId);
+      final resp = await economyRepo.getEconomyApi(userId: userId);
       economyId = resp.models[0].id;
       expect(resp.models.isNotEmpty, true);
     });
 
     test("-  delete", () async {
-      expect((await economyRepo.delete(id: economyId)), true);
+      expect((await economyRepo.deleteEconomyApi(id: economyId)), true);
     });
   });
   group('Timer ', () {
     test("-  get", () async {
-      await timerRepo.get(userId: userId);
+      await timerRepo.getTimerApi(userId: userId);
     });
     test("-  editHistory", () async {
-      expect((await timerRepo.editHistory(userId: userId, work: '1', relax: '1')), true);
+      expect((await timerRepo.editTimerHistoryApi(userId: userId, work: '1', relax: '1')), true);
     });
 
     test("-  editStat", () async {
-      expect((await timerRepo.editStat(userId: userId, timeWork: '', timeRelax: '')), true);
+      expect((await timerRepo.editTimerStatApi(userId: userId, timeWork: '', timeRelax: '')), true);
     });
+  });
+
+  group('Taks ', () {
+    String taskId = '';
+    test("-  get", () async {
+      final tasks = await taskRepo.getTasksApi(userId: userId);
+
+      taskId = tasks.tasks[0].id;
+    });
+
+    test("-  add", () async {
+      expect(
+          (await taskRepo.addTasksApi(
+            userId: userId,
+            title: '2',
+            description: '2',
+            date: '2',
+            countOnDay: '0',
+            countOnTask: '0',
+          )),
+          true);
+    });
+
+    test("-  edit", () async {
+      expect(
+          (await taskRepo.editTasksApi(
+            taskId: userId,
+            title: '1',
+            description: '1',
+            date: '0',
+            countOnDay: '1',
+            countOnTask: '1',
+          )),
+          true);
+    });
+
+    test("-  delete", () async {
+      expect((await taskRepo.deleteTasksApi(taskId: taskId)), true);
+    });
+
+    // test("-  editStat", () async {
+    //   expect((await taskRepo.statEditTasks(userId: userId, countDone: '20', countUnDone: '20')), true);
+    // });
   });
 
   group('Core ', () {
@@ -139,7 +185,7 @@ void main() {
     });
     test("- economy add", () async {
       expect(
-        await coreService.economyAdd(
+        await coreService.addEconomyApi(
           title: 'title',
           description: 'description',
           count: 1,
@@ -152,22 +198,22 @@ void main() {
 
     late String economyId;
     test("- economy get", () async {
-      final resp = await coreService.economyGet();
+      final resp = await coreService.getEconomyApi();
       economyId = resp.models[0].id;
       expect(resp.models.isNotEmpty, true);
     });
 
     test("- economy delete", () async {
-      expect((await coreService.economyDelete(id: economyId)), true);
+      expect((await coreService.deleteEconomyApi(id: economyId)), true);
     });
 
     test("- timer get", () async {
-      await coreService.timerGet();
+      await coreService.timerGetApi();
     });
 
     test("- timer edit history", () async {
       expect(
-          (await coreService.timerEditHistory(
+          (await coreService.timerEditHistoryApi(
             work: '1',
             relax: '1',
           )),
@@ -175,7 +221,43 @@ void main() {
     });
 
     test("- timer edit stat", () async {
-      expect((await coreService.timerEditStat(timeWork: '1', timeRelax: '1')), true);
+      expect((await coreService.timerEditStatApi(timeWork: '1', timeRelax: '1')), true);
+    });
+
+    String taskId = '';
+
+    test("- tasks get", () async {
+      final tasks = await coreService.getTasksApi();
+
+      taskId = tasks.tasks[0].id;
+    });
+    test("- tasks add", () async {
+      expect(
+          (await coreService.addTasksApi(
+            title: '2',
+            description: '2',
+            date: '2',
+            countOnDay: '0',
+            countOnTask: '0',
+          )),
+          true);
+    });
+
+    test("- tasks edit", () async {
+      expect(
+          (await coreService.editTasksApi(
+            taskId: userId,
+            title: '1',
+            description: '1',
+            date: '0',
+            countOnDay: '1',
+            countOnTask: '1',
+          )),
+          true);
+    });
+
+    test("-  delete", () async {
+      expect((await coreService.deleteTasksApi(taskId: taskId)), true);
     });
   });
 }

@@ -1,87 +1,35 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tasks/interface.dart';
 import 'package:tasks/model.dart';
-import 'package:tasks/stat/model/task_stat.dart';
 import 'package:tasks/tasks.dart';
 import 'package:helpers/helpers.dart';
 import 'package:tasks/uri.dart';
-import 'models/task_class.dart';
 
 class TaskRepository extends Repository implements TaskInterface {
   TaskRepository({required super.httpService});
 
   late Box<TaskModel> boxTasks;
-  late Box<TaskStat> boxTasksStat;
+  // late Box<TaskStat> boxTasksStat;
 
   static const String _boxTasks = 'boxTasks';
-  static const String _boxTasksStat = 'boxTasksStat';
+  // static const String _boxTasksStat = 'boxTasksStat';
 
   Future init() async {
-    Hive.registerAdapter(TaskModelAdapter());
-    Hive.registerAdapter(TaskStatAdapter());
-    await initializeStat();
+    // Hive.registerAdapter(TaskStatAdapter());
+    // await initializeStat();
 
     boxTasks = await Hive.openBox<TaskModel>(_boxTasks);
-    validTasks();
   }
 
-  Future initializeStat() async {
-    boxTasksStat = await Hive.openBox<TaskStat>(_boxTasksStat);
+  // Future initializeStat() async {
+  //   boxTasksStat = await Hive.openBox<TaskStat>(_boxTasksStat);
 
-    if (boxTasksStat.values.toList().isEmpty) {
-      boxTasksStat.add(TaskStat.empty(date));
-    }
-  }
+  //   if (boxTasksStat.values.toList().isEmpty) {
+  //     boxTasksStat.add(TaskStat.empty(date));
+  //   }
+  // }
 
   void refresh({required String userId}) {}
-
-  String get date => DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString().split(' ')[0];
-
-  void wipeTasks() => boxTasks.deleteAll(boxTasks.keys);
-
-  void validTasks() {
-    bool checkDate({required String str}) {
-      return date == str.split('*****date*****')[0];
-    }
-
-    int done = 0;
-    int undone = 0;
-
-    if (!checkDate(str: boxTasksStat.values.first.date)) {
-      final tasks = get();
-      wipeTasks();
-
-      for (var index = 0; index < tasks.length; index += 1) {
-        tasks[index].isDone ? done += 1 : undone += 1;
-        tasks[index].isDone = false;
-        boxTasks.add(tasks[index]);
-      }
-
-      final newStatModel = boxTasksStat.values.first.wipeHistory(date: date, done: done, undone: undone);
-      boxTasksStat.deleteAt(0);
-      boxTasksStat.add(newStatModel);
-    }
-  }
-
-  TaskStat get stat => boxTasksStat.values.first;
-
-  void changeDoneState(String id) {
-    final tasks = get();
-    wipeTasks();
-
-    for (var index = 0; index < tasks.length; index += 1) {
-      if (tasks[index].id == id) {
-        tasks[index].isDone = !tasks[index].isDone;
-      }
-      boxTasks.add(tasks[index]);
-    }
-  }
-
-  Future wipe() async {
-    await Hive.deleteBoxFromDisk(_boxTasks);
-    boxTasks = await Hive.openBox<TaskModel>(_boxTasks);
-    await initializeStat();
-  }
 
   List<TaskModel> get() {
     return boxTasks.values.toList();
@@ -118,7 +66,7 @@ class TaskRepository extends Repository implements TaskInterface {
   }
 
   @override
-  Future<bool> addTasks({
+  Future<bool> addTasksApi({
     required String userId,
     required String title,
     required String description,
@@ -138,13 +86,13 @@ class TaskRepository extends Repository implements TaskInterface {
   }
 
   @override
-  Future<bool> deleteTasks({required String taskId}) async {
+  Future<bool> deleteTasksApi({required String taskId}) async {
     final BaseResponse resp = await httpService.delete(deleteUri, data: {"taskId": taskId});
     return resp.message == MESSAGE_SUCCESS;
   }
 
   @override
-  Future<bool> editTasks({
+  Future<bool> editTasksApi({
     required String taskId,
     required String title,
     required String description,
@@ -164,13 +112,13 @@ class TaskRepository extends Repository implements TaskInterface {
   }
 
   @override
-  Future<TasksData> getTasks({required String userId}) async {
+  Future<TasksModels> getTasksApi({required String userId}) async {
     final BaseResponse resp = await httpService.post(getUri, data: {"userId": userId});
-    return TasksData.fromJson(resp.data);
+    return TasksModels.fromJson(resp.data);
   }
 
   @override
-  Future<bool> statEditTasks({required String userId, required String countDone, required String countUnDone}) async {
+  Future<bool> statEditTasksApi({required String userId, required String countDone, required String countUnDone}) async {
     final BaseResponse resp = await httpService.patch(editStatUri, data: {
       "userId": userId,
       "countDone": countDone,

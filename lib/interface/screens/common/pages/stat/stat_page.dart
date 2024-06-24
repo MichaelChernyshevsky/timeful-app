@@ -1,4 +1,3 @@
-import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/stats/money.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/stats/tasks.dart';
@@ -14,8 +13,6 @@ class StatPage extends StatefulWidget {
 }
 
 class _StatPageState extends State<StatPage> {
-  final statProvider = GetIt.I.get<StatService>();
-
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
@@ -25,9 +22,9 @@ class _StatPageState extends State<StatPage> {
       widget: Column(
         children: [
           PageTitle(h: h, text: AppLocalizations.current.statistics),
-          MoneyStat(statProvider: statProvider),
-          TimeStat(statProvider: statProvider),
-          TasksStat(statProvider: statProvider),
+          MoneyStat(),
+          TimeStat(),
+          TasksStat(),
         ],
       ),
     );

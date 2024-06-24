@@ -1,20 +1,18 @@
-class TasksData {
-  final List<TaskData> tasks;
-  TasksData(this.tasks);
+class TasksModels {
+  final List<TaskModel> tasks;
+  TasksModels(this.tasks);
 
-  factory TasksData.fromJson(Map<String, dynamic> json) {
-    print(json);
-    final List<TaskData> tasks = [];
-    print(json['data']);
+  factory TasksModels.fromJson(Map<String, dynamic> json) {
+    final List<TaskModel> tasks = [];
     for (final task in json['data'] as List<dynamic>) {
-      tasks.add(TaskData.fromJson(task));
+      tasks.add(TaskModel.fromJson(task));
     }
 
-    return TasksData(tasks);
+    return TasksModels(tasks);
   }
 }
 
-class TaskData {
+class TaskModel {
   final int countOnDay;
   final int countOnTask;
   final String date;
@@ -23,7 +21,7 @@ class TaskData {
   final String title;
   final String userId;
 
-  TaskData({
+  TaskModel({
     required this.countOnDay,
     required this.countOnTask,
     required this.date,
@@ -33,7 +31,7 @@ class TaskData {
     required this.userId,
   });
 
-  factory TaskData.fromJson(Map<String, dynamic> json) => TaskData(
+  factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
         countOnDay: json["countOnDay"] as int,
         countOnTask: json["countOnTask"] as int,
         date: json["date"] as String,

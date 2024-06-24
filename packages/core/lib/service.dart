@@ -1,18 +1,13 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'package:helpers/api/service.dart';
-import 'package:user/packages/model.dart';
-import 'package:user/packages/repo.dart';
-import 'package:user/user/repo.dart';
-import 'package:economy/repo.dart';
-import 'package:economy/model.dart';
-import 'package:timer/repo.dart';
-import 'package:timer/model.dart';
+
+import 'core.dart';
 
 class CoreService {
   late UserRepository userRepo;
   late PackagesRepository packageRepo;
   late EconomyRepository economyRepo;
   late TimerRepository timerRepo;
+  late TaskRepository taskRepo;
 
   void initialize() {
     final httpService = DioHttpService(baseUrl: 'http://127.0.0.1:5000');
@@ -20,9 +15,44 @@ class CoreService {
     packageRepo = PackagesRepository(httpService: httpService);
     economyRepo = EconomyRepository(httpService: httpService);
     timerRepo = TimerRepository(httpService: httpService);
+    taskRepo = TaskRepository(httpService: httpService);
+
+    economyRepo.init();
+    timerRepo.init();
+    taskRepo.init();
   }
 
-  // User
+  void refresh() {
+    economyRepo.refresh(userId: userId);
+    timerRepo.refresh(userId: userId);
+    taskRepo.refresh(userId: userId);
+  }
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //  User
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   Future<bool> userEdit({
     String? name,
     String? name2,
@@ -59,23 +89,86 @@ class CoreService {
   bool get loggined => userRepo.loggined;
 
   String get userId => userRepo.userId;
-
-  // Package
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //   Package
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   Future<bool> packageChange({required PackageType type}) async => packageRepo.changePackage(type: type, userId: userRepo.userId);
 
   Future<Packages> packageGet() async => packageRepo.getPackages(userId: userRepo.userId);
 
   Future<PackagesInfo> packageInfo() async => packageRepo.infoPackages();
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //  Economy
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
 
-  // Economy
-  Future<bool> economyAdd({
+  Future<bool> deleteEconomy({required String id}) async {
+    return true;
+  }
+
+  Future<bool> addEconomy({required EconomyModel element}) async {
+    return true;
+  }
+
+  Future<EconomyModels> getEconomy() async {
+    return EconomyModels(models: []);
+  }
+
+  Future<bool> wipeEconomy() async {
+    return true;
+  }
+
+  Future<bool> addEconomyApi({
     required String title,
     required String description,
     required int count,
     required int date,
     required int income,
   }) =>
-      economyRepo.add(
+      economyRepo.addEconomyApi(
         title: title,
         description: description,
         count: count,
@@ -84,30 +177,135 @@ class CoreService {
         userId: userId,
       );
 
-  Future<bool> economyDelete({required String id}) => economyRepo.delete(id: id);
+  Future<bool> deleteEconomyApi({required String id}) => economyRepo.deleteEconomyApi(id: id);
 
-  Future<EconomyModels> economyGet() => economyRepo.get(userId: userId);
-
-  // Timer
-  Future<bool> timerEditHistory({
+  Future<EconomyModels> getEconomyApi() => economyRepo.getEconomyApi(userId: userId);
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //  Timer
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  Future<bool> timerEditHistoryApi({
     required String work,
     required String relax,
   }) =>
-      timerRepo.editHistory(
+      timerRepo.editTimerHistoryApi(
         userId: userId,
         work: work,
         relax: relax,
       );
 
-  Future<bool> timerEditStat({
+  Future<bool> timerEditStatApi({
     required String timeWork,
     required String timeRelax,
   }) =>
-      timerRepo.editStat(
+      timerRepo.editTimerStatApi(
         userId: userId,
         timeWork: timeWork,
         timeRelax: timeRelax,
       );
 
-  Future<TimerModel1> timerGet() => timerRepo.get(userId: userId);
+  Future<TimerModel1> timerGetApi() => timerRepo.getTimerApi(userId: userId);
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //  Tasks
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+
+  Future<bool> deleteTasks({required String id}) async {
+    return true;
+  }
+
+  Future<bool> addTasks({required TaskModel element}) async {
+    return true;
+  }
+
+  Future<TasksModels> getTasks() async {
+    return TasksModels([]);
+  }
+
+  Future<bool> tasksWipe() async {
+    return true;
+  }
+
+  Future<bool> addTasksApi({
+    required String title,
+    required String description,
+    required String date,
+    required String countOnDay,
+    required String countOnTask,
+  }) async =>
+      taskRepo.addTasksApi(
+        userId: userId,
+        title: title,
+        description: description,
+        date: date,
+        countOnDay: countOnDay,
+        countOnTask: countOnTask,
+      );
+
+  Future<bool> deleteTasksApi({
+    required String taskId,
+  }) async =>
+      taskRepo.deleteTasksApi(
+        taskId: taskId,
+      );
+
+  Future<bool> editTasksApi({
+    required String taskId,
+    required String title,
+    required String description,
+    required String date,
+    required String countOnDay,
+    required String countOnTask,
+  }) async =>
+      taskRepo.editTasksApi(
+        taskId: taskId,
+        title: title,
+        description: description,
+        date: date,
+        countOnDay: countOnDay,
+        countOnTask: countOnTask,
+      );
+
+  Future<TasksModels> getTasksApi() async => taskRepo.getTasksApi(userId: userId);
 }

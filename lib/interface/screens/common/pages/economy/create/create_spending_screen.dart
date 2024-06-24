@@ -1,3 +1,4 @@
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/func/uuid.dart';
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
@@ -44,18 +45,18 @@ class _CreateSpedingScreenState extends State<CreateSpedingScreen> {
     if (contorllerCost.text.isEmpty) {
       return null;
     }
-    final createdElement = EconomyModel(
-      id: getUUID(),
-      title: contorllerTitle.text,
-      count: int.parse(contorllerCost.text),
-      description: contorllerDescription.text,
-      date: date ?? DateTime.now(),
-      isSpending: isSpending,
-    );
+    // final createdElement = EconomyModel(
+    //   id: getUUID(),
+    //   title: contorllerTitle.text,
+    //   count: int.parse(contorllerCost.text),
+    //   description: contorllerDescription.text,
+    //   date: date ?? DateTime.now(),
+    //   isSpending: isSpending,
+    // );
 
-    element = createdElement;
+    // element = createdElement;
 
-    return createdElement;
+    return null;
   }
 
   void addSpending() {

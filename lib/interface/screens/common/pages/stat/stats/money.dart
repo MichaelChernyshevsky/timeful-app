@@ -1,14 +1,8 @@
-import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/widgets.dart';
 
 class MoneyStat extends StatelessWidget {
-  const MoneyStat({
-    super.key,
-    required this.statProvider,
-  });
-
-  final StatService statProvider;
+  const MoneyStat({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +41,15 @@ class MoneyStat extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${statProvider.economy.income}',
-                          style: TextStyle(fontSize: h * 0.03),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       '${GetIt.I.get<CoreService>().economy.income}',
+                    //       style: TextStyle(fontSize: h * 0.03),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                   w: w * 0.38,
                   h: h * 0.15,
@@ -72,15 +66,15 @@ class MoneyStat extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${statProvider.economy.moneyAll}',
-                          style: TextStyle(fontSize: h * 0.03),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       '${GetIt.I.get<CoreService>().economy.moneyAll}',
+                    //       style: TextStyle(fontSize: h * 0.03),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                   w: w * 0.38,
                   h: h * 0.15,

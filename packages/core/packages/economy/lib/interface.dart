@@ -1,7 +1,7 @@
 import 'package:economy/model.dart';
 
 abstract class EconomyInterface {
-  void add({
+  void addEconomyApi({
     required String title,
     required String description,
     required int count,
@@ -9,7 +9,7 @@ abstract class EconomyInterface {
     required int income,
     required String userId,
   }) {}
-  void delete({required String id}) {}
-  void get({required String userId}) {}
-  void stat() {}
+  void deleteEconomyApi({required String id}) {}
+  void getEconomyApi({required String userId}) {}
+  void statEconomyApi() {}
 }

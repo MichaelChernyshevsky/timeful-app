@@ -1,4 +1,5 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      final isDeleted = await GetIt.I.get<EconomyRepo>().delete(id: event.id);
+      final isDeleted = await GetIt.I.get<CoreService>().deleteEconomy(id: event.id);
       emit(Delete(isDeleted));
     } catch (error) {
       emit(BlocError());
@@ -47,21 +48,12 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     AddEconoomyEvent event,
     Emitter<EconomyBlocState> state,
   ) async {
-    await GetIt.I.get<EconomyRepo>().add(element: event.element);
-
-    if (event.element.isSpending) {
-      await GetIt.I.get<EconomyRepo>().changeStat(
-            income: 0,
-            moneyAll: -event.element.count,
-          );
-    } else {
-      await GetIt.I.get<EconomyRepo>().changeStat(
-            income: event.element.count,
-            moneyAll: event.element.count,
-          );
+    try {
+      final state = await GetIt.I.get<CoreService>().addEconomy(element: event.element);
+      state ? emit(BlocSuccess()) : emit(BlocError());
+    } catch (e) {
+      emit(BlocError());
     }
-
-    emit(BlocSuccess());
   }
 
   Future<void> _getSpending(
@@ -69,7 +61,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      emit(GetHistorySuccess(GetIt.I.get<EconomyRepo>().get()));
+      emit(GetHistorySuccess(await GetIt.I.get<CoreService>().getEconomy()));
     } catch (error) {
       emit(BlocError());
     }
@@ -80,7 +72,7 @@ class EconomyBloc extends Bloc<EconomyBlocEvent, EconomyBlocState> {
     Emitter<EconomyBlocState> state,
   ) async {
     try {
-      await GetIt.I.get<EconomyRepo>().wipe();
+      await GetIt.I.get<CoreService>().wipeEconomy();
       emit(BlocSuccess());
     } catch (error) {
       emit(BlocError());

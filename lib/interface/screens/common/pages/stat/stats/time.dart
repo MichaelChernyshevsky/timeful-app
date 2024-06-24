@@ -1,14 +1,8 @@
-import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/stat/widgets.dart';
 
 class TimeStat extends StatelessWidget {
-  const TimeStat({
-    super.key,
-    required this.statProvider,
-  });
-
-  final StatService statProvider;
+  const TimeStat({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +41,15 @@ class TimeStat extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          statProvider.timer.work,
-                          style: TextStyle(fontSize: h * 0.03),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       statProvider.timer.work,
+                    //       style: TextStyle(fontSize: h * 0.03),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                   w: w * 0.38,
                   h: h * 0.15,
@@ -72,15 +66,15 @@ class TimeStat extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          statProvider.timer.relax,
-                          style: TextStyle(fontSize: h * 0.03),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       statProvider.timer.relax,
+                    //       style: TextStyle(fontSize: h * 0.03),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                   w: w * 0.38,
                   h: h * 0.15,

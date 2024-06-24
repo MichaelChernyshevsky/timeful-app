@@ -1,7 +1,7 @@
 abstract class TaskInterface {
-  void getTasks({required String userId}) {}
-  void deleteTasks({required String taskId}) {}
-  void editTasks({
+  void getTasksApi({required String userId}) {}
+  void deleteTasksApi({required String taskId}) {}
+  void editTasksApi({
     required String taskId,
     required String title,
     required String description,
@@ -9,7 +9,7 @@ abstract class TaskInterface {
     required String countOnDay,
     required String countOnTask,
   }) {}
-  void addTasks({
+  void addTasksApi({
     required String userId,
     required String title,
     required String description,
@@ -17,5 +17,5 @@ abstract class TaskInterface {
     required String countOnDay,
     required String countOnTask,
   }) {}
-  void statEditTasks({required String userId, required String countDone, required String countUnDone}) {}
+  void statEditTasksApi({required String userId, required String countDone, required String countUnDone}) {}
 }

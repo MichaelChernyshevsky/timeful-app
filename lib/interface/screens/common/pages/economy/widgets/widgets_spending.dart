@@ -1,5 +1,6 @@
 // ignore_for_file: type_annotate_public_apis, must_be_immutable
 
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/screens/edit_spending_screen.dart';
 import 'package:intl/intl.dart';
@@ -24,22 +25,17 @@ class SpendingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sign = element.isSpending == true ? '-' : '+';
+    // final sign = element.isSpending == true ? '-' : '+';
 
-    final color = element.isSpending == true ? UTILSConstants.pink : UTILSConstants.white;
+    // final color = element.isSpending == true ? UTILSConstants.pink : UTILSConstants.white;
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        if (element.date != null)
-          Padding(
-            padding: EdgeInsets.only(bottom: h * 0.01),
-            child: Row(
-              children: [
-                Text(DateFormat('kk:mm dd:MM:yyyy  ').format(element.date!)),
-              ],
-            ),
-          ),
+        Padding(
+          padding: EdgeInsets.only(bottom: h * 0.01),
+          child: const Row(),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -50,15 +46,9 @@ class SpendingWidget extends StatelessWidget {
                 color: UTILSConstants.grey2,
                 borderRadius: BorderRadius.circular(35),
               ),
-              child: Center(
+              child: const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(element.title, style: TextStyle(color: color, fontSize: h * 0.02)),
-                    const Spacer(),
-                    Text('$sign  ${element.count}', style: TextStyle(color: color, fontSize: h * 0.04)),
-                    const Spacer(),
-                  ],
                 ),
               ),
             ),

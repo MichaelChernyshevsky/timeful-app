@@ -1,3 +1,4 @@
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 
 import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
@@ -48,8 +49,8 @@ class _TaskPageState extends State<TaskPage> {
 
   void onError() => debugPrint(AppLocalizations.current.errorLoading);
 
-  void setElements(List<TaskModel> elementsBloc) => setState(() {
-        tasks = elementsBloc;
+  void setElements(TasksModels models) => setState(() {
+        tasks = models.tasks;
         loading = false;
       });
 

@@ -5,15 +5,12 @@ import 'package:app_with_apps/core/manager/tasks_bloc/tasks_bloc.dart';
 import 'package:app_with_apps/core/service/notification_service.dart';
 import 'package:app_with_apps/interface/utils/constants/constants_uikit.dart';
 import 'package:app_with_apps/interface/routes/app_routes.dart';
-import 'package:app_with_apps/core/service/stat/stat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:tasks/tasks.dart';
-import 'package:economy/economy.dart';
-import 'package:timer/repo.dart';
+import 'package:core/core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,32 +19,16 @@ Future<void> main() async {
   await Hive.initFlutter();
 
   GetIt.I.registerSingleton<AppStat>(AppStat());
-  GetIt.I.registerSingleton<StatService>(StatService());
 
-  GetIt.I.registerSingletonAsync<EconomyRepo>(
+  GetIt.I.registerSingletonAsync<CoreService>(
     () async {
-      final hivePacks = EconomyRepo();
-      await hivePacks.init();
-      return hivePacks;
+      final service = CoreService();
+      service.initialize();
+      return service;
     },
   );
 
-  GetIt.I.registerSingletonAsync<TaskRepo>(
-    () async {
-      final hivePacks = TaskRepo();
-      await hivePacks.init();
-      return hivePacks;
-    },
-  );
-
-  GetIt.I.registerSingletonAsync<TimerRepo>(
-    () async {
-      final hivePacks = TimerRepo();
-      await hivePacks.init();
-      return hivePacks;
-    },
-  );
-  // await GetIt.I.allReady();
+  await GetIt.I.allReady();
 
   runApp(
     MultiBlocProvider(

@@ -1,6 +1,7 @@
 // ignore_for_file: eol_at_end_of_file, lines_longer_than_80_chars
 
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/common/pages/widget/widgets.dart';
 import 'package:app_with_apps/interface/screens/common/pages/economy/create/create_spending_screen.dart';
@@ -55,8 +56,8 @@ class _EconomyPageState extends State<EconomyPage> {
 
   void onError() => debugPrint(AppLocalizations.current.errorLoading);
 
-  void setElements(List<EconomyModel> elementsBloc) => setState(() {
-        elements = elementsBloc;
+  void setElements(EconomyModels models) => setState(() {
+        elements = models.models;
         loading = false;
       });
 

@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-// part 'economy_class.g.dart';
+part 'model.g.dart';
 
 @HiveType(typeId: 0)
 class EconomyModel {

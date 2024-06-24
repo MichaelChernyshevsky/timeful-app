@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:app_with_apps/core/manager/economy_bloc/economy_bloc.dart';
+import 'package:app_with_apps/core/models.dart';
 import 'package:app_with_apps/interface/exports/screens_exports.dart';
 import 'package:app_with_apps/interface/screens/widgets/body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

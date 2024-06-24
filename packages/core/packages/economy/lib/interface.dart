@@ -1,5 +1,3 @@
-import 'package:economy/model.dart';
-
 abstract class EconomyInterface {
   void addEconomyApi({
     required String title,

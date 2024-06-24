@@ -1,4 +1,3 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tasks/interface.dart';
 import 'package:tasks/model.dart';
 import 'package:tasks/tasks.dart';
@@ -8,62 +7,41 @@ import 'package:tasks/uri.dart';
 class TaskRepository extends Repository implements TaskInterface {
   TaskRepository({required super.httpService});
 
-  late Box<TaskModel> boxTasks;
-  // late Box<TaskStat> boxTasksStat;
-
-  static const String _boxTasks = 'boxTasks';
-  // static const String _boxTasksStat = 'boxTasksStat';
-
-  Future init() async {
-    // Hive.registerAdapter(TaskStatAdapter());
-    // await initializeStat();
-
-    boxTasks = await Hive.openBox<TaskModel>(_boxTasks);
-  }
-
-  // Future initializeStat() async {
-  //   boxTasksStat = await Hive.openBox<TaskStat>(_boxTasksStat);
-
-  //   if (boxTasksStat.values.toList().isEmpty) {
-  //     boxTasksStat.add(TaskStat.empty(date));
-  //   }
-  // }
+  Future initialize() async {}
 
   void refresh({required String userId}) {}
 
-  List<TaskModel> get() {
-    return boxTasks.values.toList();
-  }
+  // List<TaskModel> get() {
+  // }
 
-  Future<bool> add({
-    required TaskModel task,
-  }) async {
-    return (await boxTasks.add(task)) != -1;
-  }
+  // Future<bool> add({
+  //   required TaskModel task,
+  // }) async {
+  // }
 
-  Future edit({
-    required TaskModel element,
-    // required int index,
-  }) async {
-    // final elementIndex = task.id;
-  }
+  // Future edit({
+  //   required TaskModel element,
+  //   // required int index,
+  // }) async {
+  //   // final elementIndex = task.id;
+  // }
 
-  Future<bool> delete({
-    required String id,
-  }) async {
-    int getIndex({required String id, required Box box}) {
-      for (var index = 0; index <= box.length; index += 1) {
-        if (box.values.elementAt(index).id == id) {
-          return index;
-        }
-      }
-      return -1;
-    }
+  // Future<bool> delete({
+  //   required String id,
+  // }) async {
+  //   int getIndex({required String id, required Box box}) {
+  //     for (var index = 0; index <= box.length; index += 1) {
+  //       if (box.values.elementAt(index).id == id) {
+  //         return index;
+  //       }
+  //     }
+  //     return -1;
+  //   }
 
-    final indexElement = getIndex(id: id, box: boxTasks);
-    await boxTasks.deleteAt(indexElement);
-    return true;
-  }
+  //   final indexElement = getIndex(id: id, box: boxTasks);
+  //   await boxTasks.deleteAt(indexElement);
+  //   return true;
+  // }
 
   @override
   Future<bool> addTasksApi({

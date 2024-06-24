@@ -1,6 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'core.dart';
+import 'package:helpers/tools/internet.dart';
+import 'package:helpers/tools/path.dart';
 
 class CoreService {
   late UserRepository userRepo;
@@ -9,7 +11,7 @@ class CoreService {
   late TimerRepository timerRepo;
   late TaskRepository taskRepo;
 
-  void initialize() {
+  Future<void> initialize({String? location}) async {
     final httpService = DioHttpService(baseUrl: 'http://127.0.0.1:5000');
     userRepo = UserRepository(httpService: httpService);
     packageRepo = PackagesRepository(httpService: httpService);
@@ -17,9 +19,11 @@ class CoreService {
     timerRepo = TimerRepository(httpService: httpService);
     taskRepo = TaskRepository(httpService: httpService);
 
-    economyRepo.init();
-    timerRepo.init();
-    taskRepo.init();
+    economyRepo.initialize(internet: false, loggined: loggined, userId: userId, location: location ?? await localPath);
+  }
+
+  Future<void> close() async {
+    await economyRepo.close();
   }
 
   void refresh() {
@@ -149,13 +153,28 @@ class CoreService {
     return true;
   }
 
-  Future<bool> addEconomy({required EconomyModel element}) async {
-    return true;
-  }
+  Future<bool> addEconomy({
+    required String title,
+    required String description,
+    required int count,
+    required int date,
+    required bool income,
+    required String userId,
+    required bool loggined,
+    bool? internet,
+  }) async =>
+      economyRepo.addEconomy(
+        title: title,
+        description: description,
+        count: count,
+        date: date,
+        income: income,
+        userId: userId,
+        loggined: loggined,
+        internet: internet ?? await internetConnected,
+      );
 
-  Future<EconomyModels> getEconomy() async {
-    return EconomyModels(models: []);
-  }
+  Future<List<EconomyModel>> getEconomy({bool? internet}) async => economyRepo.getEconomy(userId: userId, loggined: loggined, internet: internet ?? await internetConnected);
 
   Future<bool> wipeEconomy() async {
     return true;
@@ -179,7 +198,7 @@ class CoreService {
 
   Future<bool> deleteEconomyApi({required String id}) => economyRepo.deleteEconomyApi(id: id);
 
-  Future<EconomyModels> getEconomyApi() => economyRepo.getEconomyApi(userId: userId);
+  Future<List<EconomyModel>> getEconomyApi() => economyRepo.getEconomyApi(userId: userId);
   //
   //
   //
@@ -224,7 +243,7 @@ class CoreService {
         timeRelax: timeRelax,
       );
 
-  Future<TimerModel1> timerGetApi() => timerRepo.getTimerApi(userId: userId);
+  Future<TimerModel> timerGetApi() => timerRepo.getTimerApi(userId: userId);
   //
   //
   //

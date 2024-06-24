@@ -34,7 +34,7 @@ class DioHttpService implements HttpService {
     );
 
     if (response.data == null || response.statusCode != 200) {
-      throw HttpException(
+      throw HttpExcept(
         title: 'Http Error!',
         statusCode: response.statusCode,
         message: response.statusMessage,
@@ -51,7 +51,7 @@ class DioHttpService implements HttpService {
   }) async {
     final response = await dio.post(endpoint, queryParameters: queryParameters, data: data);
     if (response.data == null || response.statusCode != 200) {
-      throw HttpException(
+      throw HttpExcept(
         title: 'Http Error!',
         statusCode: response.statusCode,
         message: response.statusMessage,
@@ -66,7 +66,7 @@ class DioHttpService implements HttpService {
     final response = await dio.delete(endpoint, queryParameters: queryParameters, data: data);
 
     if (response.data == null || response.statusCode != 200) {
-      throw HttpException(
+      throw HttpExcept(
         title: 'Http Error!',
         statusCode: response.statusCode,
         message: response.statusMessage,
@@ -81,7 +81,7 @@ class DioHttpService implements HttpService {
     final response = await dio.patch(endpoint, queryParameters: queryParameters, data: data);
 
     if (response.data == null || response.statusCode != 200) {
-      throw HttpException(
+      throw HttpExcept(
         title: 'Http Error!',
         statusCode: response.statusCode,
         message: response.statusMessage,

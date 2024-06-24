@@ -1,17 +1,28 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:math';
+
 import 'package:economy/economy.dart';
 import 'package:economy/interface.dart';
 import 'package:economy/uri.dart';
 import 'package:helpers/helpers.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
-// import 'stat/model/economy_stat.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
-// import 'models/economy_class.dart';
+export 'dart:io';
+export 'package:path_provider/path_provider.dart';
 
 class EconomyRepository extends Repository implements EconomyInterface {
   EconomyRepository({required super.httpService});
+  late Isar isar;
+
+  Future<void> initialize({required bool internet, required bool loggined, required String userId, required String location}) async {
+    await Isar.initializeIsarCore(download: true);
+    isar = await Isar.open(
+      [EconomyModelSchema],
+      directory: location,
+    );
+    if (internet && loggined) await refresh(userId: userId);
+  }
+
+  Future<void> close() async => await isar.close();
 
   @override
   Future<bool> addEconomyApi({
@@ -40,87 +51,114 @@ class EconomyRepository extends Repository implements EconomyInterface {
   }
 
   @override
-  Future<EconomyModels> getEconomyApi({required String userId}) async {
+  Future<List<EconomyModel>> getEconomyApi({required String userId}) async {
     final BaseResponse resp = await httpService.post(economyGet, data: {"userId": userId});
-    return EconomyModels.fromJson(resp.data);
+    final List<EconomyModel> models = [];
+    for (final element in resp.data['data']) {
+      models.add(EconomyModel.fromJson(element));
+    }
+    return models;
   }
 
-  void refresh({required String userId}) {}
+  Future<void> refresh({required String userId}) async {
+    final list = await isar.economyModels.filter().inDBlEqualTo(false).findAll();
+    if (list.isNotEmpty) {
+      for (final EconomyModel element in list) {
+        await addEconomy(
+          count: int.parse(element.count),
+          title: element.title,
+          description: element.description ?? '',
+          date: element.date,
+          income: element.income,
+          userId: userId,
+          loggined: true,
+          internet: true,
+        );
+      }
+      await isar.writeTxn(() async {
+        await isar.economyModels.filter().inDBlEqualTo(false).deleteAll();
+      });
+    }
+
+    final elements = await getEconomyApi(userId: userId);
+    await isar.writeTxn(() async {
+      for (final element in elements) {
+        final contain = await isar.economyModels.filter().idEqualTo(element.id).findAll();
+        if (contain.isEmpty) {
+          await isar.economyModels.put(element);
+        }
+      }
+    });
+  }
 
   @override
   void statEconomyApi() {}
-  late Box<EconomyModel> boxEconomy;
-  late Box<EconomyStat> boxEconomyStat;
 
-  static const String _boxEconomy = 'boxEconomy';
-  static const String _boxEconomyStat = 'boxEconomyStat';
-
-  Future init() async {
-    if (!Hive.isAdapterRegistered(0)) {
-      Hive.registerAdapter(EconomyModelAdapter());
-    }
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(EconomyStatAdapter());
-      await initializeStat();
-    }
-
-    boxEconomy = await Hive.openBox<EconomyModel>(_boxEconomy);
-  }
-
-  Future initializeStat() async {
-    boxEconomyStat = await Hive.openBox<EconomyStat>(_boxEconomyStat);
-
-    if (boxEconomyStat.values.toList().isEmpty) {
-      boxEconomyStat.add(EconomyStat.empty());
-    }
-  }
-
-  EconomyStat get stat => boxEconomyStat.values.first;
-
-  Future changeStat({
-    required int income,
-    required int moneyAll,
+  Future<bool> addEconomy({
+    required String title,
+    required String description,
+    required int count,
+    required int date,
+    required bool income,
+    required String userId,
+    required bool loggined,
+    required bool internet,
   }) async {
-    final statModel = boxEconomyStat.values.first.edit(income: income, moneyAll: moneyAll);
-    boxEconomyStat.deleteAt(0);
-    boxEconomyStat.add(statModel);
+    // try {
+    if (internet && loggined) {
+      final state = await addEconomyApi(
+        count: count,
+        title: title,
+        description: description,
+        date: date,
+        income: income == true ? 1 : 0,
+        userId: userId,
+      );
+      return state;
+    } else {
+      await isar.writeTxn(() async {
+        final newEconomy = EconomyModel(
+          id: Random().nextInt(1000000000),
+          title: title,
+          count: count.toString(),
+          income: true,
+          description: "This is an example",
+          date: DateTime.now().millisecondsSinceEpoch,
+          userId: userId,
+          inDBl: false,
+        );
+
+        await isar.economyModels.put(newEconomy);
+      });
+
+      return true;
+    }
+    // } catch (_) {
+    //   return false;
+    // }
   }
 
-  Future wipe() async {
-    await Hive.deleteBoxFromDisk(_boxEconomy);
-    await Hive.deleteBoxFromDisk(_boxEconomyStat);
-
-    boxEconomy = await Hive.openBox<EconomyModel>(_boxEconomy);
-    await initializeStat();
-  }
-
-  List<EconomyModel> get() => boxEconomy.values.toList().reversed.toList();
-
-  Future<bool> add({
-    required EconomyModel element,
-  }) async {
-    return (await boxEconomy.add(element)) != -1;
-  }
-
-  Future edit({
-    required EconomyModel element,
-    // required int index,
-  }) async {}
-
-  Future<bool> delete({
-    required String id,
-  }) async {
-    final indexElement = getIndex(id: id, box: boxEconomy);
-    await boxEconomy.deleteAt(indexElement);
-    return true;
-  }
-
-  int getIndex({required String id, required Box box}) {
-    for (var index = 0; index <= box.length; index += 1) {
-      if (box.values.elementAt(index).id == id) {
-        return index;
+  Future<bool> deleteEconomy({required int id, required bool loggined, required bool internet}) async {
+    try {
+      late bool stat;
+      if (internet && loggined) {
+        stat = await deleteEconomyApi(id: id.toString());
+      } else {
+        stat = true;
       }
+      await isar.writeTxn(() async {
+        await isar.economyModels.delete(id);
+      });
+      return stat;
+    } catch (_) {
+      return false;
     }
-    return -1;
+  }
+
+  Future<List<EconomyModel>> getEconomy({required String userId, required bool loggined, required bool internet}) async {
+    if (internet && loggined) {
+      await refresh(userId: userId);
+    }
+    return await isar.economyModels.where().findAll();
   }
 }

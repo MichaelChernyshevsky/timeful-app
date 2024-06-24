@@ -1,25 +1,25 @@
-class TimerModel1 {
+class TimerModel {
   final String id;
   final String userId;
-  final History1 history;
-  final Stat1 stat;
+  final History history;
+  final Stat stat;
 
-  TimerModel1({
+  TimerModel({
     required this.id,
     required this.userId,
     required this.history,
     required this.stat,
   });
 
-  factory TimerModel1.fromJson({required Map<String, dynamic> json}) {
-    return TimerModel1(
+  factory TimerModel.fromJson({required Map<String, dynamic> json}) {
+    return TimerModel(
       id: json['id'].toString(),
       userId: json['userId'].toString(),
-      history: History1(
+      history: History(
         work: json['history']['work'],
         relax: json['history']['relax'],
       ),
-      stat: Stat1(
+      stat: Stat(
         timeWork: json['stat']['timeWork'],
         timeStat: json['stat']['timeStat'],
       ),
@@ -27,16 +27,20 @@ class TimerModel1 {
   }
 }
 
-class History1 {
+class History {
   final int work;
   final int relax;
+  int workSave = 0;
+  int relaxSave = 0;
 
-  History1({required this.work, required this.relax});
+  History({required this.work, required this.relax});
 }
 
-class Stat1 {
+class Stat {
   final int timeWork;
   final int timeStat;
+  int timeWorkSave = 0;
+  int timeStatSave = 0;
 
-  Stat1({required this.timeWork, required this.timeStat});
+  Stat({required this.timeWork, required this.timeStat});
 }

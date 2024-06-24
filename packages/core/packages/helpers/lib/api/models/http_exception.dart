@@ -1,6 +1,5 @@
-class HttpException implements Exception {
-  /// Creates a new instance of [HttpException]
-  HttpException({
+class HttpExcept implements Exception {
+  HttpExcept({
     this.title,
     this.message,
     this.statusCode,

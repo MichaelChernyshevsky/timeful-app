@@ -33,6 +33,8 @@ class TaskRepository extends Repository implements TaskInterface {
     }
   }
 
+  void refresh({required String userId}) {}
+
   String get date => DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString().split(' ')[0];
 
   void wipeTasks() => boxTasks.deleteAll(boxTasks.keys);

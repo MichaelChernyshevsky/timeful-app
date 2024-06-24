@@ -1,10 +1,15 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tasks/interface.dart';
+import 'package:tasks/model.dart';
 import 'package:tasks/stat/model/task_stat.dart';
 import 'package:tasks/tasks.dart';
-
+import 'package:helpers/helpers.dart';
+import 'package:tasks/uri.dart';
 import 'models/task_class.dart';
 
-class TaskRepo {
+class TaskRepository extends Repository implements TaskInterface {
+  TaskRepository({required super.httpService});
+
   late Box<TaskModel> boxTasks;
   late Box<TaskStat> boxTasksStat;
 
@@ -108,5 +113,67 @@ class TaskRepo {
     final indexElement = getIndex(id: id, box: boxTasks);
     await boxTasks.deleteAt(indexElement);
     return true;
+  }
+
+  @override
+  Future<bool> addTasks({
+    required String userId,
+    required String title,
+    required String description,
+    required String date,
+    required String countOnDay,
+    required String countOnTask,
+  }) async {
+    final BaseResponse resp = await httpService.post(addUri, data: {
+      "userId": userId,
+      "title": title,
+      "description": description,
+      "date": date,
+      "countOnDay": int.parse(countOnDay),
+      "countOnTask": int.parse(countOnTask),
+    });
+    return resp.message == MESSAGE_SUCCESS;
+  }
+
+  @override
+  Future<bool> deleteTasks({required String taskId}) async {
+    final BaseResponse resp = await httpService.delete(deleteUri, data: {"taskId": taskId});
+    return resp.message == MESSAGE_SUCCESS;
+  }
+
+  @override
+  Future<bool> editTasks({
+    required String taskId,
+    required String title,
+    required String description,
+    required String date,
+    required String countOnDay,
+    required String countOnTask,
+  }) async {
+    final BaseResponse resp = await httpService.patch(editUri, data: {
+      "taskId": taskId,
+      "title": title,
+      "description": description,
+      "date": date,
+      "countOnDay": countOnDay,
+      "countOnTask": countOnTask,
+    });
+    return resp.message == MESSAGE_SUCCESS;
+  }
+
+  @override
+  Future<TasksData> getTasks({required String userId}) async {
+    final BaseResponse resp = await httpService.post(getUri, data: {"userId": userId});
+    return TasksData.fromJson(resp.data);
+  }
+
+  @override
+  Future<bool> statEditTasks({required String userId, required String countDone, required String countUnDone}) async {
+    final BaseResponse resp = await httpService.patch(editStatUri, data: {
+      "userId": userId,
+      "countDone": countDone,
+      "countUnDone": countUnDone,
+    });
+    return resp.message == MESSAGE_SUCCESS;
   }
 }
